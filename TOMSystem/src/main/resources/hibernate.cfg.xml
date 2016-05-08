@@ -5,7 +5,7 @@
     
 <hibernate-configuration>
     <session-factory>        
-        <mapping class="com.TOMSystem.Item" />
-        <mapping class="com.TOMSystem.User" />
+        <mapping class="com.TOMSystem.Item.Item" />
+        <mapping class="com.TOMSystem.User.User" />
     </session-factory>         
 </hibernate-configuration>

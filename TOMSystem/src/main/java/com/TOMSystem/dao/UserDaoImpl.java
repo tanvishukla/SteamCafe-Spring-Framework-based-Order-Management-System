@@ -1,4 +1,4 @@
-package com.dao;
+package com.TOMSystem.dao;
 
 import java.util.List;
 import org.hibernate.SessionFactory;

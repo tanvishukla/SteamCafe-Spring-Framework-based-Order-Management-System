@@ -1,4 +1,4 @@
-package com.service;
+package com.TOMSystem.service;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.TOMSystem.Item.Item;
-import com.dao.ItemDao;
+import com.TOMSystem.dao.ItemDao;
 
 @Service
 public class ItemServiceImpl implements ItemService {
