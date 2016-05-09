@@ -54,6 +54,7 @@ public class UserController {
 		{
 			System.out.println("inside already exist"+user.getEmail());
 			//userService.edit(user);
+			///Added to map***************
 			map.put("userAlreadyExistError","User already exist!!!Either login or signup with new emailId");
 			return "SignUp";
 		}
