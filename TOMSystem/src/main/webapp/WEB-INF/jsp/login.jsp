@@ -103,9 +103,13 @@ body {
 </br>
 <div class="login-block">
     <h1>Login</h1>
-    <input type="text" value="" placeholder="Username" id="username" />
-    <input type="password" value="" placeholder="Password" id="password" />
-    <button>Submit</button>
+    <form action="authUser" method="POST" commandName ="user">
+    <input type="text" value="" name="email" placeholder="Username" id="email" />
+    <input type="password" value="" name="password" placeholder="Password" id="password" />
+    <button type="submit" name="action" commandName = "user">Login</button>
+    
+    </form>
+    <p>${email}</p>
 </div>
 </body>
 
