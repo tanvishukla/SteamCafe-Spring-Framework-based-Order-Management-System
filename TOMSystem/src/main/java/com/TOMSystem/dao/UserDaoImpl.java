@@ -24,7 +24,6 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public void delete(String emailId) {
 		// TODO Auto-generated method stub
 		session.getCurrentSession().delete(getUser(emailId));
@@ -34,19 +33,7 @@ public class UserDaoImpl implements UserDao {
 	public User getUser(String emailId) {
 		// TODO Auto-generated method stub
 		return (User)session.getCurrentSession().get(User.class, emailId);
-=======
-	public void delete(String email) {
-		// TODO Auto-generated method stub
-		session.getCurrentSession().delete(getUser(email));
-	}
 
-	@Override
-	public User getUser(String email) {
-		// TODO Auto-generated method stub
-		
-		return (User)session.getCurrentSession().get(User.class, email);
-		//return (User)session.getCurrentSession().get(User.class, email);
->>>>>>> 799d81ffefb0bdf9d1cec927e69fc982962b510a
 	}
 
 	@Override
