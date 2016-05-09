@@ -10,8 +10,28 @@
 <body>
 <h1>User Home Page</h1>
 
-<br>
 
+<br>
+<table border="1">
+	<th>ID</th>
+	<th>Category</th>
+	<th>Name</th>
+	<th>Picture</th>
+	<th>Calories</th>
+	<th>Unit Price</th>
+	<th>Prep Time</th>
+	<c:forEach items="${ItemList}" var="item">
+		<tr>
+			<td>${item.id}</td>
+			<td>${item.category}</td>
+			<td>${item.name}</td>
+			<td>${item.picture}</td>
+			<td>${item.calories}</td>
+			<td>${item.unit_price}</td>
+			<td>${item.prep_time}</td>
+		</tr>
+	</c:forEach>
+</table>
 
 </body>
 </html>

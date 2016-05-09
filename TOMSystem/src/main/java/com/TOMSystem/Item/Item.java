@@ -5,14 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+@Entity
 public class Item {
+	@Id
+	@Column
 	private int id;
+	@Column
 	private String category;
+	@Column
 	private String name;
+	@Column
 	private String picture;
+	@Column
 	private double calories;
+	@Column
 	private double unit_price;
+	@Column
 	private int prep_time;
 	
 	public Item(){}

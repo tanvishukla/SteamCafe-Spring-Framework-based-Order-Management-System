@@ -1,4 +1,4 @@
-package com.controller;
+package com.TOMSystem.controller;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.model.Item;
-import com.service.ItemService;
-import com.service.ItemServiceImpl;
+import com.TOMSystem.Item.Item;
+import com.TOMSystem.service.ItemService;
+import com.TOMSystem.service.ItemServiceImpl;
 
 @Controller
 public class FileUploadController {

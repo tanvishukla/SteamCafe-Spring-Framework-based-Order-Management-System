@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
     "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"> 
+    
 <hibernate-configuration>
-	<session-factory>
-		<property name="hibernate.hbm2ddl.auto">update</property>
-
-		<mapping class="com.model.Item" />
-		<mapping class="com.model.User" />
-	</session-factory>
-
-
+    <session-factory>
+    <property name="hibernate.hbm2ddl.auto">update</property>        
+        <mapping class="com.TOMSystem.Item.Item" />
+        <mapping class="com.TOMSystem.User.User" />
+    </session-factory>         
 </hibernate-configuration>
