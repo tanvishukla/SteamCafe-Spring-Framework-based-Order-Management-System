@@ -8,8 +8,8 @@
 <title>TOM</title>
 </head>
 <body>
-<h1>User Home Page</h1>
-
+<h1>Welcome User</h1>
+<select><option>Select Category</option></select>
 
 <br>
 <table border="1">
