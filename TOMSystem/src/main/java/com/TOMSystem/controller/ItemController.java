@@ -12,22 +12,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.TOMSystem.service.UserService;
-
+import com.TOMSystem.*;
 
 @Controller
-public class UserController {
+public class ItemController {
 
-	@Autowired
-	private UserService userService;
+	private com.TOMSystem.service.ItemService itemservice;
 	
-	//The function
-	@RequestMapping("/index")
-	public String setUpProfile(Map<String,Object> map)
-	{
-		
-		return "login";
-	}
 	
 	
 }
