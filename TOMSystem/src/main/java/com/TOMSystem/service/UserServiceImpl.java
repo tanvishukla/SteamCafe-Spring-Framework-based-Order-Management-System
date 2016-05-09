@@ -27,7 +27,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-<<<<<<< HEAD
 	public void delete(String emailId) {
 		// TODO Auto-generated method stub
 		userDao.delete(emailId);
@@ -37,17 +36,6 @@ public class UserServiceImpl implements UserService {
 	public User getUser(String emailId) {
 		// TODO Auto-generated method stub
 		return userDao.getUser(emailId);
-=======
-	public void delete(String email) {
-		// TODO Auto-generated method stub
-		userDao.delete(email);
-	}
-
-	@Transactional
-	public User getUser(String email) {
-		// TODO Auto-generated method stub
-		return userDao.getUser(email);
->>>>>>> 799d81ffefb0bdf9d1cec927e69fc982962b510a
 	}
 
 	@Transactional

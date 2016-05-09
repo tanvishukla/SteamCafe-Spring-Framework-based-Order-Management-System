@@ -3,19 +3,16 @@ package com.TOMSystem.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
 
 import com.TOMSystem.User.User;
 import com.TOMSystem.service.UserService;
-import com.TOMSystem.User.User;
 
 @Controller
 public class UserController {
@@ -25,21 +22,18 @@ public class UserController {
 	
 	//The function
 	@RequestMapping("/")
-<<<<<<< HEAD
-	public String setUpProfile(Map<String,Object> map)
-=======
+
 	public String HomePage(Map<String,Object> map)
->>>>>>> 799d81ffefb0bdf9d1cec927e69fc982962b510a
+
 	{
 		
 		return "login";
 	}
 	
-<<<<<<< HEAD
+
 	@RequestMapping(value="/authUser" , method = RequestMethod.POST)
-	//public @ResponseBody 
-	String authUser(@ModelAttribute User user, BindingResult result,@RequestParam String action,Map<String, Object> map,Model model){
-		
+	String authUser(@ModelAttribute User user, BindingResult result,@RequestParam String action,Map<String, Object> map,Model model)
+	{
 		
 		System.out.println("In authUser");
 		System.out.println("User email is :"+user.getEmail());
@@ -59,8 +53,8 @@ public class UserController {
 		return "menu";
 		}
 		
-	
-=======
+	}
+
 	@RequestMapping(value="/LoginPage", method=RequestMethod.POST)
 	public String GetLoginPage(Map<String,Object> map)
 	{
@@ -71,7 +65,6 @@ public class UserController {
 	@RequestMapping(value="/SignupPage", method=RequestMethod.POST)
 	public String GetSignupPage(Map<String,Object> map)
 	{
-		
 		return "SignUp";
 	}
 	
@@ -96,12 +89,11 @@ public class UserController {
 			System.out.println("Added to database successfully");
 			 userResult=userService.getUser(user.getEmail());
 				map.put("user", userResult);
-				//map.put("profileList", profileService.getAllProfiles());
-			     return "login";
+				 return "login";
 		}
 		
 		   
->>>>>>> 799d81ffefb0bdf9d1cec927e69fc982962b510a
+
 	}
 	
 }
