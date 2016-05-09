@@ -43,5 +43,29 @@ public class ItemDaoImpl implements ItemDao {
 		// TODO Auto-generated method stub
 		return session.getCurrentSession().createQuery("from Item").list();
 	}
+	
+	@Override
+	public List getDrinks(){
+		
+		return session.getCurrentSession().createQuery("from Item where category ='Drink'").list();
+	}
+	
+	@Override
+	public List getAppetizers(){
+		
+		return session.getCurrentSession().createQuery("from Item where category ='Appetizer'").list();
+	}
+	
+	@Override
+	public List getMainCourse(){
+		
+		return session.getCurrentSession().createQuery("from Item where category ='MainCourse'").list();
+	}
+	
+	@Override
+	public List getDesserts(){
+		
+		return session.getCurrentSession().createQuery("from Item where category ='Dessert'").list();
+	}
 
 }

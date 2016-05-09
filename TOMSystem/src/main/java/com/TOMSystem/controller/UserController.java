@@ -1,6 +1,8 @@
 package com.TOMSystem.controller;
 
-//import java.net.PasswordAuthentication;
+////////
+import java.util.ArrayList;
+
 import java.util.Map;
 import java.util.Properties;
 
@@ -21,15 +23,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.TOMSystem.Item.Item;
 import com.TOMSystem.User.User;
+import com.TOMSystem.service.ItemService;
 import com.TOMSystem.service.UserService;
+
+import antlr.collections.List;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	private UserService userService;
-		
+
+	@Autowired
+	private ItemService itemService;
+    
+	
+
 	//The function
 	@RequestMapping("/")
 	public String HomePage(Map<String,Object> map)
@@ -52,10 +63,17 @@ public class UserController {
 			model.addAttribute("email","Invalid Login");
 			
 			return "login";
+			
+			
+
 		}
 		else{
 		model.addAttribute("email",user.getEmail());
-		return "menu";
+		if(itemService.getAllItems().size()!=0)
+		{
+		model.addAttribute("ItemList", itemService.getAllItems());
+		}
+		return "UserHome";
 		}
 		
 	}
