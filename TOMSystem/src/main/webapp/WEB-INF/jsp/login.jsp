@@ -94,7 +94,9 @@ body {
     background: #ff7b81;
 }
 
+
 </style>
+<!-- Comment -->
 </head>
 
 <body>
@@ -103,11 +105,21 @@ body {
 </br>
 <div class="login-block">
     <h1>Login</h1>
+<<<<<<< HEAD
+    <form action="authUser" method="POST" commandName ="user">
+    <input type="text" value="" name="email" placeholder="Username" id="email" />
+    <input type="password" value="" name="password" placeholder="Password" id="password" />
+    <button type="submit" name="action" commandName = "user">Login</button>
+    
+    </form>
+    <p>${email}</p>
+=======
     <form action="LoginPage" method="post">
     <input type="text" value="" placeholder="Username" id="username" />
     <input type="password" value="" placeholder="Password" id="password" />
     <button>Login</button>
     </form>
+>>>>>>> 799d81ffefb0bdf9d1cec927e69fc982962b510a
 </div>
 <form action="SignupPage" method="post">
 <button>Signup</button>
