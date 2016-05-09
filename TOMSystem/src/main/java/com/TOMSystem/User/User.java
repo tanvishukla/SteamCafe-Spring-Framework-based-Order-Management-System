@@ -8,12 +8,13 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-	@Id
+	
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Column
 	private String name;
+	@Id
 	@Column
 	private String email;
 	@Column

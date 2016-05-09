@@ -24,15 +24,17 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void delete(int userId) {
+	public void delete(String email) {
 		// TODO Auto-generated method stub
-		session.getCurrentSession().delete(getUser(userId));
+		session.getCurrentSession().delete(getUser(email));
 	}
 
 	@Override
-	public User getUser(int userId) {
+	public User getUser(String email) {
 		// TODO Auto-generated method stub
-		return (User)session.getCurrentSession().get(User.class, userId);
+		
+		return (User)session.getCurrentSession().get(User.class, email);
+		//return (User)session.getCurrentSession().get(User.class, email);
 	}
 
 	@Override

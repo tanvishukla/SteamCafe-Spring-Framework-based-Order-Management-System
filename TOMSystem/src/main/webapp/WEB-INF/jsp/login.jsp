@@ -103,10 +103,17 @@ body {
 </br>
 <div class="login-block">
     <h1>Login</h1>
+    <form action="LoginPage" method="post">
     <input type="text" value="" placeholder="Username" id="username" />
     <input type="password" value="" placeholder="Password" id="password" />
-    <button>Submit</button>
+    <button>Login</button>
+    </form>
 </div>
+<form action="SignupPage" method="post">
+<button>Signup</button>
+
+</form>
+
 </body>
 
 </html>

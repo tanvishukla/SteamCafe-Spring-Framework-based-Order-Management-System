@@ -27,15 +27,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Transactional
-	public void delete(int userId) {
+	public void delete(String email) {
 		// TODO Auto-generated method stub
-		userDao.delete(userId);
+		userDao.delete(email);
 	}
 
 	@Transactional
-	public User getUser(int userId) {
+	public User getUser(String email) {
 		// TODO Auto-generated method stub
-		return userDao.getUser(userId);
+		return userDao.getUser(email);
 	}
 
 	@Transactional
