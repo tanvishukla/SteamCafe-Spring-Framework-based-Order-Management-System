@@ -9,10 +9,45 @@
 </head>
 <body>
 <h1>Welcome User</h1>
-<select><option>Select Category</option></select>
+
+<form action="displayItems" method="get">
+<select name="item"><option>Select Category</option>
+		<option name="drinks">Drinks</option>
+		<option name="app">Appetisers</option>
+		<option>Main Course</option>
+		<option>Desserts</option>
+</select>
+
+
+	<button type="submit" name="action" commandName = "user">Get Items</button>
+    </form>
+
 
 <br>
 <table border="1">
+	<th>ID</th>
+	<th>Category</th>
+	<th>Name</th>
+	<th>Picture</th>
+	<th>Calories</th>
+	<th>Unit Price</th>
+	<th>Prep Time</th>
+	<c:forEach items="${drinkList}" var="item">
+		<tr>
+			<td>${item.id}</td>
+			<td>${item.category}</td>
+			<td>${item.name}</td>
+			<td>${item.picture}</td>
+			<td>${item.calories}</td>
+			<td>${item.unit_price}</td>
+			<td>${item.prep_time}</td>
+		</tr>
+	</c:forEach>
+</table>
+
+
+
+<!--  <table border="1">
 	<th>ID</th>
 	<th>Category</th>
 	<th>Name</th>
@@ -32,6 +67,7 @@
 		</tr>
 	</c:forEach>
 </table>
+-->
 
 </body>
 </html>

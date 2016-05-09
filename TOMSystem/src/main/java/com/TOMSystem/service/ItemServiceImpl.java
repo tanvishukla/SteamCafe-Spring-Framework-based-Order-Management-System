@@ -43,5 +43,30 @@ public class ItemServiceImpl implements ItemService {
 		// TODO Auto-generated method stub
 		return itemDao.getAllItems();
 	}
+	
+	@Transactional
+	public List getDrinks() {
+		// TODO Auto-generated method stub
+		return itemDao.getDrinks();
+	}
+
+	@Transactional
+	public List getAppetizers() {
+		// TODO Auto-generated method stub
+		return itemDao.getAppetizers();
+	}
+	@Transactional
+	public List getMainCourse() {
+		// TODO Auto-generated method stub
+		return itemDao.getMainCourse();
+	}
+
+	@Transactional
+	public List getDesserts() {
+		// TODO Auto-generated method stub
+		return itemDao.getDesserts();
+	}
+
+
 
 }
