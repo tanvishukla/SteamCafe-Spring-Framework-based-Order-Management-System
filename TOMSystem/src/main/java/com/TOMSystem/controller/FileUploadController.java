@@ -28,7 +28,7 @@ public class FileUploadController {
 	 * Upload single file using Spring Controller
 	 */
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String setupForm(Map<String, Object> map){
 		Item item= new Item();
 		map.put("item", item);
