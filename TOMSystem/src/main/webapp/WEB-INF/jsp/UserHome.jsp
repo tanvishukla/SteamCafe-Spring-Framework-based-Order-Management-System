@@ -11,19 +11,31 @@
 <h1>Welcome User</h1>
 
 <form action="displayItems" method="get">
+
+List<String> item = new ArrayList<String>();
+item.add("drinks");
+item.add("app");
+item.add("")
+request.setAttribute("startTimeList", startTimeList);
+
 <select name="item"><option>Select Category</option>
 		<option name="drinks">Drinks</option>
 		<option name="app">Appetisers</option>
 		<option>Main Course</option>
 		<option>Desserts</option>
 </select>
+<%
+    String Selectedtype = request.getParameter("item");
+    
 
+%>    
 
-	<button type="submit" name="action" commandName = "user">Get Items</button>
+	<button type="submit" name="action" commandName = "item">Get Items</button>
     </form>
 
 
 <br>
+<td> Selectedtype </td>
 <table border="1">
 	<th>ID</th>
 	<th>Category</th>

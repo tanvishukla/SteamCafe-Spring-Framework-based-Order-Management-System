@@ -8,5 +8,6 @@
     <property name="hibernate.hbm2ddl.auto">update</property>        
         <mapping class="com.TOMSystem.Item.Item" />
         <mapping class="com.TOMSystem.User.User" />
+        <mapping class="com.TOMSystem.Order.Order" />
     </session-factory>         
 </hibernate-configuration>
