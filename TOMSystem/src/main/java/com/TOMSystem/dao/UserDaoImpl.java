@@ -1,9 +1,12 @@
 package com.TOMSystem.dao;
 
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.TOMSystem.User.User;
 
 @Repository
@@ -40,6 +43,18 @@ public class UserDaoImpl implements UserDao {
 	public List getAllUsers() {
 		// TODO Auto-generated method stub
 		return session.getCurrentSession().createQuery("from User").list();
+	}
+	
+	@Override
+	public User getUserFromAccessToken(String accessToken)
+	{
+		//String query="select * from User where activation_token='"+accessToken+"'";
+		//return (User)session.getCurrentSession().createSQLQuery(query).uniqueResult();
+		//return (User)session.getCurrentSession().createQuery(query);
+		Query query= session.getCurrentSession().createQuery("from User where activation_token=:name");
+		query.setParameter("name", accessToken);
+		User user = (User) query.uniqueResult();
+		return user;
 	}
 
 }

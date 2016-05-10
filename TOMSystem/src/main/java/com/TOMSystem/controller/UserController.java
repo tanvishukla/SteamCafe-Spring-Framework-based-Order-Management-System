@@ -2,7 +2,7 @@ package com.TOMSystem.controller;
 
 ////////
 import java.util.ArrayList;
-
+import java.util.Base64;
 import java.util.Map;
 import java.util.Properties;
 
@@ -28,10 +28,26 @@ import com.TOMSystem.User.User;
 import com.TOMSystem.service.ItemService;
 import com.TOMSystem.service.UserService;
 
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
+
+
+
+
+
+
 import antlr.collections.List;
 
 @Controller
 public class UserController {
+	
 
 	@Autowired
 	private UserService userService;
@@ -63,9 +79,6 @@ public class UserController {
 			model.addAttribute("email","Invalid Login");
 			
 			return "login";
-			
-			
-
 		}
 		else{
 		model.addAttribute("email",user.getEmail());
@@ -92,7 +105,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/Signup", method=RequestMethod.POST)
-	public String Signup(@ModelAttribute User user, BindingResult result,@RequestParam String action,Map<String, Object> map) throws MessagingException
+	public String Signup(@ModelAttribute User user, BindingResult result,@RequestParam String action,Map<String, Object> map) throws MessagingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
 	{
 		System.out.println(user.getName());
 		System.out.println(user.getEmail());
@@ -107,13 +120,30 @@ public class UserController {
 		else
 		{
 			userService.add(user);
+			
 			System.out.println("Added to database successfully");
 			 userResult=userService.getUser(user.getEmail());
-			 
+			 ////////////////////////
+			 String text = userResult.getEmail();
+	         String key = "Bar12345Bar12345"; // 128 bit key
+
+	         // Create key and cipher
+	         Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+	         Cipher cipher = Cipher.getInstance("AES");
+
+	         // encrypt the text
+	         cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+	         byte[] encrypted = cipher.doFinal(text.getBytes());
+	         System.out.println("Access Token is");
+	         String accessToken=new String(encrypted.toString());
+	         System.err.println(accessToken);
+	         
+	         userResult.setActivation_token(accessToken);
+			 userService.edit(userResult);
 			//////////////////////////////////// 
-			 String to = user.getEmail();
+			 String to = userResult.getEmail();
 			    String subject = "subject";
-			    String msg ="email text....";
+			    //String msg ="email text....";
 			    final String from ="tomsystemcmpe275@gmail.com";
 			    final  String password ="TOMSystem";
 
@@ -140,7 +170,7 @@ public class UserController {
 			  // MimeMessage message = new MimeMessage(session);  
 			   message.setSender(addressFrom);  
 			   message.setSubject(subject);  
-			   String messageBody = "<div style=\"color:red;\">Welcome to TOMSystem</div><br><div>Please find below link and token to verify yourself</div>";
+			   String messageBody = "<div style=\"color:red;\">Welcome to TOMSystem</div><br><div>Please find below link and token to verify yourself</div><br><div>Your Access Token is :"+accessToken+"</div>";
 			   String url="http://localhost:8080/TOMSystem/Verify";
 			   messageBody= messageBody.concat("<a href="+'"'+ url +'"'+">Verify your account</a>");
 			   System.out.println("Message body is...."+messageBody);
@@ -160,13 +190,36 @@ public class UserController {
 				 return "login";
 		}
 	
-	@RequestMapping(value="/Verify", method=RequestMethod.GET)
-	public String VerifyUser(@ModelAttribute User user, BindingResult result,@RequestParam String action,Map<String, Object> map)
+	@RequestMapping("/Verify")
+	public String VerifyUser(Map<String, Object> map)
 	{
 		System.out.println("Inside verification function");
 		return "UserVerification";
 	}
 	
+	@RequestMapping("/verifyAccess")
+	public String VerifyUserAccess(Map<String, Object> map,@RequestParam String accessToken)
+	{
+		System.out.println("Access Token Entered is "+accessToken);
+		User userResult=new User();
+		
+		userResult=userService.getUserFromAccessToken(accessToken);
+		if(userResult!=null)
+		{
+			System.out.println("in verify***********************************");
+			userResult.setEnabled(true);
+			userService.edit(userResult);
+			map.put("VerifiedUser", userResult.getEmail()+" verified. Now you can access your account");
+			return "login";
+		}
+		else
+		{
+			System.out.println("----------------------------------------");
+			map.put("VerifiedUser", "Please enter valid Token");
+			return "UserVerification";
+		}
+	}
+		
 	
 	}
 

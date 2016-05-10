@@ -4,7 +4,7 @@
 <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <meta charset="UTF-8">
 
-<title>Elegant Login - Designscrazed</title>
+<title>Takeout Order Management System</title>
 <style>
 body {
     background: url('http://res.cloudinary.com/grubhub-marketing/image/upload/v1460472623/Marketing%20assets/2016-MarchSeasonal-Desktop-1200by550px-GH.jpg') no-repeat fixed center center;
@@ -110,7 +110,7 @@ body {
     <form action="SignupPage" method="post">
 	<button type="submit" name="action" commandName = "user">SignUp</button>
     <p>${email}</p>
-
+<p>${VerifiedUser}</p>
 </div>
 
 

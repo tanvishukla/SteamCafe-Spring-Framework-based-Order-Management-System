@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.TOMSystem.User.User;
 import com.TOMSystem.dao.UserDao;
 
@@ -43,7 +44,11 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.getAllUsers();
 	}
-	
-	
 
+	@Transactional
+	public User getUserFromAccessToken(String accessToken) {
+		// TODO Auto-generated method stub
+		return userDao.getUserFromAccessToken(accessToken);
+	}
+	
 }
