@@ -29,12 +29,12 @@ public class Item {
 	private int prep_time;
 	//@ManyToOne
 	//@JoinColumn(name="order_id")
-	private Order order1;
+	//private Order order1;
 	
 	public Item(){}
 	
 	public Item(int id, String category, String name, String picture, double calories, double unit_price,
-			int prep_time, Order order) {
+			int prep_time) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -43,7 +43,7 @@ public class Item {
 		this.calories = calories;
 		this.unit_price = unit_price;
 		this.prep_time = prep_time;
-		this.order1=order;
+		//this.order1=order;
 	}
 
 	public int getId() {
@@ -102,11 +102,11 @@ public class Item {
 		this.prep_time = prep_time;
 	}	
 	
-	public Order getOrder() {
-		return order1;
-	}
-
-	public void setOrder(Order order1) {
-		this.order1 = order1;
-	}	
+//	public Order getOrder() {
+//		return order1;
+//	}
+//
+//	public void setOrder(Order order1) {
+//		this.order1 = order1;
+//	}	
 }
