@@ -101,8 +101,6 @@ body {
 <h1>SignUp</h1>
 
 <div>
-<!--  <form method="post" action="Signup">
--->
 <form action="Signup" method="POST" commandName="user">
 
 <span class="fontawesome-user"></span>

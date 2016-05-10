@@ -14,7 +14,7 @@
                 <option value="Drinks">Drinks</option>
                 <option value="Appetizer">Appetizer</option>
                 <option value="Main Course">Main Course</option>
-                <option value="Desert">Desert</option>
+                <option value="Desserts">Desserts</option>
         </select>
     	<br />
     	
