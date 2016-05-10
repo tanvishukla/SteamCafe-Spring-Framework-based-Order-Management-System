@@ -24,20 +24,33 @@ public class ItemController {
 	private ItemService itemService;
     
 	@RequestMapping(value="/displayItems" , method = RequestMethod.GET)
-	public String displayItems(Map<String,Object> map, Model model)
+	public String displayItems(@ModelAttribute Item item,BindingResult result,Map<String,Object> map, Model model)
 
 	{
+		System.out.println("In display items");
+		System.out.println("Item category is :"+item.getCategory());
+		switch(item.getCategory()){
+		
+		case "Drinks" : if(itemService.getDrinks().size()!=0)
+						model.addAttribute("itemList", itemService.getDrinks());
+						break;
+						
+		case "Appetizers" : if(itemService.getAppetizers().size()!=0)
+							model.addAttribute("itemList", itemService.getAppetizers());
+							break;
+							
+		case "Main Course" : if(itemService.getMainCourse().size()!=0)
+							model.addAttribute("itemList", itemService.getMainCourse());
+							break;
+							
+		case "Desserts" : if(itemService.getDesserts().size()!=0)
+							model.addAttribute("itemList", itemService.getDesserts());
+								break;					
 		
 		
-		if(itemService.getDrinks().size()!=0)
-		{
-		model.addAttribute("drinkList", itemService.getDrinks());
-		System.out.println("hiiiiiiiii***********8");
 		}
 		
-		
-		
-		return "UserHome";
+	return "UserHome";
 	}
 
 	

@@ -107,14 +107,18 @@ body {
     <input type="password" value="" name="password" placeholder="Password" id="password" />
     <button type="submit" name="action" >Login</button>
     </form>
+    <br>
+    
     <form action="SignupPage" method="post">
+
 	<button type="submit" name="action" >SignUp</button>
+
     <p>${email}</p>
 <p>${VerifiedUser}</p>
 </div>
 
 
-</form>
+
 
 
 </body>
