@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
 	function removeThis() {
-		//alert(removeThis.caller.arguments[0].target.id);
+		alert(removeThis.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
 		var id = removeThis.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -91,13 +91,13 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									onclick="callAddItem()">Add Item <span class="sr-only">(current)</span></a></li>
+									href="addItem">Add Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									onclick="callRemoveItem()">Remove Item <span class="sr-only">(current)</span></a></li>
+									href="removeItem">Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									onclick="callReports()">View Reports <span class="sr-only">(current)</span></a></li>
+									href="removeItem">View Reports <span class="sr-only">(current)</span></a></li>
 
 							</ul>
 						</div>
@@ -207,7 +207,7 @@
 						<td>${item.prep_time}</td>
 						<td>${item.category}</td>
 						<td>${item.picture}</td>
-						<td>${item.available}</td>
+						<td>${item.availability}</td>
 					</tr>
 				</c:forEach>
 			</table>

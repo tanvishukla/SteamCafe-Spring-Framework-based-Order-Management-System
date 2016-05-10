@@ -41,7 +41,7 @@ public class FileUploadController {
 	public String removeSelectedItem(@RequestBody String item_id, Map<String, Object> map){
 		Item tempItem = itemService.getItem(Integer.valueOf(item_id));
 		System.out.println("***************"+item_id+"**************");
-		tempItem.setAvailable(false);
+		tempItem.setavailability(false);
 		itemService.editItem(tempItem);
 		
 		map.put("item", tempItem);
@@ -76,7 +76,7 @@ public class FileUploadController {
 				tempItem.setPicture(item_name);
 				tempItem.setPrep_time(item_prep_time);
 				tempItem.setUnit_price(item_price);
-				//tempItem.setavailability(true);
+				tempItem.setavailability(true);
 				//add item to table
 				itemService.addItem(tempItem);
 											
@@ -85,7 +85,7 @@ public class FileUploadController {
 
 				// Creating the directory to store file
 				//String rootPath = System.getProperty("catalina.home");
-				String rootPath = "E:/F/Lectures/275-Zhang/CMPE-275-Project/TOMSystem/src/main/webapp/WEB-INF";
+				String rootPath = "/TOMSystem/src/main/webapp/WEB-INF";
 				
 				File dir = new File(rootPath + File.separator + "images");
 				if (!dir.exists())

@@ -64,13 +64,13 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href="login">Add Item <span class="sr-only">(current)</span></a></li>
+									href="addItem">Add Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="index.html">Remove Item <span class="sr-only">(current)</span></a></li>
+									href="removeItem">Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="index.html">View Reports <span class="sr-only">(current)</span></a></li>
+									href="removeItem">View Reports <span class="sr-only">(current)</span></a></li>
 
 							</ul>
 						</div>
