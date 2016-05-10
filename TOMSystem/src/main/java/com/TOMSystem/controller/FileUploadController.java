@@ -51,31 +51,27 @@ public class FileUploadController {
 				tempItem.setName(item_name);
 				tempItem.setCalories(item_calories);
 				tempItem.setCategory(category);
-				tempItem.setPicture("");
+				tempItem.setPicture(item_name);
 				tempItem.setPrep_time(item_prep_time);
 				tempItem.setUnit_price(item_price);
-				
+				tempItem.setavailability(true);
 				//add item to table
 				itemService.addItem(tempItem);
-				
-				//fetch the item_id and name the image by it.
-				String imageName = tempItem.getId() + "";
-				tempItem.setPicture(imageName);
-				
-				//update the item
-				itemService.editItem(tempItem);
 				
 				//uploading image
 				byte[] bytes = file.getBytes();
 
 				// Creating the directory to store file
-				String rootPath = System.getProperty("catalina.home");
+				//String rootPath = System.getProperty("catalina.home");
+				String rootPath = "/CMPE-275-Project/TOMSystem/src/main/webapp/WEB-INF";
+				
+				//File dir = new File(rootPath + File.separator + "images");
 				File dir = new File(rootPath + File.separator + "images");
 				if (!dir.exists())
 					dir.mkdirs();
 
 				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath() + File.separator + imageName);
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + item_name+".png");
 				BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
 				stream.write(bytes);
 				stream.close();

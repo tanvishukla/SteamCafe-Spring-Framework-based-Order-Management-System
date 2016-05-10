@@ -9,6 +9,7 @@ import javax.persistence.Id;
 public class Item {
 	@Id
 	@Column
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@Column
 	private String category;
@@ -22,11 +23,13 @@ public class Item {
 	private double unit_price;
 	@Column
 	private int prep_time;
+	@Column
+	private boolean availability;
 	
 	public Item(){}
 	
 	public Item(int id, String category, String name, String picture, double calories, double unit_price,
-			int prep_time) {
+			int prep_time,boolean availability) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -35,6 +38,7 @@ public class Item {
 		this.calories = calories;
 		this.unit_price = unit_price;
 		this.prep_time = prep_time;
+		this.availability = availability;
 	}
 
 	public int getId() {
@@ -92,4 +96,13 @@ public class Item {
 	public void setPrep_time(int prep_time) {
 		this.prep_time = prep_time;
 	}	
+	
+	public boolean getavailability() {
+		return availability ;
+	}
+
+	public void setavailability(boolean availability) {
+		this.availability = availability;
+	}	
+	
 }
