@@ -5,11 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.TOMSystem.Order.*;
 @Entity
 public class Item {
 	@Id
-	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column
 	private int id;
 	@Column
 	private String category;
@@ -23,8 +27,14 @@ public class Item {
 	private double unit_price;
 	@Column
 	private int prep_time;
+
 	@Column
 	private boolean availability;
+
+	//@ManyToOne
+	//@JoinColumn(name="order_id")
+	//private Order order1;
+
 	
 	public Item(){}
 	
@@ -38,7 +48,11 @@ public class Item {
 		this.calories = calories;
 		this.unit_price = unit_price;
 		this.prep_time = prep_time;
+
 		this.availability = availability;
+
+		//this.order1=order;
+
 	}
 
 	public int getId() {
@@ -97,6 +111,7 @@ public class Item {
 		this.prep_time = prep_time;
 	}	
 	
+
 	public boolean getavailability() {
 		return availability ;
 	}
@@ -105,4 +120,13 @@ public class Item {
 		this.availability = availability;
 	}	
 	
+
+//	public Order getOrder() {
+//		return order1;
+//	}
+//
+//	public void setOrder(Order order1) {
+//		this.order1 = order1;
+//	}	
+
 }

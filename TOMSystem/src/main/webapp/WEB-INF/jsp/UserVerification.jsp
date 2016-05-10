@@ -1,10 +1,11 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ include file="/WEB-INF/jsp/includes.jsp"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<meta charset="UTF-8">
-
-<title>Takeout Order Management System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>User Verification Page</title>
 <style>
 body {
     background: url('http://res.cloudinary.com/grubhub-marketing/image/upload/v1460472623/Marketing%20assets/2016-MarchSeasonal-Desktop-1200by550px-GH.jpg') no-repeat fixed center center;
@@ -96,31 +97,18 @@ body {
 
 </style>
 </head>
-
 <body>
 <div class="logo"></div></br>
 </br>
 <div class="login-block">
-    <h1>Login</h1>
-    <form action="authUser" method="POST" commandName ="user">
-    <input type="text" value="" name="email" placeholder="Username" id="email" />
-    <input type="password" value="" name="password" placeholder="Password" id="password" />
-    <button type="submit" name="action" >Login</button>
-    </form>
-    <br>
-    
-    <form action="SignupPage" method="post">
-
-	<button type="submit" name="action" >SignUp</button>
-
-    <p>${email}</p>
-<p>${VerifiedUser}</p>
+    <h1>Verify Yourself by entering your Access Token</h1>
+    <form action="verifyAccess" method="POST" commandName ="access">
+    <input type="text" value="" name="accessToken" placeholder="Username" id="accessToken" />
+    <button type="submit" name="action" commandName = "user">Verify</button>
+   </form>
 </div>
 
 
 
-
-
 </body>
-
 </html>

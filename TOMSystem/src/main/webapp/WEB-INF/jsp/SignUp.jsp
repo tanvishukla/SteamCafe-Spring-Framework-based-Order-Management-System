@@ -96,6 +96,8 @@ body {
 </style>
 </head>
 <body>
+<div class="logo"></div></br>
+<div class="login-block">
 <h1>SignUp</h1>
 
 <div>
@@ -113,5 +115,6 @@ body {
 <input type="submit" name="action" value="SignUp"/>
 <p style="color: #000; text-align: center;"> ${userAlreadyExistError}</p>
 </form>
+</div>
 </body>
 </html>
