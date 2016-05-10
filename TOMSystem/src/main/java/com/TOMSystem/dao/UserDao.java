@@ -1,6 +1,7 @@
 package com.TOMSystem.dao;
 
 import java.util.List;
+
 import com.TOMSystem.User.User;
 
 public interface UserDao {
@@ -9,4 +10,5 @@ public interface UserDao {
 		public void delete(String emailId);
 		public User getUser(String emailId);
 		public List getAllUsers();
+		public User getUserFromAccessToken(String accessToken);
 }

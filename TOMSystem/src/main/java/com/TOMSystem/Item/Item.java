@@ -27,8 +27,8 @@ public class Item {
 	private double unit_price;
 	@Column
 	private int prep_time;
-	@ManyToOne
-	@JoinColumn(name="order_id")
+	//@ManyToOne
+	//@JoinColumn(name="order_id")
 	private Order order1;
 	
 	public Item(){}
