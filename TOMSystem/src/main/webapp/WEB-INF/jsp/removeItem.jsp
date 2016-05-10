@@ -7,8 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="application/x-javascript">
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+		function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
 <!-- //for-mobile-apps -->
 <link
 	href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/bootstrap.css"
@@ -36,6 +38,23 @@
 <script
 	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery.easing.min.js"></script>
 </head>
+
+<script type="text/javascript">
+	function removeThis() {
+		//alert(removeThis.caller.arguments[0].target.id);
+		//alert("Clicked "+c);
+		var id = removeThis.caller.arguments[0].target.id + "";
+		$.ajax({
+			type : 'POST',
+			url : "/TOMSystem/removeItem",
+			data : id
+		});
+		location.reload();
+	}
+</script>
+
+
+
 <body>
 	<!-- header-bot -->
 	<div class="header-bot">
@@ -72,13 +91,13 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href="login">Add Item <span class="sr-only">(current)</span></a></li>
+									onclick="callAddItem()">Add Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="index.html">Remove Item <span class="sr-only">(current)</span></a></li>
+									onclick="callRemoveItem()">Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="index.html">View Reports <span class="sr-only">(current)</span></a></li>
+									onclick="callReports()">View Reports <span class="sr-only">(current)</span></a></li>
 
 							</ul>
 						</div>
@@ -119,23 +138,13 @@
 						<c:forEach items="${itemList}" var="item">
 							<!-- For every item-->
 							<tr class=${item.id} >
-								<td  name="id"  value=${item.id} class="invert-closeb">
+								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
-										<div class="close1" id = ${item.id}></div>
-									</div> 
-									<script>$(document).ready(function(c) {
-										$(this).on('click', function(c){
-											var id= ${item.id}+'';
-											$.ajax({
-											type:'POST',
-											url: "/TOMSystem/removeItem",
-											data: id
-											});
-										});	  
-									});
-						   			</script>
+										<div class="close1" id = ${item.id} onclick="removeThis()"></div>
+						   			</div>
 								</td>
-								<td class="invert-image"><img src="./images/${item.picture}.png" alt=" "
+								<td class="invert-image"><img
+									src="./images/${item.picture}.png" alt=" "
 									class="img-responsive" /></td>
 								<td class="invert">
 									<div class="quantity">
@@ -156,16 +165,25 @@
 
 						<!--quantity-->
 						<script>
-				    $('.value-plus').on('click', function(){
-						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-						divUpd.text(newVal);
-					});
+							$('.value-plus').on(
+									'click',
+									function() {
+										var divUpd = $(this).parent().find(
+												'.value'), newVal = parseInt(
+												divUpd.text(), 10) + 1;
+										divUpd.text(newVal);
+									});
 
-					$('.value-minus').on('click', function(){
-						var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-						if(newVal>=1) divUpd.text(newVal);
-					});
-				</script>
+							$('.value-minus').on(
+									'click',
+									function() {
+										var divUpd = $(this).parent().find(
+												'.value'), newVal = parseInt(
+												divUpd.text(), 10) - 1;
+										if (newVal >= 1)
+											divUpd.text(newVal);
+									});
+						</script>
 						<!--quantity-->
 					</table>
 				</div>
