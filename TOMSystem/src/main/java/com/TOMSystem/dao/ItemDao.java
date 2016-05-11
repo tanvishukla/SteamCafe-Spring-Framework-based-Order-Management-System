@@ -9,4 +9,9 @@ public interface ItemDao {
 	public void removeItem(int itemId);
 	public Item getItem(int itemId);
 	public List getAllItems();
+	public List getDrinks();
+	public List getAppetizers();
+	public List getMainCourse();
+	public List getDesserts();
+	
 }

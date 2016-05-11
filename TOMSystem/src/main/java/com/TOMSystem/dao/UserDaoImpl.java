@@ -1,9 +1,12 @@
 package com.TOMSystem.dao;
 
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
 import com.TOMSystem.User.User;
 
 @Repository
@@ -24,23 +27,34 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public void delete(String email) {
+	public void delete(String emailId) {
 		// TODO Auto-generated method stub
-		session.getCurrentSession().delete(getUser(email));
+		session.getCurrentSession().delete(getUser(emailId));
 	}
 
 	@Override
-	public User getUser(String email) {
+	public User getUser(String emailId) {
 		// TODO Auto-generated method stub
-		
-		return (User)session.getCurrentSession().get(User.class, email);
-		//return (User)session.getCurrentSession().get(User.class, email);
+		return (User)session.getCurrentSession().get(User.class, emailId);
+
 	}
 
 	@Override
 	public List getAllUsers() {
 		// TODO Auto-generated method stub
 		return session.getCurrentSession().createQuery("from User").list();
+	}
+	
+	@Override
+	public User getUserFromAccessToken(String accessToken)
+	{
+		//String query="select * from User where activation_token='"+accessToken+"'";
+		//return (User)session.getCurrentSession().createSQLQuery(query).uniqueResult();
+		//return (User)session.getCurrentSession().createQuery(query);
+		Query query= session.getCurrentSession().createQuery("from User where activation_token=:name");
+		query.setParameter("name", accessToken);
+		User user = (User) query.uniqueResult();
+		return user;
 	}
 
 }

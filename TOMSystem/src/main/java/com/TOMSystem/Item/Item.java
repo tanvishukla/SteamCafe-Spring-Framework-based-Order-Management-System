@@ -5,20 +5,41 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
+import com.TOMSystem.Order.*;
+@Entity
 public class Item {
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column
 	private int id;
+	@Column
 	private String category;
+	@Column
 	private String name;
+	@Column
 	private String picture;
+	@Column
 	private double calories;
+	@Column
 	private double unit_price;
+	@Column
 	private int prep_time;
+
+	@Column
+	private boolean availability;
+
+	//@ManyToOne
+	//@JoinColumn(name="order_id")
+	//private Order order1;
+
 	
 	public Item(){}
 	
 	public Item(int id, String category, String name, String picture, double calories, double unit_price,
-			int prep_time) {
+			int prep_time,boolean availability) {
 		super();
 		this.id = id;
 		this.category = category;
@@ -27,6 +48,11 @@ public class Item {
 		this.calories = calories;
 		this.unit_price = unit_price;
 		this.prep_time = prep_time;
+
+		this.availability = availability;
+
+		//this.order1=order;
+
 	}
 
 	public int getId() {
@@ -84,4 +110,23 @@ public class Item {
 	public void setPrep_time(int prep_time) {
 		this.prep_time = prep_time;
 	}	
+	
+
+	public boolean getavailability() {
+		return availability ;
+	}
+
+	public void setavailability(boolean availability) {
+		this.availability = availability;
+	}	
+	
+
+//	public Order getOrder() {
+//		return order1;
+//	}
+//
+//	public void setOrder(Order order1) {
+//		this.order1 = order1;
+//	}	
+
 }
