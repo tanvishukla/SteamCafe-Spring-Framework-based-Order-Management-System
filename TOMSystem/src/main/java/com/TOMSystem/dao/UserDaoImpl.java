@@ -54,6 +54,7 @@ public class UserDaoImpl implements UserDao {
 		Query query= session.getCurrentSession().createQuery("from User where activation_token=:name");
 		query.setParameter("name", accessToken);
 		User user = (User) query.uniqueResult();
+		
 		return user;
 	}
 

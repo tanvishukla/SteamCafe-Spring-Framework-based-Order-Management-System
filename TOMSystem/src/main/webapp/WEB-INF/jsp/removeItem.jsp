@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
 	function removeThis() {
-		//alert(removeThis.caller.arguments[0].target.id);
+		alert(removeThis.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
 		var id = removeThis.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -94,12 +94,14 @@
 									href="addItem">Add Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="reoveItem">Remove Item <span class="sr-only">(current)</span></a></li>
+
+									href="removeItem">Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									onclick="removeItem">View Reports <span class="sr-only">(current)</span></a></li>
+									href="removeItem">View Reports <span class="sr-only">(current)</span></a></li>
 
-							</ul>
+
+													</ul>
 						</div>
 					</div>
 				</nav>

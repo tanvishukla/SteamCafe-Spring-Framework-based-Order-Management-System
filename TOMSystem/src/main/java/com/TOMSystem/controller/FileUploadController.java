@@ -76,7 +76,7 @@ public class FileUploadController {
 				tempItem.setPicture(item_name);
 				tempItem.setPrep_time(item_prep_time);
 				tempItem.setUnit_price(item_price);
-				//tempItem.setavailability(true);
+				tempItem.setavailability(true);
 				//add item to table
 				itemService.addItem(tempItem);
 											

@@ -41,7 +41,7 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List getAllItems() {
 		// TODO Auto-generated method stub
-		return session.getCurrentSession().createQuery("from Item").list();
+		return session.getCurrentSession().createQuery("from Item where Availability=true").list();
 	}
 	
 	
