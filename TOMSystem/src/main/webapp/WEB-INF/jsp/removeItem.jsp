@@ -41,7 +41,7 @@
 
 <script type="text/javascript">
 	function removeThis() {
-		alert(removeThis.caller.arguments[0].target.id);
+		//alert(removeThis.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
 		var id = removeThis.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -49,6 +49,20 @@
 			url : "/TOMSystem/removeItem",
 			data : id
 		});
+		setTimeout(5000);
+		location.reload();
+	}
+	
+	function addThis() {
+		//alert(removeThis.caller.arguments[0].target.id);
+		//alert("Clicked "+c);
+		var id = addThis.caller.arguments[0].target.id + "";
+		$.ajax({
+			type : 'POST',
+			url : "/TOMSystem/addThisItem",
+			data : id
+		});
+		setTimeout(5000);
 		location.reload();
 	}
 </script>
@@ -91,17 +105,15 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href="addItem">Add Item <span class="sr-only">(current)</span></a></li>
+									href=addItem >Add Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-
-									href="removeItem">Remove Item <span class="sr-only">(current)</span></a></li>
+									href=removeItem>Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="removeItem">View Reports <span class="sr-only">(current)</span></a></li>
+									href=addItem>View Reports <span class="sr-only">(current)</span></a></li>
 
-
-													</ul>
+							</ul>
 						</div>
 					</div>
 				</nav>
@@ -142,7 +154,7 @@
 							<tr class=${item.id} >
 								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
-										<div class="close1" id = ${item.id} onclick="removeThis()"></div>
+										<div class="entry value-minus label-danger" id = ${item.id} onclick="removeThis()"></div>
 						   			</div>
 								</td>
 								<td class="invert-image"><img
@@ -216,6 +228,106 @@
 
 		</div>
 	</div>
+	
+	<div class="checkout">
+		<div class="container">
+			<h2>Unavailable items...</h2>
+			<br />
+			<form method="POST" action="removeItem" command="item">
+
+				<div class="table-responsive checkout-right animated wow slideInUp"
+					data-wow-delay=".5s">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>Add</th>
+								<th>Item</th>
+								<th>Quantity</th>
+								<th>Item Name</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+
+						<c:forEach items="${unavailableItemList}" var="item">
+							<!-- For every item-->
+							<tr class=${item.id} >
+								<td name="id" value=${item.id } class="invert-closeb">
+									<div class="rem">
+										<div class="enrty value-plus label-success" id = ${item.id} onclick="addThis()"></div>
+						   			</div>
+								</td>
+								<td class="invert-image"><img
+									src="./images/${item.picture}.png" alt=" "
+									class="img-responsive" /></td>
+								<td class="invert">
+									<div class="quantity">
+										<div class="quantity-select">
+											<div class="entry value-minus">&nbsp;</div>
+											<div class="entry value">
+												<span>1</span>
+											</div>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div>
+									</div>
+								</td>
+								<td class="invert">${item.name}</td>
+								<td class="invert">${item.unit_price}</td>
+							</tr>
+						</c:forEach>
+						<!-- If quantity changes-->
+
+						<!--quantity-->
+						<script>
+							$('.value-plus').on(
+									'click',
+									function() {
+										var divUpd = $(this).parent().find(
+												'.value'), newVal = parseInt(
+												divUpd.text(), 10) + 1;
+										divUpd.text(newVal);
+									});
+
+							$('.value-minus').on(
+									'click',
+									function() {
+										var divUpd = $(this).parent().find(
+												'.value'), newVal = parseInt(
+												divUpd.text(), 10) - 1;
+										if (newVal >= 1)
+											divUpd.text(newVal);
+									});
+						</script>
+						<!--quantity-->
+					</table>
+				</div>
+			</form>
+
+			<br>
+			<table border="1">
+				<th>Name</th>
+				<th>Calories</th>
+				<th>Unit Price</th>
+				<th>Preparation Time</th>
+				<th>Cateory</th>
+				<th>Image Name</th>
+				<th>Available</th>
+
+				<c:forEach items="${unavailableItemList}" var="item">
+					<tr>
+						<td>${item.name}</td>
+						<td>${item.calories}</td>
+						<td>${item.unit_price}</td>
+						<td>${item.prep_time}</td>
+						<td>${item.category}</td>
+						<td>${item.picture}</td>
+						<td>${item.availability}</td>
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
+	</div>
+	
+	
 	<!-- //check out -->
 	<!-- //product-nav -->
 	<div class="coupons">

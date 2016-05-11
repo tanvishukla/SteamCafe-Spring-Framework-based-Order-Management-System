@@ -67,6 +67,10 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.getDesserts();
 	}
 
-
+	@Transactional
+	public List getUnavailableItems() {
+		// TODO Auto-generated method stub
+		return itemDao.getUnavailableItems();
+	}
 
 }

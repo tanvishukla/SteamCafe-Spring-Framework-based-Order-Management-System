@@ -29,23 +29,50 @@ public class FileUploadController {
 	 * Upload single file using Spring Controller
 	 */
 	
+	@RequestMapping(value = "/items", method = RequestMethod.GET)
+	public String setupItemsForm(Map<String, Object> map){
+		Item item= new Item();
+		map.put("item", item);
+		map.put("itemList", itemService.getAllItems());
+		map.put("drinksList", itemService.getDrinks());
+		map.put("appetizerList", itemService.getAppetizers());
+		map.put("maincourseList", itemService.getMainCourse());
+		map.put("dessertList", itemService.getDesserts());
+		System.out.println(map);
+		return "items";
+	}
+	
 	@RequestMapping(value = "/removeItem", method = RequestMethod.GET)
 	public String setupRemoveForm(Map<String, Object> map){
 		Item item= new Item();
 		map.put("item", item);
 		map.put("itemList", itemService.getAllItems());
+		map.put("unavailableItemList", itemService.getUnavailableItems());
 		return "removeItem";
 	}
 	
 	@RequestMapping(value = "/removeItem", method = RequestMethod.POST)
 	public String removeSelectedItem(@RequestBody String item_id, Map<String, Object> map){
 		Item tempItem = itemService.getItem(Integer.valueOf(item_id));
-		System.out.println("***************"+item_id+"**************");
 		tempItem.setavailability(false);
 		itemService.editItem(tempItem);
 		
 		map.put("item", tempItem);
 		map.put("itemList", itemService.getAllItems());
+		map.put("unavailableItemList", itemService.getUnavailableItems());
+		
+		return "removeItem";
+	}
+	
+	@RequestMapping(value = "/addThisItem", method = RequestMethod.POST)
+	public String addSelectedItem(@RequestBody String item_id, Map<String, Object> map){
+		Item tempItem = itemService.getItem(Integer.valueOf(item_id));
+		tempItem.setavailability(true);
+		itemService.editItem(tempItem);
+		
+		map.put("item", tempItem);
+		map.put("itemList", itemService.getAllItems());
+		map.put("unavailableItemList", itemService.getUnavailableItems());
 		
 		return "removeItem";
 	}
@@ -76,7 +103,7 @@ public class FileUploadController {
 				tempItem.setPicture(item_name);
 				tempItem.setPrep_time(item_prep_time);
 				tempItem.setUnit_price(item_price);
-				tempItem.setavailability(true);
+				//tempItem.setavailability(true);
 				//add item to table
 				itemService.addItem(tempItem);
 											
@@ -85,7 +112,7 @@ public class FileUploadController {
 
 				// Creating the directory to store file
 				//String rootPath = System.getProperty("catalina.home");
-				String rootPath = "/TOMSystem/src/main/webapp/WEB-INF";
+				String rootPath = "E:/F/Lectures/275-Zhang/CMPE-275-Project/TOMSystem/src/main/webapp/WEB-INF";
 				
 				File dir = new File(rootPath + File.separator + "images");
 				if (!dir.exists())

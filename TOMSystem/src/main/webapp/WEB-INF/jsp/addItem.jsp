@@ -108,13 +108,13 @@
 						<option value="Drinks">Drinks</option>
 						<option value="Appetizer">Appetizer</option>
 						<option value="Main Course">Main Course</option>
-						<option value="Desert">Desert</option>
+						<option value="Dessert">Dessert</option>
 					</select>
 				</div>
 
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Price</span> <input
-						type="number" min="0" class="form-control" placeholder="$0.00"
+						type="text" min="0" class="form-control" placeholder="$0.00"
 						name="item_price">
 				</div>
 

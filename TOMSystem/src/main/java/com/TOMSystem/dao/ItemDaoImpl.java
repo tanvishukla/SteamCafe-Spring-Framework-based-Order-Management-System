@@ -49,7 +49,7 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List getDrinks(){
 		
-		return session.getCurrentSession().createQuery("from Item where category ='Drink' and availability='1'").list();
+		return session.getCurrentSession().createQuery("from Item where category ='Drinks' and availability='1'").list();
 	}
 	
 	@Override
@@ -67,7 +67,12 @@ public class ItemDaoImpl implements ItemDao {
 	@Override
 	public List getDesserts(){
 		
-		return session.getCurrentSession().createQuery("from Item where category ='Desserts' and availability='1'").list();
+		return session.getCurrentSession().createQuery("from Item where category ='Dessert' and availability='1'").list();
+	}
+	
+	@Override
+	public List getUnavailableItems(){
+		return session.getCurrentSession().createQuery("from Item where availability='0'").list();
 	}
 
 }
