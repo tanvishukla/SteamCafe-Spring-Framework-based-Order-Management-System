@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 
 import com.TOMSystem.Order.*;
 @Entity
-public class Item {
+public class Item implements java.io.Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column

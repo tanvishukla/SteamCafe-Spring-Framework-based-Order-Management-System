@@ -1,291 +1,515 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
-	<head>
-		<title>Smart Shop a Ecommerce Online Shopping Portal</title>
-		<!-- for-mobile-apps -->
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="keywords" content="" />
-		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-			function hideURLbar(){ window.scrollTo(0,1); } </script>
-		<!-- //for-mobile-apps -->
-		<link
-			href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/bootstrap.css"
-			rel="stylesheet" type="text/css" media="all" />
-		<link href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/style.css" rel="stylesheet" type="text/css" media="all" />
-		<!-- js -->
-		<script type="text/javascript" src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery-2.1.4.min.js"></script>
-		<!-- //js -->
-		<!-- cart -->
-		<script
-			src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/simpleCart.min.js"></script>
-		<!-- cart -->
-		<!-- for bootstrap working -->
-		<script type="text/javascript"
-			src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/bootstrap-3.1.1.min.js"></script>
-		<!-- //for bootstrap working -->
-		<link href='//fonts.googleapis.com/css?family=Montserrat:400,700'
-			rel='stylesheet' type='text/css'>
-		<link
-			href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
-			rel='stylesheet' type='text/css'>
-		<script
-		src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery.easing.min.js"></script>
+<head>
+<title>Smart Shop a Ecommerce Online Shopping Portal</title>
+<!-- for-mobile-apps -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<script type="application/x-javascript">
+	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+			function hideURLbar(){ window.scrollTo(0,1); } 
+
+</script>
+<!-- //for-mobile-apps -->
+<link
+	href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/bootstrap.css"
+	rel="stylesheet" type="text/css" media="all" />
+<link
+	href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/style.css"
+	rel="stylesheet" type="text/css" media="all" />
+<!-- js -->
+<script type="text/javascript"
+	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery-2.1.4.min.js"></script>
+<!-- //js -->
+<!-- cart -->
+<script
+	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/simpleCart.min.js"></script>
+<!-- cart -->
+<!-- for bootstrap working -->
+<script type="text/javascript"
+	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/bootstrap-3.1.1.min.js"></script>
+<!-- //for bootstrap working -->
+<link href='//fonts.googleapis.com/css?family=Montserrat:400,700'
+	rel='stylesheet' type='text/css'>
+<link
+	href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
+	rel='stylesheet' type='text/css'>
+<script
+	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery.easing.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
 </head>
+
+<script type="text/javascript">
+
+	function callMyFunction(){
+		alert("Your order has been placed");
+	}
+
+	function addToCart() {
+		alert(addToCart.caller.arguments[0].target.id);
+		//alert("Clicked "+c);
+		var id = addToCart.caller.arguments[0].target.id + "";
+		$.ajax({
+			type : 'POST',
+			url : "/TOMSystem/addCart",
+			data : id
+		});
+		setTimeout(5000);
+		location.reload();
+	}
+
+	function removeThisFromCart() {
+		alert(removeThisFromCart.caller.arguments[0].target.id);
+		//alert("Clicked "+c);
+		var id = removeThisFromCart.caller.arguments[0].target.id + "";
+		$.ajax({
+			type : 'POST',
+			url : "/TOMSystem/removeFromCart",
+			data : id
+		});
+		//setTimeout(5000);
+		//location.reload();
+	}
+
+	$(function() {
+		$("#datepicker").datepicker({
+			defaultDate : "+1w",
+			changeMonth : true,
+			numberOfMonths : 1,
+			minDate : 0,
+			maxDate : "+1m"
+		});
+	});
+</script>
+
 <body>
 	<!-- header-bot -->
 	<div class="header-bot">
 		<div class="container">
 			<div class="col-md-3 header-left">
 				<h1>
-					<a href="index.html"><img src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
+					<a href="index.html"><img
+						src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
 				</h1>
 			</div>
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	<!-- //header-bot -->
-	<form method="POST" action="" command="item">
-	<!--My Tab comes HERE-->
-	<div class="col-sm-12 col-md-12 col-lg-12 mb-60">
-		<br />
-		<div class="horizontal-tab">
-			<ul class="nav nav-tabs">
-				<li class="active col-sm-3 col-md-3 col-lg-3"><a href="#drinks"
-					data-toggle="tab" aria-expanded="true">Drinks</a></li>
-				<li class="col-sm-3 col-md-3 col-lg-3"><a href="#appetizer"
-					data-toggle="tab" aria-expanded="false">Appetizer</a></li>
-				<li class=" col-sm-3 col-md-3 col-lg-3 "><a href="#maincourse"
-					data-toggle="tab" aria-expanded="false">Main Course</a></li>
-				<li class=" col-sm-3 col-md-3 col-lg-3 "><a href="#dessert"
-					data-toggle="tab" aria-expanded="false">Dessert</a></li>
-			</ul>
-			<div class="tab-content">
-				<div class="tab-pane fade" id="drinks">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
-									<table class="timetable_sub">
-										<thead>
-											<tr>
-												<th>Add to Cart</th>
-												<th>Item</th>
-												<th>Quantity</th>
-												<th>Item Name</th>
-												<th>Calories</th>
-												<th>Price</th>
-											</tr>
-										</thead>
 
-										<c:forEach items="${drinksList}" var="item">
-											<!-- For every item-->
-											<tr class=${item.id} >
-												<td name="id" value=${item.id } class="invert-closeb">
-													<div class="rem">
-														<div class="entry value-minus label-danger" id=${item.id} onclick="removeThis()"></div>
-													</div>
-												</td>
-												<td class="invert-image"><img src="./images/${item.picture}.png" alt=" " class="img-responsive" /></td>
-												<td class="invert">
-													<div class="quantity">
-														<div class="quantity-select">
-															<div class="entry value-minus">&nbsp;</div>
-															<div class="entry value">
-																<span>1</span>
-															</div>
-															<div class="entry value-plus active">&nbsp;</div>
-														</div>
-													</div>
-												</td>
-												<td class="invert">${item.name}</td>
-												<td class="invert">${item.unit_price}</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
+	<div class="ban-top">
+		<div class="container">
+			<div class="top_nav_left">
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed"
+								data-toggle="collapse"
+								data-target="#bs-example-navbar-collapse-1"
+								aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span> <span
+									class="icon-bar"></span> <span class="icon-bar"></span> <span
+									class="icon-bar"></span>
+							</button>
+						</div>
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse menu--shylock"
+							id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav menu__list">
+								<li class="active menu__item "><a class="menu__link"
+									href="myCart">View Cart <span class="sr-only">(current)</span></a></li>
+
+								<li class="active menu__item "><a class="menu__link"
+									href="/TOMSystem">Logout <span class="sr-only">(current)</span></a></li>
+							</ul>
 						</div>
 					</div>
-				</div>
-
-				<div class="tab-pane fade" id="appetizer">
-					<div class="row">
-						<div class="col-md-12">
-							<!--Table for appetizer comes HERE-->
-							<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
-									<table class="timetable_sub">
-										<thead>
-											<tr>
-												<th>Add to Cart</th>
-												<th>Item</th>
-												<th>Quantity</th>
-												<th>Item Name</th>
-												<th>Calories</th>
-												<th>Price</th>
-											</tr>
-										</thead>
-
-										<c:forEach items="${appetizerList}" var="item">
-											<!-- For every item-->
-											<tr class="rem1" id=${item.id} onclick="addToCart()">
-												<td class="invert-closeb">
-													<div class="rem">
-														<div class="close1"></div>
-													</div>
-												</td>
-												<td class="invert-image"><img src="${item.picture}"	alt=" " class="img-responsive" /></td>
-												<td class="invert">
-													<div class="quantity">
-														<div class="quantity-select">
-															<div class="entry value-minus">&nbsp;</div>
-															<div class="entry value">
-																<span>1</span>
-															</div>
-															<div class="entry value-plus active">&nbsp;</div>
-														</div>
-													</div>
-												</td>
-												<td class="invert">${item.name}</td>
-												<td class="invert">${item.calories}</td>
-												<td class="invert">${item.unit_price}</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="tab-pane fade" id="maincourse">
-					<div class="row">
-						<div class="col-md-12">
-							<!--Table for main course comes HERE-->
-							<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
-									<table class="timetable_sub">
-										<thead>
-											<tr>
-												<th>Add to Cart</th>
-												<th>Item</th>
-												<th>Quantity</th>
-												<th>Item Name</th>
-												<th>Calories</th>
-												<th>Price</th>
-											</tr>
-										</thead>
-
-										<c:forEach items="${maincourseList}" var="item">
-											<!-- For every item-->
-											<tr class="rem1" id=${item.id} onclick="addToCart()">
-												<td class="invert-closeb">
-													<div class="rem">
-														<div class="close1"></div>
-													</div>
-												</td>
-												<td class="invert-image"><img src="${item.picture}"	alt=" " class="img-responsive" /></td>
-												<td class="invert">
-													<div class="quantity">
-														<div class="quantity-select">
-															<div class="entry value-minus">&nbsp;</div>
-															<div class="entry value">
-																<span>1</span>
-															</div>
-															<div class="entry value-plus active">&nbsp;</div>
-														</div>
-													</div>
-												</td>
-												<td class="invert">${item.name}</td>
-												<td class="invert">${item.calories}</td>
-												<td class="invert">${item.unit_price}</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="tab-pane fade" id="dessert">
-					<div class="row">
-						<div class="col-md-12">
-							<!--  Table for deserts comes HERE-->
-							<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
-									<table class="timetable_sub">
-										<thead>
-											<tr>
-												<th>Add to Cart</th>
-												<th>Item</th>
-												<th>Quantity</th>
-												<th>Item Name</th>
-												<th>Calories</th>
-												<th>Price</th>
-											</tr>
-										</thead>
-
-										<c:forEach items="${dessertList}" var="item">
-											<!-- For every item-->
-											<tr class="rem1" id=${item.id} onclick="addToCart()">
-												<td class="invert-closeb">
-													<div class="rem">
-														<div class="close1"></div>
-													</div>
-												</td>
-												<td class="invert-image"><img src="${item.picture}"	alt=" " class="img-responsive" /></td>
-												<td class="invert">
-													<div class="quantity">
-														<div class="quantity-select">
-															<div class="entry value-minus">&nbsp;</div>
-															<div class="entry value">
-																<span>1</span>
-															</div>
-															<div class="entry value-plus active">&nbsp;</div>
-														</div>
-													</div>
-												</td>
-												<td class="invert">${item.name}</td>
-												<td class="invert">${item.calories}</td>
-												<td class="invert">${item.unit_price}</td>
-											</tr>
-										</c:forEach>
-									</table>
-								</div>
-						</div>
-					</div>
-				</div>
+				</nav>
 			</div>
+			<div class="clearfix"></div>
 		</div>
 	</div>
-	
 
-	<!--My Tab ends HERE-->
-
-
-	<!-- check out -->
+	<div class="page-head">
+		<div class="container">
+			<h3>Welcome to Smart Shop</h3>
+		</div>
+	</div>
 	<div class="checkout">
 		<div class="container">
-			<br />
-			<table border="1">
-				<th>Name</th>
-				<th>Calories</th>
-				<th>Unit Price</th>
-				<th>Preparation Time</th>
-				<th>Cateory</th>
-				<th>Image Name</th>
+			<!-- //header-bot -->
+			<form method="POST" action="" command="item">
+				<!--My Tab comes HERE-->
+				<div class="col-sm-12 col-md-12 col-lg-12 mb-60">
+					<br />
+					<div class="horizontal-tab">
+						<ul class="nav nav-tabs">
+							<li class="active col-sm-3 col-md-3 col-lg-3"><a
+								href="#drinks" data-toggle="tab" aria-expanded="true">Drinks</a></li>
+							<li class="col-sm-3 col-md-3 col-lg-3"><a href="#appetizer"
+								data-toggle="tab" aria-expanded="false">Appetizer</a></li>
+							<li class=" col-sm-3 col-md-3 col-lg-3 "><a
+								href="#maincourse" data-toggle="tab" aria-expanded="false">Main
+									Course</a></li>
+							<li class=" col-sm-3 col-md-3 col-lg-3 "><a href="#dessert"
+								data-toggle="tab" aria-expanded="false">Dessert</a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active in" id="drinks">
+								<div class="row">
+									<div class="col-md-12">
+										<div
+											class="table-responsive checkout-right animated wow slideInUp"
+											data-wow-delay=".5s">
+											<table class="timetable_sub">
+												<thead>
+													<tr>
+														<th>Add to Cart</th>
+														<th>Item</th>
+														<th>Quantity</th>
+														<th>Item Name</th>
+														<th>Calories</th>
+														<th>Price</th>
+													</tr>
+												</thead>
 
-				<c:forEach items="${itemList}" var="item">
-					<tr>
-						<td>${item.name}</td>
-						<td>${item.calories}</td>
-						<td>${item.unit_price}</td>
-						<td>${item.prep_time}</td>
-						<td>${item.category}</td>
-						<td>${item.picture}</td>
-					</tr>
-				</c:forEach>
-			</table>
+												<c:forEach items="${drinksList}" var="item">
+													<!-- For every item-->
+													<tr class=${item.id} >
+														<td name="id" value=${item.id } class="invert-closeb">
+															<div class="rem">
+																<div class="entry value-plus label-success"
+																	id=${item.id
+																	} onclick="addToCart()"></div>
+															</div>
+														</td>
+														<td class="invert-image"><img
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/tree/master/Drinks/${item.picture}.png" alt=" "
+															class="img-responsive" /></td>
+														<td class="invert">
+															<div class="quantity">
+																<div class="quantity-select">
+																	<div class="entry value-minus">&nbsp;</div>
+																	<div class="entry value">
+																		<span>1</span>
+																	</div>
+																	<div class="entry value-plus active">&nbsp;</div>
+																</div>
+															</div>
+														</td>
+														<td class="invert">${item.name}</td>
+														<td class="invert">${item.calories}</td>
+														<td class="invert">${item.unit_price}</td>
+													</tr>
+												</c:forEach>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
 
+							<div class="tab-pane fade" id="appetizer">
+								<div class="row">
+									<div class="col-md-12">
+										<!--Table for appetizer comes HERE-->
+										<div
+											class="table-responsive checkout-right animated wow slideInUp"
+											data-wow-delay=".5s">
+											<table class="timetable_sub">
+												<thead>
+													<tr>
+														<th>Add to Cart</th>
+														<th>Item</th>
+														<th>Quantity</th>
+														<th>Item Name</th>
+														<th>Calories</th>
+														<th>Price</th>
+													</tr>
+												</thead>
+
+												<c:forEach items="${appetizerList}" var="item">
+													<!-- For every item-->
+													<tr class=${item.id} >
+														<td name="id" value=${item.id } class="invert-closeb">
+															<div class="rem">
+																<div class="entry value-plus label-success"
+																	id=${item.id
+																	} onclick="addToCart()"></div>
+															</div>
+														</td>
+														<td class="invert-image"><img
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
+															class="img-responsive" /></td>
+														<td class="invert">
+															<div class="quantity">
+																<div class="quantity-select">
+																	<div class="entry value-minus">&nbsp;</div>
+																	<div class="entry value">
+																		<span>1</span>
+																	</div>
+																	<div class="entry value-plus active">&nbsp;</div>
+																</div>
+															</div>
+														</td>
+														<td class="invert">${item.name}</td>
+														<td class="invert">${item.calories}</td>
+														<td class="invert">${item.unit_price}</td>
+													</tr>
+												</c:forEach>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="maincourse">
+								<div class="row">
+									<div class="col-md-12">
+										<!--Table for main course comes HERE-->
+										<div
+											class="table-responsive checkout-right animated wow slideInUp"
+											data-wow-delay=".5s">
+											<table class="timetable_sub">
+												<thead>
+													<tr>
+														<th>Add to Cart</th>
+														<th>Item</th>
+														<th>Quantity</th>
+														<th>Item Name</th>
+														<th>Calories</th>
+														<th>Price</th>
+													</tr>
+												</thead>
+
+												<c:forEach items="${maincourseList}" var="item">
+													<!-- For every item-->
+													<tr class=${item.id} >
+														<td name="id" value=${item.id } class="invert-closeb">
+															<div class="rem">
+																<div class="entry value-plus label-success"
+																	id=${item.id
+																	} onclick="addToCart()"></div>
+															</div>
+														</td>
+														<td class="invert-image"><img
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
+															class="img-responsive" /></td>
+														<td class="invert">
+															<div class="quantity">
+																<div class="quantity-select">
+																	<div class="entry value-minus">&nbsp;</div>
+																	<div class="entry value">
+																		<span>1</span>
+																	</div>
+																	<div class="entry value-plus active">&nbsp;</div>
+																</div>
+															</div>
+														</td>
+														<td class="invert">${item.name}</td>
+														<td class="invert">${item.calories}</td>
+														<td class="invert">${item.unit_price}</td>
+													</tr>
+												</c:forEach>
+												<!--quantity-->
+												<script>
+													$('.value-plus')
+															.on(
+																	'click',
+																	function() {
+																		var divUpd = $(
+																				this)
+																				.parent()
+																				.find(
+																						'.value'), newVal = parseInt(
+																				divUpd
+																						.text(),
+																				10) + 1;
+																		divUpd
+																				.text(newVal);
+																	});
+
+													$('.value-minus')
+															.on(
+																	'click',
+																	function() {
+																		var divUpd = $(
+																				this)
+																				.parent()
+																				.find(
+																						'.value'), newVal = parseInt(
+																				divUpd
+																						.text(),
+																				10) - 1;
+																		if (newVal >= 1)
+																			divUpd
+																					.text(newVal);
+																	});
+												</script>
+												<!--quantity-->
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="tab-pane fade" id="dessert">
+								<div class="row">
+									<div class="col-md-12">
+										<!--  Table for deserts comes HERE-->
+										<div
+											class="table-responsive checkout-right animated wow slideInUp"
+											data-wow-delay=".5s">
+											<table class="timetable_sub">
+												<thead>
+													<tr>
+														<th>Add to Cart</th>
+														<th>Item</th>
+														<th>Quantity</th>
+														<th>Item Name</th>
+														<th>Calories</th>
+														<th>Price</th>
+													</tr>
+												</thead>
+
+												<c:forEach items="${dessertList}" var="item">
+													<!-- For every item-->
+													<tr class=${item.id} >
+														<td name="id" value=${item.id } class="invert-closeb">
+															<div class="rem">
+																<div class="entry value-plus label-success"
+																	id=${item.id
+																	} onclick="addToCart()"></div>
+															</div>
+														</td>
+														<td class="invert-image"><img
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
+															class="img-responsive" /></td>
+														<td class="invert">
+															<div class="quantity">
+																<div class="quantity-select">
+																	<div class="entry value-minus">&nbsp;</div>
+																	<div class="entry value">
+																		<span>1</span>
+																	</div>
+																	<div class="entry value-plus active">&nbsp;</div>
+																</div>
+															</div>
+														</td>
+														<td class="invert">${item.name}</td>
+														<td class="invert">${item.calories}</td>
+														<td class="invert">${item.unit_price}</td>
+													</tr>
+												</c:forEach>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
-	</form>
+	<div class="checkout">
+		<div class="container">
+			<h2>My Shopping Cart</h2>
+			<br />
+			<form method="POST" action="proceed" command="item">
+
+				<div class="alert alert-warning alert-dismissable">
+					<button aria-hidden="true" data-dismiss="alert" class="close"
+						type="button">
+						<%=session.getAttribute("message")%>
+					</button>
+				</div>
+				<!-- <h2 class="label-danger"><%=session.getAttribute("message")%></h2>-->
+				<div class="table-responsive checkout-right animated wow slideInUp"
+					data-wow-delay=".5s">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>Add</th>
+								<th>Item</th>
+								<th>Quantity</th>
+								<th>Item Name</th>
+								<th>Price</th>
+							</tr>
+						</thead>
+						<c:forEach items='<%=session.getAttribute("cart")%>' var="item">
+							<!-- For every item-->
+							<tr class=${item.id} >
+								<td name="id" value=${item.id } class="invert-closeb">
+									<div class="rem">
+										<div class="enrty value-plus label-danger"
+											id=${item.id
+											} onclick="removeThisFromCart()"></div>
+									</div>
+								</td>
+								<td class="invert-image"><img
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
+									class="img-responsive" /></td>
+								<td class="invert">
+									<div class="quantity">
+										<div class="quantity-select">
+											<div class="entry value-minus">&nbsp;</div>
+											<div class="entry value">
+												<span>1</span>
+											</div>
+											<div class="entry value-plus active">&nbsp;</div>
+										</div>
+									</div>
+								</td>
+								<td class="invert">${item.name}</td>
+								<td class="invert">${item.unit_price}</td>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+
+				<!-- My date selector comes here -->
+				<div class="col-md-3 col-sm-3 col-lg-3 horizontal-tab">
+					<div class="grid_3 grid_5 wow fadeInRight animated"	data-wow-delay=".5s">
+						<div class="input-group">
+							<span>
+								Pick-up Date: <input name="date" type="text" id="datepicker" readonly="readonly">
+							</span>
+						</div>
+					</div>
+
+
+					<div class="input-group">
+						<span class="input-group-addon" id="hours">HH</span> <input
+							type="number" min="6" max="21" class="form-control"
+							placeholder="6" name="hours">
+					</div>
+					<div class="input-group">
+						<span class="input-group-addon" id="minutes">MM</span> <input
+							type="number" min="0" max="60" class="form-control"
+							placeholder="00" name="minutes">
+					</div>
+					<div class="grid_3 grid_5 wow fadeInRight animated"
+						data-wow-delay=".5s">
+						<div class="input-group">
+							<input type="submit" value="Proceed"
+								class="form-control  label-success" onclick="callMyFunction()">
+						</div>
+					</div>
+				</div>
+
+			</form>
+			<br>
+		</div>
+	</div>
+
+
 	<!-- //check out -->
 	<!-- //product-nav -->
 	<div class="coupons">

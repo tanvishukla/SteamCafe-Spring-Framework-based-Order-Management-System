@@ -111,7 +111,7 @@
 									href=removeItem>Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href=addItem>View Reports <span class="sr-only">(current)</span></a></li>
+									href="/TOMSystem">Logout<span class="sr-only">(current)</span></a></li>
 
 							</ul>
 						</div>
@@ -158,7 +158,7 @@
 						   			</div>
 								</td>
 								<td class="invert-image"><img
-									src="./images/${item.picture}.png" alt=" "
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
 									class="img-responsive" /></td>
 								<td class="invert">
 									<div class="quantity">
@@ -204,7 +204,7 @@
 			</form>
 
 			<br>
-			<table border="1">
+<%-- 			<table border="1">
 				<th>Name</th>
 				<th>Calories</th>
 				<th>Unit Price</th>
@@ -225,7 +225,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-
+ --%>
 		</div>
 	</div>
 	
@@ -257,7 +257,7 @@
 						   			</div>
 								</td>
 								<td class="invert-image"><img
-									src="./images/${item.picture}.png" alt=" "
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
 									class="img-responsive" /></td>
 								<td class="invert">
 									<div class="quantity">
@@ -303,7 +303,7 @@
 			</form>
 
 			<br>
-			<table border="1">
+<%-- 			<table border="1">
 				<th>Name</th>
 				<th>Calories</th>
 				<th>Unit Price</th>
@@ -324,7 +324,7 @@
 					</tr>
 				</c:forEach>
 			</table>
-		</div>
+ --%>		</div>
 	</div>
 	
 	

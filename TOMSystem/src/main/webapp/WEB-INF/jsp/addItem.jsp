@@ -70,7 +70,7 @@
 									href="removeItem">Remove Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="removeItem">View Reports <span class="sr-only">(current)</span></a></li>
+									href="/TOMSystem">Logout<span class="sr-only">(current)</span></a></li>
 
 							</ul>
 						</div>
@@ -155,7 +155,7 @@
 			</form>
 
 			<br>
-			<table border="1">
+<%-- 			<table border="1">
 				<th>Name</th>
 				<th>Calories</th>
 				<th>Unit Price</th>
@@ -174,7 +174,7 @@
 					</tr>
 				</c:forEach>
 
-
+ --%>
 				</div>
 				</div>
 				<!-- //check out -->
