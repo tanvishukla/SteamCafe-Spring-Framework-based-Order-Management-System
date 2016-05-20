@@ -1,7 +1,8 @@
 package com.TOMSystem.dao;
 
 import java.util.List;
-import com.TOMSystem.Item.Item;
+
+import com.TOMSystem.model.Item;
 
 public interface ItemDao {
 	public void addItem(Item item);

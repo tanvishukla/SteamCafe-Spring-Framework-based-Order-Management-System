@@ -1,28 +1,26 @@
-package com.TOMSystem.Order;
+package com.TOMSystem.model;
 
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import com.TOMSystem.Item.*;
-
 @Entity
-public class Order {
+public class Invoice {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column
-	private int order_id;
-	@Column
-	private int user_id;
-	@Column
-	private String order;
+	private int invoice_id;
+	//@Column
+	//private String invoice;
 	@Column
 	private Date startTime;
 	@Column
@@ -34,14 +32,21 @@ public class Order {
 	@Column
 	private String status;
 	
-	public Order(){}
+	@OneToMany(mappedBy="invoice")
+	private Set<InvoiceDetails> invoiceDetails;
 	
-	public Order(int order_id, int user_id, String order, Date startTime, Date endTime, Date pickupTime, int prep_Time,
+	@ManyToOne
+	@JoinColumn(name = "EMAIL")
+	private User user;
+	
+	public Invoice(){}
+	
+	public Invoice(int invoice_id, int user_id, String invoice, Date startTime, Date endTime, Date pickupTime, int prep_Time,
 			String status) {
 		super();
-		this.order_id = order_id;
-		this.user_id = user_id;
-		this.order = order;
+		this.invoice_id = invoice_id;
+		//this.user_id = user_id;
+		//this.invoice = invoice;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.pickupTime = pickupTime;
@@ -49,28 +54,29 @@ public class Order {
 		this.status = status;
 	}
 
-	public int getOrder_id() {
-		return order_id;
+
+	public int getInvoice_id() {
+		return invoice_id;
 	}
 
-	public void setOrder_id(int order_id) {
-		this.order_id = order_id;
+	public void setInvoice_id(int invoice_id) {
+		this.invoice_id = invoice_id;
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public Set<InvoiceDetails> getInvoiceDetails() {
+		return invoiceDetails;
 	}
 
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setInvoiceDetails(Set<InvoiceDetails> invoiceDetails) {
+		this.invoiceDetails = invoiceDetails;
 	}
 
-	public String getOrder() {
-		return order;
+	public User getUser() {
+		return user;
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Date getStartTime() {

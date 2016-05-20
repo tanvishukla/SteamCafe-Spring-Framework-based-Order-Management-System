@@ -6,8 +6,10 @@
 <hibernate-configuration>
     <session-factory>
     <property name="hibernate.hbm2ddl.auto">update</property>        
-        <mapping class="com.TOMSystem.Item.Item" />
-        <mapping class="com.TOMSystem.User.User" />
-        <mapping class="com.TOMSystem.Order.Order" />
+        <mapping class="com.TOMSystem.model.Item" />
+        <mapping class="com.TOMSystem.model.User" />
+        <mapping class="com.TOMSystem.model.Invoice" />
+        <mapping class="com.TOMSystem.model.InvoiceDetails" />
+        <mapping class="com.TOMSystem.model.Reviews" />
     </session-factory>         
 </hibernate-configuration>

@@ -7,7 +7,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.TOMSystem.User.User;
+import com.TOMSystem.model.User;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -53,8 +53,7 @@ public class UserDaoImpl implements UserDao {
 		//return (User)session.getCurrentSession().createQuery(query);
 		Query query= session.getCurrentSession().createQuery("from User where activation_token=:name");
 		query.setParameter("name", accessToken);
-		User user = (User) query.uniqueResult();
-		
+		User user = (User) query.uniqueResult();		
 		return user;
 	}
 

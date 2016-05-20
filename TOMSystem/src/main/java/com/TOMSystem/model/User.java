@@ -1,21 +1,24 @@
-package com.TOMSystem.User;
+package com.TOMSystem.model;
+
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class User {
-	
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	@Column
-	private String name;
+	private int userId;
+	@Column()
+	private String name;	
 	@Id
-	@Column
+	@Column(name = "EMAIL", nullable=false, unique=true)
 	private String email;
 	@Column
 	private String password;
@@ -24,11 +27,35 @@ public class User {
 	@Column
 	private boolean enabled;
 	
+	@OneToMany(mappedBy="reviewUser")
+	private Set<Reviews> userReviews;
+	
+	@OneToMany(mappedBy="user")
+	private Set<Invoice> userInvoice;
+	
+	
+	//getters & setters
+	public Set<Reviews> getUserReviews() {
+		return userReviews;
+	}
+
+	public void setUserReviews(Set<Reviews> userReviews) {
+		this.userReviews = userReviews;
+	}
+
+	public Set<Invoice> getUserInvoice() {
+		return userInvoice;
+	}
+
+	public void setUserInvoice(Set<Invoice> userInvoice) {
+		this.userInvoice = userInvoice;
+	}
+
 	public User(){}
 	
 	public User(int id, String name, String email, String password, String activation_token, boolean enabled) {
 		super();
-		this.id = id;
+		this.userId = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
@@ -37,11 +64,11 @@ public class User {
 	}
 
 	public int getId() {
-		return id;
+		return userId;
 	}
 
 	public void setId(int id) {
-		this.id = id;
+		this.userId = id;
 	}
 
 	public String getName() {

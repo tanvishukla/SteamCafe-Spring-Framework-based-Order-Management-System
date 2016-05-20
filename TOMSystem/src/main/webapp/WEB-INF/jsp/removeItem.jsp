@@ -151,14 +151,14 @@
 
 						<c:forEach items="${itemList}" var="item">
 							<!-- For every item-->
-							<tr class=${item.id} >
+							<tr class=${item.id} style="height: 10px; ">
 								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
 										<div class="entry value-minus label-danger" id = ${item.id} onclick="removeThis()"></div>
 						   			</div>
 								</td>
 								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" align="middle" width="100px" alt=" "
 									class="img-responsive" /></td>
 								<td class="invert">
 									<div class="quantity">
@@ -257,7 +257,7 @@
 						   			</div>
 								</td>
 								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" width="100px" alt=" "
 									class="img-responsive" /></td>
 								<td class="invert">
 									<div class="quantity">

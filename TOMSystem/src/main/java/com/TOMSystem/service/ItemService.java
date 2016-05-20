@@ -2,7 +2,7 @@ package com.TOMSystem.service;
 
 import java.util.List;
 
-import com.TOMSystem.Item.Item;
+import com.TOMSystem.model.Item;
 
 public interface ItemService {
 	public void addItem(Item item);

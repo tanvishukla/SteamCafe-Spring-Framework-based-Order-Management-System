@@ -2,7 +2,7 @@ package com.TOMSystem.dao;
 
 import java.util.List;
 
-import com.TOMSystem.User.User;
+import com.TOMSystem.model.User;
 
 public interface UserDao {
 		public void add(User user);

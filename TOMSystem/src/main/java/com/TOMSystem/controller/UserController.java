@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.TOMSystem.Item.Item;
-import com.TOMSystem.User.User;
+import com.TOMSystem.model.Item;
+import com.TOMSystem.model.User;
 import com.TOMSystem.service.ItemService;
 import com.TOMSystem.service.UserService;
 

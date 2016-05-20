@@ -26,11 +26,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.TOMSystem.Item.Item;
 import com.TOMSystem.service.ItemService;
 import com.TOMSystem.service.ItemServiceImpl;
-import com.TOMSystem.Order.*;
-import com.TOMSystem.service.OrderService;
+import com.TOMSystem.model.*;
+import com.TOMSystem.model.Item;
+import com.TOMSystem.service.InvoiceService;
 
 @Controller
 public class FileUploadController {
@@ -38,7 +38,7 @@ public class FileUploadController {
 	@Autowired
 	private ItemService itemService;
 	
-	private OrderService orderService;
+	//private OrderService orderService;
 	
 	public ArrayList<Item> cart = new ArrayList<Item>();
 	
@@ -110,6 +110,13 @@ public class FileUploadController {
 		*/return "proceed";
 	}
 	
+	@RequestMapping(value = "/proceed", method = RequestMethod.GET)
+	public String setupProceedForm(Map<String, Object> map){
+		/*Order order= new Order();
+		map.put("orderList", orderService.getAllOrders());
+		*/return "proceed";
+	}
+	
 	
 	@RequestMapping(value = "/items", method = RequestMethod.GET)
 	public String setupItemsForm(Map<String, Object> map){
@@ -122,13 +129,6 @@ public class FileUploadController {
 		map.put("dessertList", itemService.getDesserts());
 		//System.out.println(map);
 		return "items";
-	}
-	
-	@RequestMapping(value = "/proceed", method = RequestMethod.GET)
-	public String setupProceedForm(Map<String, Object> map){
-		/*Order order= new Order();
-		map.put("orderList", orderService.getAllOrders());
-		*/return "proceed";
 	}
 	
 	
