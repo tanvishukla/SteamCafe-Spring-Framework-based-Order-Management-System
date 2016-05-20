@@ -63,13 +63,18 @@ public class UserController {
 		System.out.println("In authUser");
 		System.out.println("User email is :" + user.getEmail());
 		System.out.println("User password is :" + user.getPassword());
+		
+		HttpSession session = request.getSession();
+		
 
 		// Admin Login Authentication
 		if (user.getEmail().equals("admin") && user.getPassword().equals("admin"))
+		{
 
+			session.setAttribute("userId", "admin");
 			// Return the Admin Homepage
 			return "addItem";
-
+		}
 		// User Login Authentication
 		else {
 
@@ -98,9 +103,7 @@ public class UserController {
 					model.addAttribute("ItemList", itemService.getAllItems());
 				}
 				
-				HttpSession session = request.getSession();
-				session.setAttribute("userId", user.getId());
-				
+								
 				Item item= new Item();
 				map.put("item", item);
 				map.put("itemList", itemService.getAllItems());
@@ -108,8 +111,10 @@ public class UserController {
 				map.put("appetizerList", itemService.getAppetizers());
 				map.put("maincourseList", itemService.getMainCourse());
 				map.put("dessertList", itemService.getDesserts());
-				//System.out.println(map);
-				return "items";			}
+				//setting session attribute to user email
+				session.setAttribute("userId", user.getEmail());
+				return "items";			
+				}
 
 		}
 
@@ -181,7 +186,6 @@ public class UserController {
 
 			MimeMessage message = new MimeMessage(session);
 
-			// MimeMessage message = new MimeMessage(session);
 			message.setSender(addressFrom);
 			message.setSubject(subject);
 			String messageBody = "<div style=\"color:red;\">Welcome to TOMSystem</div><br><div>Please find below link and token to verify yourself</div><br><div>Your Access Token is :"
@@ -205,14 +209,14 @@ public class UserController {
 		return "login";
 	}
 
-	///// Navigate to Verify User
+	// Navigate to Verify User
 	@RequestMapping("/Verify")
 	public String VerifyUser(Map<String, Object> map) {
 		System.out.println("Inside verification function");
 		return "UserVerification";
 	}
 
-	///// Verifying Access Token of User
+	// Verifying Access Token of User
 	@RequestMapping("/verifyAccess")
 	public String VerifyUserAccess(Map<String, Object> map, @RequestParam String accessToken) {
 		System.out.println("Access Token Entered is " + accessToken);
