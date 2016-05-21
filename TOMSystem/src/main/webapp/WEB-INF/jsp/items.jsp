@@ -2,8 +2,7 @@
 <%@ page session="true"%>
 <html>
 <head>
-<title>Smart Shop a E-
-commerce Online Shopping Portal</title>
+<title>Smart Shop a E- commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -51,7 +50,7 @@ commerce Online Shopping Portal</title>
 	}
 
 	function addToCart() {
-		alert(addToCart.caller.arguments[0].target.id);
+		alert(addToCart.caller.arguments[0].target.id.innerHTML);
 		//alert("Clicked "+c);
 		var id = addToCart.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -72,8 +71,8 @@ commerce Online Shopping Portal</title>
 			url : "/TOMSystem/removeFromCart",
 			data : id
 		});
-		//setTimeout(5000);
-		//location.reload();
+		setTimeout(5000);
+		location.reload();
 	}
 
 	$(function() {
@@ -184,8 +183,7 @@ commerce Online Shopping Portal</title>
 														<td name="id" value=${item.id } class="invert-closeb">
 															<div class="rem">
 																<div class="entry value-plus label-success"
-																	id=${item.id
-																	} onclick="addToCart()"></div>
+																	id=${item.id} onclick="addToCart()"></div>
 															</div>
 														</td>
 														<td class="invert-image"><img
@@ -318,37 +316,19 @@ commerce Online Shopping Portal</title>
 												<!--quantity-->
 												<script>
 													$('.value-plus')
-															.on(
-																	'click',
-																	function() {
-																		var divUpd = $(
-																				this)
-																				.parent()
-																				.find(
-																						'.value'), newVal = parseInt(
-																				divUpd
-																						.text(),
-																				10) + 1;
-																		divUpd
-																				.text(newVal);
-																	});
+															.on('click',function() {
+																var divUpd = $(this).parent().find('.value'), 
+																newVal = parseInt( divUpd.text(),	10) + 1;
+																divUpd.text(newVal);
+															});
 
 													$('.value-minus')
-															.on(
-																	'click',
-																	function() {
-																		var divUpd = $(
-																				this)
-																				.parent()
-																				.find(
-																						'.value'), newVal = parseInt(
-																				divUpd
-																						.text(),
-																				10) - 1;
-																		if (newVal >= 1)
-																			divUpd
-																					.text(newVal);
-																	});
+															.on('click',function() {
+																var divUpd = $(this).parent().find('.value'), 
+																newVal = parseInt(divUpd.text(),10) - 1;
+																if (newVal >= 1)
+																	divUpd.text(newVal);
+															});
 												</script>
 												<!--quantity-->
 											</table>
@@ -460,38 +440,16 @@ commerce Online Shopping Portal</title>
 							</tr>
 						</c:forEach>
 					</table>
-				</div>
-
-				<!-- My date selector comes here -->
-				<div class="col-md-3 col-sm-3 col-lg-3 horizontal-tab">
-					<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
-						<div class="input-group">
-							<span> Pick-up Date: <input name="date" type="text" id="datepicker" readonly="readonly"> </span>
-						</div>
-					</div>
-
-					<div class="input-group">
-						<span class="input-group-addon" id="hours">HH</span> 
-						<input type="number" min="6" max="21" class="form-control" placeholder="6" name="hours">
-					</div>
-					
-					<div class="input-group">
-						<span class="input-group-addon" id="minutes">MM</span> 
-						<input type="number" min="0" max="60" class="form-control" placeholder="00" name="minutes">
-					</div>
-					
-					<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
-						<div class="input-group">
-							<input type="submit" value="Proceed" class="form-control  label-success" onclick="callMyFunction()">
-						</div>
-					</div>
+				</div>								
+				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+					<a href="checkout"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Continue to checkout</a>
 				</div>
 			</form>
 			<br>
 		</div>
 	</div>
 
-	<!-- //check out -->
+	
 	<!-- //product-nav -->
 	<div class="coupons">
 		<div class="container">

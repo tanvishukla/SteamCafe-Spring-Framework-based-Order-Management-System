@@ -1,6 +1,5 @@
 package com.TOMSystem.controller;
 
-////////
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Map;
@@ -45,7 +44,6 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
-
 	@Autowired
 	private ItemService itemService;
 
@@ -63,21 +61,17 @@ public class UserController {
 		System.out.println("In authUser");
 		System.out.println("User email is :" + user.getEmail());
 		System.out.println("User password is :" + user.getPassword());
-		
+
 		HttpSession session = request.getSession();
-		
 
 		// Admin Login Authentication
-		if (user.getEmail().equals("admin") && user.getPassword().equals("admin"))
-		{
-
+		if (user.getEmail().equals("admin") && user.getPassword().equals("admin")) {
 			session.setAttribute("userId", "admin");
 			// Return the Admin Homepage
 			return "addItem";
 		}
 		// User Login Authentication
 		else {
-
 			// Search this user in from database
 			User searchedUser = userService.getUser(user.getEmail());
 
@@ -88,7 +82,6 @@ public class UserController {
 			if (searchedUser == null || searchedUser.isEnabled() == false
 					|| searchedUser.getPassword().equals(user.getPassword()) == false) {
 				model.addAttribute("email", "Invalid Login");
-
 				return "login";
 			}
 
@@ -102,22 +95,19 @@ public class UserController {
 					// Then return the item list to the user home page
 					model.addAttribute("ItemList", itemService.getAllItems());
 				}
-				
-								
-				Item item= new Item();
+
+				Item item = new Item();
 				map.put("item", item);
 				map.put("itemList", itemService.getAllItems());
 				map.put("drinksList", itemService.getDrinks());
 				map.put("appetizerList", itemService.getAppetizers());
 				map.put("maincourseList", itemService.getMainCourse());
 				map.put("dessertList", itemService.getDesserts());
-				//setting session attribute to user email
+				// setting session attribute to user email
 				session.setAttribute("userId", user.getEmail());
-				return "items";			
-				}
-
+				return "items";
+			}
 		}
-
 	}
 
 	// Navigate to Sign Up Page
@@ -136,7 +126,7 @@ public class UserController {
 		User userResult = new User();
 		if ((userService.getUser(user.getEmail()) != null)) {
 			System.out.println("inside already exist" + user.getEmail());
-			map.put("userAlreadyExistError", "User already exist!!!Either login or signup with new emailId");
+			map.put("userAlreadyExistError", "User already exist! Either login or signup with new emailId.");
 			return "SignUp";
 		} else {
 			userService.add(user);
@@ -204,7 +194,7 @@ public class UserController {
 			System.out.println("Email Sent successfully....");
 		}
 
-		map.put("email", "Sign Up Successfull!!PLease verify and then login");
+		map.put("email", "Sign-up successful! Please verify by using the code sent to your mail.");
 		map.put("user", userResult);
 		return "login";
 	}
@@ -227,7 +217,7 @@ public class UserController {
 
 			userResult.setEnabled(true);
 			userService.edit(userResult);
-			map.put("VerifiedUser", userResult.getEmail() + " verified. Now you can access your account");
+			map.put("VerifiedUser", userResult.getEmail() + " Verified! Now you can access your account");
 			return "login";
 		} else {
 			map.put("VerifiedUser", "Please enter valid Token");
@@ -236,9 +226,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String resetOrderSystem(HttpServletRequest request, Model model){
+	public String logoutFromSystem(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return "login";
 	}
-	
 }
