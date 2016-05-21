@@ -30,6 +30,8 @@ public class Invoice {
 	@Column
 	private Date endTime;
 	@Column
+	private Date orderDate;
+	@Column
 	private Date pickupTime;
 	@Column
 	private int prep_Time;

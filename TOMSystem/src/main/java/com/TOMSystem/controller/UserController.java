@@ -235,4 +235,10 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String resetOrderSystem(HttpServletRequest request, Model model){
+		request.getSession().invalidate();
+		return "login";
+	}
+	
 }
