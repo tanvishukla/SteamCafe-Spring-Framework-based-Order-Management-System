@@ -4,56 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.TOMSystem.dao.InvoiceDao;
 import com.TOMSystem.model.Invoice;
 import com.TOMSystem.model.Item;
-
+@Service
 public class InvoiceServiceImpl implements InvoiceService {
 
 	@Autowired
 	private InvoiceDao invoiceDao;
 	
-	@Override
+	@Transactional
 	public void add(Invoice invoice) {
 		// TODO Auto-generated method stub
 		invoiceDao.add(invoice);
 	}
 
-	@Override
+	@Transactional
 	public void edit(Invoice invoice) {
 		// TODO Auto-generated method stub
 		invoiceDao.edit(invoice);
 	}
 
-	@Override
+	@Transactional
 	public void delete(int invoice_id) {
 		// TODO Auto-generated method stub
 		invoiceDao.delete(invoice_id);
 	}
 
-	@Override
+	@Transactional
 	public Invoice getInvoice(int invoice_id) {
 		// TODO Auto-generated method stub
 		return invoiceDao.getInvoice(invoice_id);
 	}
 
-	@Override
+	@Transactional
 	public List getAllInvoice() {
 		// TODO Auto-generated method stub
 		return invoiceDao.getAllInvoice();
 	}
 
-	@Override
+	@Transactional
 	public int totalPrepTime(ArrayList<Item> invoice) {
 		// TODO Auto-generated method stub
 		return invoiceDao.totalPrepTime(invoice);
 	}
 
-	@Override
+	@Transactional
 	public List<Item> getAllItems(Invoice invoice) {
 		// TODO Auto-generated method stub
 		return invoiceDao.getAllItems(invoice);
+	}
+
+	@Transactional
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		invoiceDao.deleteAll();
 	}
 
 }

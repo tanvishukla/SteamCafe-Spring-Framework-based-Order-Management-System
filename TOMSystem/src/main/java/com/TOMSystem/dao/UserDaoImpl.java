@@ -35,8 +35,10 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public User getUser(String emailId) {
 		// TODO Auto-generated method stub
-		return (User)session.getCurrentSession().get(User.class, emailId);
-
+		Query query= session.getCurrentSession().createQuery("from User where email=:parameter");
+		query.setParameter("parameter", emailId);
+		User user = (User) query.uniqueResult();		
+		return user;
 	}
 
 	@Override

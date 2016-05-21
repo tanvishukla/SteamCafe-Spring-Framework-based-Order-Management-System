@@ -11,6 +11,7 @@ public interface InvoiceDao {
 	public void add(Invoice invoice);
 	public void edit(Invoice invoice);
 	public void delete(int invoice_id);
+	public void deleteAll();
 	public Invoice getInvoice(int invoice_id);
 	public List getAllInvoice();
 	public int totalPrepTime(ArrayList<Item> invoice);

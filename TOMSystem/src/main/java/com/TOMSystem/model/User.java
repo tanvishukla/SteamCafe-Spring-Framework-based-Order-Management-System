@@ -2,15 +2,18 @@ package com.TOMSystem.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 @Entity
+@Table(name="user")
 public class User {
 	@Column
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -18,7 +21,7 @@ public class User {
 	@Column()
 	private String name;	
 	@Id
-	@Column(name = "EMAIL", nullable=false, unique=true)
+	@Column(nullable=false, unique=true)
 	private String email;
 	@Column
 	private String password;
@@ -27,15 +30,15 @@ public class User {
 	@Column
 	private boolean enabled;
 	
-	@OneToMany(mappedBy="reviewUser")
+/*	@OneToMany(cascade=CascadeType.ALL, mappedBy="reviewUser")
 	private Set<Reviews> userReviews;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="user")
 	private Set<Invoice> userInvoice;
-	
+*/	
 	
 	//getters & setters
-	public Set<Reviews> getUserReviews() {
+/*	public Set<Reviews> getUserReviews() {
 		return userReviews;
 	}
 
@@ -50,7 +53,7 @@ public class User {
 	public void setUserInvoice(Set<Invoice> userInvoice) {
 		this.userInvoice = userInvoice;
 	}
-
+*/
 	public User(){}
 	
 	public User(int id, String name, String email, String password, String activation_token, boolean enabled) {

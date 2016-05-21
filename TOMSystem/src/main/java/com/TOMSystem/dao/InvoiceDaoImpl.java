@@ -73,4 +73,10 @@ public class InvoiceDaoImpl implements InvoiceDao {
 		}*/
 		return tempItemList;
 	}
+
+	@Override
+	public void deleteAll() {
+		// TODO Auto-generated method stub
+		session.getCurrentSession().createQuery("delete from Invoice").executeUpdate();		
+	}
 }

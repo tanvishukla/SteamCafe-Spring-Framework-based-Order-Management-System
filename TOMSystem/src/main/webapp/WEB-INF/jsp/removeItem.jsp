@@ -2,7 +2,7 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>Smart Shop a Ecommerce Online Shopping Portal</title>
+<title>Smart Shop a E-commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -41,28 +41,24 @@
 
 <script type="text/javascript">
 	function removeThis() {
-		//alert(removeThis.caller.arguments[0].target.id);
-		//alert("Clicked "+c);
 		var id = removeThis.caller.arguments[0].target.id + "";
 		$.ajax({
 			type : 'POST',
 			url : "/TOMSystem/removeItem",
 			data : id
 		});
-		setTimeout(5000);
+		setTimeout(2000);
 		location.reload();
 	}
 	
 	function addThis() {
-		//alert(removeThis.caller.arguments[0].target.id);
-		//alert("Clicked "+c);
 		var id = addThis.caller.arguments[0].target.id + "";
 		$.ajax({
 			type : 'POST',
 			url : "/TOMSystem/addThisItem",
 			data : id
 		});
-		setTimeout(5000);
+		setTimeout(2000);
 		location.reload();
 	}
 </script>
@@ -109,6 +105,9 @@
 
 								<li class="active menu__item "><a class="menu__link"
 									href=removeItem>Remove Item <span class="sr-only">(current)</span></a></li>
+
+								<li class="active menu__item "><a class="menu__link"
+									href="reset">Reset System Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
 									href="/TOMSystem">Logout<span class="sr-only">(current)</span></a></li>

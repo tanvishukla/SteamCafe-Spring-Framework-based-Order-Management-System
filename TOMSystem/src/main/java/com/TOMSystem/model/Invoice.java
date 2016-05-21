@@ -1,18 +1,22 @@
 package com.TOMSystem.model;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="invoice")
 public class Invoice {
 	
 	@Id
@@ -31,14 +35,25 @@ public class Invoice {
 	private int prep_Time;
 	@Column
 	private String status;
+	@Column
+	private String email;
 	
-	@OneToMany(mappedBy="invoice")
-	private Set<InvoiceDetails> invoiceDetails;
 	
-	@ManyToOne
+public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/*	@ManyToMany(cascade=CascadeType.ALL, mappedBy="invoices")
+	private Set<InvoiceDetails> invoiceDetails = new HashSet<InvoiceDetails>();
+	
+	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "EMAIL")
 	private User user;
-	
+*/	
 	public Invoice(){}
 	
 	public Invoice(int invoice_id, int user_id, String invoice, Date startTime, Date endTime, Date pickupTime, int prep_Time,
@@ -63,7 +78,7 @@ public class Invoice {
 		this.invoice_id = invoice_id;
 	}
 
-	public Set<InvoiceDetails> getInvoiceDetails() {
+/*	public Set<InvoiceDetails> getInvoiceDetails() {
 		return invoiceDetails;
 	}
 
@@ -78,7 +93,7 @@ public class Invoice {
 	public void setUser(User user) {
 		this.user = user;
 	}
-
+*/
 	public Date getStartTime() {
 		return startTime;
 	}

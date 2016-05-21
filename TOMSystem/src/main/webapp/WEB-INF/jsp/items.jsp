@@ -2,16 +2,15 @@
 <%@ page session="true"%>
 <html>
 <head>
-<title>Smart Shop a Ecommerce Online Shopping Portal</title>
+<title>Smart Shop a E-
+commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript">
-	
+<script type="application/x-javascript">	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
-
 </script>
 <!-- //for-mobile-apps -->
 <link
@@ -47,8 +46,7 @@
 </head>
 
 <script type="text/javascript">
-
-	function callMyFunction(){
+	function callMyFunction() {
 		alert("Your order has been placed");
 	}
 
@@ -124,7 +122,7 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href="myCart">View Cart <span class="sr-only">(current)</span></a></li>
+									href="myCart">View Previous Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
 									href="/TOMSystem">Logout <span class="sr-only">(current)</span></a></li>
@@ -191,8 +189,8 @@
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/tree/master/Drinks/${item.picture}.png" alt=" "
-															class="img-responsive" /></td>
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/tree/master/Drinks/${item.picture}.png"
+															alt=" " class="img-responsive" /></td>
 														<td class="invert">
 															<div class="quantity">
 																<div class="quantity-select">
@@ -245,8 +243,8 @@
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
-															class="img-responsive" /></td>
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+															alt=" " class="img-responsive" /></td>
 														<td class="invert">
 															<div class="quantity">
 																<div class="quantity-select">
@@ -299,8 +297,8 @@
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
-															class="img-responsive" /></td>
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+															alt=" " class="img-responsive" /></td>
 														<td class="invert">
 															<div class="quantity">
 																<div class="quantity-select">
@@ -389,8 +387,8 @@
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
-															class="img-responsive" /></td>
+															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+															alt=" " class="img-responsive" /></td>
 														<td class="invert">
 															<div class="quantity">
 																<div class="quantity-select">
@@ -424,15 +422,7 @@
 			<br />
 			<form method="POST" action="proceed" command="item">
 
-				<div class="alert alert-warning alert-dismissable">
-					<button aria-hidden="true" data-dismiss="alert" class="close"
-						type="button">
-						<%=session.getAttribute("message")%>
-					</button>
-				</div>
-				<!-- <h2 class="label-danger"><%=session.getAttribute("message")%></h2>-->
-				<div class="table-responsive checkout-right animated wow slideInUp"
-					data-wow-delay=".5s">
+				<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
 					<table class="timetable_sub">
 						<thead>
 							<tr>
@@ -448,14 +438,12 @@
 							<tr class=${item.id} >
 								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
-										<div class="enrty value-plus label-danger"
-											id=${item.id
-											} onclick="removeThisFromCart()"></div>
+										<div class="enrty value-plus label-danger" id=${item.id} onclick="removeThisFromCart()"></div>
 									</div>
 								</td>
-								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" "
-									class="img-responsive" /></td>
+								<td class="invert-image">
+									<img src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" " class="img-responsive" />
+								</td>
 								<td class="invert">
 									<div class="quantity">
 										<div class="quantity-select">
@@ -476,39 +464,32 @@
 
 				<!-- My date selector comes here -->
 				<div class="col-md-3 col-sm-3 col-lg-3 horizontal-tab">
-					<div class="grid_3 grid_5 wow fadeInRight animated"	data-wow-delay=".5s">
+					<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="input-group">
-							<span>
-								Pick-up Date: <input name="date" type="text" id="datepicker" readonly="readonly">
-							</span>
+							<span> Pick-up Date: <input name="date" type="text" id="datepicker" readonly="readonly"> </span>
 						</div>
 					</div>
 
-
 					<div class="input-group">
-						<span class="input-group-addon" id="hours">HH</span> <input
-							type="number" min="6" max="21" class="form-control"
-							placeholder="6" name="hours">
+						<span class="input-group-addon" id="hours">HH</span> 
+						<input type="number" min="6" max="21" class="form-control" placeholder="6" name="hours">
 					</div>
+					
 					<div class="input-group">
-						<span class="input-group-addon" id="minutes">MM</span> <input
-							type="number" min="0" max="60" class="form-control"
-							placeholder="00" name="minutes">
+						<span class="input-group-addon" id="minutes">MM</span> 
+						<input type="number" min="0" max="60" class="form-control" placeholder="00" name="minutes">
 					</div>
-					<div class="grid_3 grid_5 wow fadeInRight animated"
-						data-wow-delay=".5s">
+					
+					<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
 						<div class="input-group">
-							<input type="submit" value="Proceed"
-								class="form-control  label-success" onclick="callMyFunction()">
+							<input type="submit" value="Proceed" class="form-control  label-success" onclick="callMyFunction()">
 						</div>
 					</div>
 				</div>
-
 			</form>
 			<br>
 		</div>
 	</div>
-
 
 	<!-- //check out -->
 	<!-- //product-nav -->
