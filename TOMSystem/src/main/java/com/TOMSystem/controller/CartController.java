@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -197,15 +198,17 @@ public class CartController {
 			
 			Calendar endTime = Calendar.getInstance();
 			endTime.add(Calendar.MINUTE, totalPrepTime);
-			
-			while(checkAvailability(startTime.getTime(), endTime.getTime()) == false)
+			System.out.println("End Time: "+endTime.getTime());
+			/*while(checkAvailability(startTime.getTime(), endTime.getTime()) == false)
 			{
 				endTime.add(Calendar.MINUTE, 1);
-				if((endTime.getTime().getHours() == 21) && (endTime.getTime().getMinutes() == 1))
-					
 				startTime.add(Calendar.MINUTE, 1);
+				if((endTime.getTime().getHours() == 21) && (endTime.getTime().getMinutes() == 1)){
+					startTime.add(Calendar.MINUTE, 479 + + totalPrepTime);
+					endTime.add(Calendar.MINUTE, 479 + totalPrepTime);
+				}
 			}
-			System.out.println(startTime.getTime());
+			*/System.out.println(startTime.getTime());
 			
 			//System.out.println(formatDateToString(tempTime));
 			model.addAttribute("pickup_time", formatDateToString(endTime.getTime()));
@@ -244,6 +247,7 @@ public class CartController {
 	/*
 	 * Check availability of chef
 	 */
+	@Transactional
 	public boolean checkAvailability(Date startTime, Date endTime) {
         int chefCount = 0;
         List<Invoice> tempInvoiceList = invoiceService.getAllInvoice();

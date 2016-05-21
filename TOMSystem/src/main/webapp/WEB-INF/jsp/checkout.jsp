@@ -1,14 +1,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
 <html>
 <head>
-<title>Smart Shop a E-commerce Online Shopping Portal</title>
+<title>Smart Shop a E- commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="application/x-javascript">	
+	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+			function hideURLbar(){ window.scrollTo(0,1); } 
+</script>
 <!-- //for-mobile-apps -->
 <link
 	href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/bootstrap.css"
@@ -35,7 +37,28 @@
 	rel='stylesheet' type='text/css'>
 <script
 	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery.easing.min.js"></script>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
 </head>
+<script type="text/javascript">
+function callMyFunction() {
+	alert("Your order has been placed");
+}
+$(function() {
+	$("#datepicker").datepicker({
+		defaultDate : "+1w",
+		changeMonth : true,
+		numberOfMonths : 1,
+		minDate : 0,
+		maxDate : "+1m"
+	});
+});
+
+</script>
+
 <body>
 	<!-- header-bot -->
 	<div class="header-bot">
@@ -72,17 +95,10 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href="addItem">Add Item <span class="sr-only">(current)</span></a></li>
+									href="myCart">View Previous Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="removeItem">Remove Item <span class="sr-only">(current)</span></a></li>
-									
-								<li class="active menu__item "><a class="menu__link"
-									href="reset">Reset System Orders <span class="sr-only">(current)</span></a></li>
-
-								<li class="active menu__item "><a class="menu__link"
-									href="/TOMSystem">Logout<span class="sr-only">(current)</span></a></li>
-
+									href="/TOMSystem">Logout <span class="sr-only">(current)</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -95,7 +111,7 @@
 	<!-- banner -->
 	<div class="page-head">
 		<div class="container">
-			<h3>Welcome Admin</h3>
+			<h3>Welcome to Smart Shop</h3>
 		</div>
 	</div>
 	<!-- //banner -->
@@ -139,7 +155,7 @@
 				
 				<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
 					<div class="input-group">
-						<input type="submit" value="Confirm" class="form-control  label-success" onclick="callMyFunction()">
+						<input type="submit" value="Confirm" class="form-control  label-success" ">
 					</div>
 				</div>
 					
