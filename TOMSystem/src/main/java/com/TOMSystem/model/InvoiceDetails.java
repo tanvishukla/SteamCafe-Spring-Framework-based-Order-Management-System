@@ -29,8 +29,12 @@ public class InvoiceDetails {
 	private int quantity;	
 	@Column
 	private double price;
+	@Column
+	private String item_name;
 	
-/*	@ManyToOne(cascade=CascadeType.ALL)
+
+
+	/*	@ManyToOne(cascade=CascadeType.ALL)
     @JoinTable(name="invoice", joinColumns=@JoinColumn(name="invoice_details_id"), inverseJoinColumns = @JoinColumn(name="invoice_id"))
     private Set<Invoice> invoices = new HashSet<Invoice>();
 */	
@@ -90,4 +94,12 @@ public class InvoiceDetails {
 	public void setPrice(double price) {
 		this.price = price;
 	}	
+	
+	public String getItem_name() {
+		return item_name;
+	}
+
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
 }
