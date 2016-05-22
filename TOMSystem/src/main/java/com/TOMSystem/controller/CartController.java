@@ -112,21 +112,21 @@ public class CartController {
 
 			//Remove the selected item
 			//cart.remove(tempItem);
-			for(int i=0;i<cart.size();i++)
-				if(cart.get(i).getName().equals(tempItem.getName())){
-					cart.remove(i);
+			for(int i=0;i<cartItemsList.size();i++)
+				if(cartItemsList.get(i).getItemName().equals(tempItem.getName())){
+					cartItemsList.remove(i);
 					break;
 				}
 			
 			System.out.println(cart);
 
-			session.setAttribute("cart", cart);
+			session.setAttribute("cart", cartItemsList);
 
 			model.addAttribute("item", tempItem);
 			model.addAttribute("itemList", itemService.getAllItems());
 			model.addAttribute("unavailableItemList", itemService.getUnavailableItems());
 			model.addAttribute("cart", session.getAttribute("cart"));
-			System.out.println("Cart:"+ cart.size());
+			System.out.println("Cart:"+ cartItemsList.size());
 			
 			map.put("drinksList", itemService.getDrinks());
 			map.put("appetizerList", itemService.getAppetizers());
@@ -185,6 +185,7 @@ public class CartController {
 				{
 					invoiceDetails.setInvoice_id(tempInvoice.getInvoice_id());
 					invoiceDetails.setItem_id(cartItemsList.get(i).getItemId());
+					invoiceDetails.setItem_name(cartItemsList.get(i).getItemName());
 					invoiceDetails.setPrice(cartItemsList.get(i).getPrice());
 					invoiceDetails.setQuantity((cartItemsList.get(i).getQuantity()));
 					invoiceDetailsService.add(invoiceDetails);
@@ -238,6 +239,7 @@ public class CartController {
 				{
 					invoiceDetails.setInvoice_id(tempInvoice.getInvoice_id());
 					invoiceDetails.setItem_id(cartItemsList.get(i).getItemId());
+					invoiceDetails.setItem_name(cartItemsList.get(i).getItemName());
 					invoiceDetails.setPrice(cartItemsList.get(i).getPrice());
 					invoiceDetails.setQuantity((cartItemsList.get(i).getQuantity()));
 					invoiceDetailsService.add(invoiceDetails);
@@ -263,17 +265,28 @@ public class CartController {
 			{
 				session.setAttribute("cart", cart);
 				
-				Calendar startTime = Calendar.getInstance();
-		        System.out.println("Current Time: "+startTime.getTime());
-				
 				Calendar endTime = Calendar.getInstance();
 				
 				Calendar pickUpTime = Calendar.getInstance();
 				
+				/////////////////
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:s");
+		        Calendar startTime = Calendar.getInstance();
+		        
+		        Calendar TodaysDate=Calendar.getInstance();
+		        Date orderDate = TodaysDate.getTime();
+		        session.setAttribute("orderDate",orderDate);
+		        
+		        System.out.println("Current Time: "+dateFormat.format(startTime.getTime()));
+		        session.setAttribute("start", startTime.getTime());
+		        ///////////
+				
 				int totalPrepTime = 0;
-				for(int i=0; i<cart.size(); i++){
-					totalPrepTime += cart.get(i).getPrep_time();
-				}			
+				for(int i=0; i<cartItemsList.size(); i++){
+					totalPrepTime += cartItemsList.get(i).getItem_PrepTime()*cartItemsList.get(i).quantity;
+				}	
+				
+				session.setAttribute("totalPrepTime", totalPrepTime);
 				
 				endTime.add(Calendar.MINUTE, totalPrepTime);
 				System.out.println("End Time: "+endTime.getTime());
@@ -308,7 +321,7 @@ public class CartController {
 				else
 					pickUpTime.setTime(endTime.getTime());
 				
-				
+				session.setAttribute("pickup",endTime.getTime());
 				//System.out.println(formatDateToString(tempTime));
 				model.addAttribute("pickup_time", pickUpTime.getTime());
 				model.addAttribute("itemList", itemService.getAllItems());
