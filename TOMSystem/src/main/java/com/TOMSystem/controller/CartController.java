@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -13,17 +14,20 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.TOMSystem.model.Invoice;
 import com.TOMSystem.model.Item;
+import com.TOMSystem.service.InvoiceDetailsService;
 import com.TOMSystem.service.InvoiceService;
 import com.TOMSystem.service.ItemService;
 import com.thoughtworks.xstream.persistence.StreamStrategy;
+
+
 
 @Controller
 public class CartController {
@@ -32,10 +36,18 @@ public class CartController {
 	private	ItemService itemService;
 	
 	@Autowired
+	private InvoiceDetailsService invoiceDetailsService;
+
+	
 	private InvoiceService invoiceService;
 	
+
 	//Creating an list of all items in the cart
+	//public HashMap<Item,Integer> cart = new HashMap<Item,Integer>();
 	public ArrayList<Item> cart = new ArrayList<Item>();
+	
+	public ArrayList<CartItems> cartItemsList= new ArrayList<CartItems>();
+	
 	
 	/*
 	 * To add an element in the cart 
@@ -43,14 +55,28 @@ public class CartController {
 	 * increment count, else add 
 	 */
 	@RequestMapping(value = "/addCart", method = RequestMethod.POST)
-	public String addItemToCart(@RequestBody String item_id, Model model, HttpServletRequest request){
+	public String addItemToCart(@RequestParam("item_id") int item_id,@RequestParam("item_quantity") int item_quantity, Model model, HttpServletRequest request) throws NoSuchFieldException, SecurityException{
+
+
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId")!=null)
 		{
+			System.out.println("Item Id is....."+item_id);
+			System.out.println("Item quantity is...."+item_quantity);
+			
+			
 			Item tempItem = itemService.getItem(Integer.valueOf(item_id));
-			cart.add(tempItem);
-			session.setAttribute("cart", cart);
-
+			
+			CartItems tempCartItem=new CartItems();
+			tempCartItem.setItemId(tempItem.getId());
+			tempCartItem.setItemName(tempItem.getName());
+			tempCartItem.setPrice(tempItem.getUnit_price()*item_quantity);
+			tempCartItem.setQuantity(item_quantity);
+			
+			cartItemsList.add(tempCartItem);
+			session.setAttribute("cart", cartItemsList);
+		
+					
 			model.addAttribute("item", tempItem);
 			model.addAttribute("itemList", itemService.getAllItems());
 			model.addAttribute("unavailableItemList", itemService.getUnavailableItems());
@@ -63,7 +89,7 @@ public class CartController {
 			return "login";
 		}
 	}
-	
+
 	/*
 	 * To remove an element from the cart 
 	 */
@@ -75,14 +101,15 @@ public class CartController {
 		{
 			//Fetch the item from table
 			Item tempItem = itemService.getItem(Integer.valueOf(item_id));
-			
+
 			//Remove the selected item
-			for(int i=0; i<cart.size(); i++){						
+			//cart.remove(tempItem);
+			for(int i=0;i<cart.size();i++)
 				if(cart.get(i).getName().equals(tempItem.getName())){
 					cart.remove(i);
 					break;
 				}
-			}
+			
 			System.out.println(cart);
 
 			session.setAttribute("cart", cart);
@@ -99,14 +126,14 @@ public class CartController {
 			return "login";
 		}
 	}
-	
+
 	/*
 	 * 
 	 * Add items to invoice with dates
 	 * 
 	 */
-	
-	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
+
+	/*@RequestMapping(value = "/checkout", method = RequestMethod.POST)
 	public String proceedToCheckout(@RequestBody String item_id, Model model, HttpServletRequest request){
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId")!=null)
@@ -127,6 +154,7 @@ public class CartController {
 			return "login";
 		}
 	}
+*/
 	
 	/*
 	 * Add functionality HERE 
@@ -293,6 +321,7 @@ public class CartController {
 	 * 
 	 * return "checkout";
 	 */
+
 	public boolean checkAvailability(Date startTime, Date endTime) {
         int chefCount = 0;
         List<Invoice> tempInvoiceList = new ArrayList<Invoice>();
@@ -311,4 +340,5 @@ public class CartController {
     }
 	
 	
+
 }

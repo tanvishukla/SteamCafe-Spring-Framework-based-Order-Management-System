@@ -73,7 +73,8 @@ public class UserController {
 		// User Login Authentication
 		else {
 			// Search this user in from database
-			User searchedUser = userService.getUser(user.getEmail());
+			User searchedUser = userService.getUser(user.getEmail().toString());
+					
 
 			// If this user is not present, or this user has not been verified,
 			// or password is incorrect
@@ -103,12 +104,15 @@ public class UserController {
 				map.put("appetizerList", itemService.getAppetizers());
 				map.put("maincourseList", itemService.getMainCourse());
 				map.put("dessertList", itemService.getDesserts());
-				// setting session attribute to user email
-				session.setAttribute("userId", user.getEmail());
-				return "items";
+
+				//setting session attribute to user email
+				session.setAttribute("userId", user.getEmail().toString());
+				return "items";			
+				}
 			}
+
 		}
-	}
+	
 
 	// Navigate to Sign Up Page
 	@RequestMapping(value = "/SignupPage", method = RequestMethod.POST)

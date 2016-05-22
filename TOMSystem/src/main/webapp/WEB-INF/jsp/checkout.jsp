@@ -98,7 +98,7 @@ $(function() {
 									href="myCart">View Previous Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="/TOMSystem">Logout <span class="sr-only">(current)</span></a></li>
+									href="/logout">Logout <span class="sr-only">(current)</span></a></li>
 							</ul>
 						</div>
 					</div>
