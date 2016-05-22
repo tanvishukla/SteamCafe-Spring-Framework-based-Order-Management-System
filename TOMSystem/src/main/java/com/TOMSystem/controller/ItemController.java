@@ -16,8 +16,8 @@ public class ItemController {
 
 	@Autowired
 	private ItemService itemService;
-	
-	
+
+
 	/*
 	 * 
 	 * To set up items page
@@ -41,5 +41,5 @@ public class ItemController {
 		else
 			return "login";
 	}
-	
+
 }

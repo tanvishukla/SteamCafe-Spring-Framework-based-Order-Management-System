@@ -2,15 +2,16 @@
 <%@ page session="true"%>
 <html>
 <head>
-<title>Smart Shop a E-
-commerce Online Shopping Portal</title>
+<title>Smart Shop a E- commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript">	
+<script type="application/x-javascript">
+		
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
+
 </script>
 <!-- //for-mobile-apps -->
 <link
@@ -50,14 +51,25 @@ commerce Online Shopping Portal</title>
 		alert("Your order has been placed");
 	}
 
+	 $(function(){
+		    var $select = $(".1-100");
+		    for (var i=1;i<=100;i++){
+		        $select.append($('<option></option>').val(i).html(i))
+		    }
+		});
+	
 	function addToCart() {
+		
+		
+		alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
 		alert(addToCart.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
+		var quantity=document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value;
 		var id = addToCart.caller.arguments[0].target.id + "";
 		$.ajax({
 			type : 'POST',
 			url : "/TOMSystem/addCart",
-			data : id
+			data : {item_id:id,item_quantity:quantity}
 		});
 		setTimeout(5000);
 		location.reload();
@@ -191,17 +203,11 @@ commerce Online Shopping Portal</title>
 														<td class="invert-image"><img
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/tree/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
+															
+														
 														<td class="invert">
-															<div class="quantity">
-																<div class="quantity-select">
-																	<div class="entry value-minus">&nbsp;</div>
-																	<div class="entry value">
-																		<span>1</span>
-																	</div>
-																	<div class="entry value-plus active">&nbsp;</div>
-																</div>
-															</div>
-														</td>
+														 <select  class="1-100" name="${item.id}"></select>
+														</td> 
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
 														<td class="invert">${item.unit_price}</td>
@@ -238,23 +244,14 @@ commerce Online Shopping Portal</title>
 														<td name="id" value=${item.id } class="invert-closeb">
 															<div class="rem">
 																<div class="entry value-plus label-success"
-																	id=${item.id
-																	} onclick="addToCart()"></div>
+																	id=${item.id } onclick="addToCart()"></div>
 															</div>
 														</td>
 														<td class="invert-image"><img
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
 														<td class="invert">
-															<div class="quantity">
-																<div class="quantity-select">
-																	<div class="entry value-minus">&nbsp;</div>
-																	<div class="entry value">
-																		<span>1</span>
-																	</div>
-																	<div class="entry value-plus active">&nbsp;</div>
-																</div>
-															</div>
+															 <select  class="1-100" name="${item.id}"></select>
 														</td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
@@ -300,57 +297,14 @@ commerce Online Shopping Portal</title>
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
 														<td class="invert">
-															<div class="quantity">
-																<div class="quantity-select">
-																	<div class="entry value-minus">&nbsp;</div>
-																	<div class="entry value">
-																		<span>1</span>
-																	</div>
-																	<div class="entry value-plus active">&nbsp;</div>
-																</div>
-															</div>
+															 <select  class="1-100" name="${item.id}"></select>
 														</td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
 														<td class="invert">${item.unit_price}</td>
 													</tr>
 												</c:forEach>
-												<!--quantity-->
-												<script>
-													$('.value-plus')
-															.on(
-																	'click',
-																	function() {
-																		var divUpd = $(
-																				this)
-																				.parent()
-																				.find(
-																						'.value'), newVal = parseInt(
-																				divUpd
-																						.text(),
-																				10) + 1;
-																		divUpd
-																				.text(newVal);
-																	});
-
-													$('.value-minus')
-															.on(
-																	'click',
-																	function() {
-																		var divUpd = $(
-																				this)
-																				.parent()
-																				.find(
-																						'.value'), newVal = parseInt(
-																				divUpd
-																						.text(),
-																				10) - 1;
-																		if (newVal >= 1)
-																			divUpd
-																					.text(newVal);
-																	});
-												</script>
-												<!--quantity-->
+											
 											</table>
 										</div>
 									</div>
@@ -390,15 +344,7 @@ commerce Online Shopping Portal</title>
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
 														<td class="invert">
-															<div class="quantity">
-																<div class="quantity-select">
-																	<div class="entry value-minus">&nbsp;</div>
-																	<div class="entry value">
-																		<span>1</span>
-																	</div>
-																	<div class="entry value-plus active">&nbsp;</div>
-																</div>
-															</div>
+															 <select  class="1-100" name="${item.id}"></select>
 														</td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
@@ -422,7 +368,8 @@ commerce Online Shopping Portal</title>
 			<br />
 			<form method="POST" action="proceed" command="item">
 
-				<div class="table-responsive checkout-right animated wow slideInUp" data-wow-delay=".5s">
+				<div class="table-responsive checkout-right animated wow slideInUp"
+					data-wow-delay=".5s">
 					<table class="timetable_sub">
 						<thead>
 							<tr>
@@ -438,12 +385,13 @@ commerce Online Shopping Portal</title>
 							<tr class=${item.id} >
 								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
-										<div class="enrty value-plus label-danger" id=${item.id} onclick="removeThisFromCart()"></div>
+										<div class="enrty value-plus label-danger" id=${item.id
+											} onclick="removeThisFromCart()"></div>
 									</div>
 								</td>
-								<td class="invert-image">
-									<img src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" alt=" " class="img-responsive" />
-								</td>
+								<td class="invert-image"><img
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+									alt=" " class="img-responsive" /></td>
 								<td class="invert">
 									<div class="quantity">
 										<div class="quantity-select">
@@ -464,25 +412,32 @@ commerce Online Shopping Portal</title>
 
 				<!-- My date selector comes here -->
 				<div class="col-md-3 col-sm-3 col-lg-3 horizontal-tab">
-					<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
+					<div class="grid_3 grid_5 wow fadeInRight animated"
+						data-wow-delay=".5s">
 						<div class="input-group">
-							<span> Pick-up Date: <input name="date" type="text" id="datepicker" readonly="readonly"> </span>
+							<span> Pick-up Date: <input name="date" type="text"
+								id="datepicker" readonly="readonly">
+							</span>
 						</div>
 					</div>
 
 					<div class="input-group">
-						<span class="input-group-addon" id="hours">HH</span> 
-						<input type="number" min="6" max="21" class="form-control" placeholder="6" name="hours">
+						<span class="input-group-addon" id="hours">HH</span> <input
+							type="number" min="6" max="21" class="form-control"
+							placeholder="6" name="hours">
 					</div>
-					
+
 					<div class="input-group">
-						<span class="input-group-addon" id="minutes">MM</span> 
-						<input type="number" min="0" max="60" class="form-control" placeholder="00" name="minutes">
+						<span class="input-group-addon" id="minutes">MM</span> <input
+							type="number" min="0" max="60" class="form-control"
+							placeholder="00" name="minutes">
 					</div>
-					
-					<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
+
+					<div class="grid_3 grid_5 wow fadeInRight animated"
+						data-wow-delay=".5s">
 						<div class="input-group">
-							<input type="submit" value="Proceed" class="form-control  label-success" onclick="callMyFunction()">
+							<input type="submit" value="Proceed"
+								class="form-control  label-success" onclick="callMyFunction()">
 						</div>
 					</div>
 				</div>

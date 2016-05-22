@@ -79,7 +79,8 @@ public class UserController {
 		else {
 
 			// Search this user in from database
-			User searchedUser = userService.getUser(user.getEmail());
+			User searchedUser = userService.getUser(user.getEmail().toString());
+					
 
 			// If this user is not present, or this user has not been verified,
 			// or password is incorrect
@@ -112,10 +113,9 @@ public class UserController {
 				map.put("maincourseList", itemService.getMainCourse());
 				map.put("dessertList", itemService.getDesserts());
 				//setting session attribute to user email
-				session.setAttribute("userId", user.getEmail());
+				session.setAttribute("userId", user.getEmail().toString());
 				return "items";			
 				}
-
 		}
 
 	}
