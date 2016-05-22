@@ -65,7 +65,7 @@ $(function() {
 		<div class="container">
 			<div class="col-md-3 header-left">
 				<h1>
-					<a href="index.html"><img
+					<a href="/TOMSystem"><img
 						src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
 				</h1>
 			</div>

@@ -41,7 +41,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	@Transactional
-	public List getAllInvoice() {
+	public List<Invoice> getAllInvoice() {
 		// TODO Auto-generated method stub
 		return invoiceDao.getAllInvoice();
 	}

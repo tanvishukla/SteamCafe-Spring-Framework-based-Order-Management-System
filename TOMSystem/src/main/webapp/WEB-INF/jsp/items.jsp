@@ -50,7 +50,7 @@
 	}
 
 	function addToCart() {
-		alert(addToCart.caller.arguments[0].target.id.innerHTML);
+		//alert(addToCart.caller.arguments[0].target.id.innerHTML);
 		//alert("Clicked "+c);
 		var id = addToCart.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -63,7 +63,7 @@
 	}
 
 	function removeThisFromCart() {
-		alert(removeThisFromCart.caller.arguments[0].target.id);
+		//alert(removeThisFromCart.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
 		var id = removeThisFromCart.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -92,7 +92,7 @@
 		<div class="container">
 			<div class="col-md-3 header-left">
 				<h1>
-					<a href="index.html"><img
+					<a href="/TOMSystem"><img
 						src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
 				</h1>
 			</div>

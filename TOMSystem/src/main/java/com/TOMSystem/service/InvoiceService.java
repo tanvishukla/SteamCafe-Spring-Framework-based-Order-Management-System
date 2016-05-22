@@ -13,7 +13,7 @@ public interface InvoiceService{
 	public void delete(int invoice_id);
 	public void deleteAll();
 	public Invoice getInvoice(int invoice_id);
-	public List getAllInvoice();
+	public List<Invoice> getAllInvoice();
 	public int totalPrepTime(ArrayList<Item> invoice);
 	public List<Item> getAllItems(Invoice invoice);
 
