@@ -15,12 +15,15 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.TOMSystem.model.Invoice;
+import com.TOMSystem.model.InvoiceDetails;
 import com.TOMSystem.model.Item;
 import com.TOMSystem.service.InvoiceDetailsService;
 import com.TOMSystem.service.InvoiceService;
@@ -325,5 +328,22 @@ public class CartController {
 			else
 			return "login";
 		}
+		
+		
+		@RequestMapping(value = "/invoiceDetail/{id}", method = RequestMethod.GET)
+		public String invoiceDetailGET(@PathVariable String id, Model model, HttpServletRequest request){
+			HttpSession session = request.getSession();
+			if(session.getAttribute("userId")!=null)
+			{
+				System.out.println("Id: "+id);
+				model.addAttribute("invoiceDetailList", invoiceDetailsService.getInvoiceDetails(Integer.valueOf(id)));
+				return "invoiceDetails";
+			}
+			else
+			{
+				return "login";
+			}
+		}
+	
 
 }

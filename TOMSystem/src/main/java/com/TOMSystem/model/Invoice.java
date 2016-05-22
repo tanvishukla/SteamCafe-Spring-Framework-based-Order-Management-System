@@ -96,6 +96,14 @@ public String getEmail() {
 		this.user = user;
 	}
 */
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+	
 	public Date getStartTime() {
 		return startTime;
 	}

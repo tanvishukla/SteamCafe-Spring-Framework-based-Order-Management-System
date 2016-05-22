@@ -83,18 +83,24 @@ public class InvoiceDaoImpl implements InvoiceDao {
 	@Override
 	public List<Invoice> getAllQueuedInvoices(String email) {
 		// TODO Auto-generated method stub
+		if(email.equals("admin"))
+			return session.getCurrentSession().createQuery("from Invoice where status='Queued'").list();
 		return session.getCurrentSession().createQuery("from Invoice where email='"+email+"' AND status='Queued'").list();
 	}
 
 	@Override
 	public List<Invoice> getAllInProgressInvoices(String email) {
 		// TODO Auto-generated method stub
+		if(email.equals("admin"))
+			return session.getCurrentSession().createQuery("from Invoice where status='In progress'").list();
 		return  session.getCurrentSession().createQuery("from Invoice where email='"+email+"' AND status='In progress'").list();
 	}
 
 	@Override
 	public List<Invoice> getAllCompletedInvoices(String email) {
 		// TODO Auto-generated method stub
+		if(email.equals("admin"))
+			return session.getCurrentSession().createQuery("from Invoice where status='Completed'").list();
 		return session.getCurrentSession().createQuery("from Invoice where email='"+email+"' AND status='Completed'").list();
 	}
 }

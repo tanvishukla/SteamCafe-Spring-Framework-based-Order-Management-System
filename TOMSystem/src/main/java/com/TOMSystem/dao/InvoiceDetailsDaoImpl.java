@@ -1,5 +1,7 @@
 package com.TOMSystem.dao;
 
+import java.util.List;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -25,13 +27,13 @@ public class InvoiceDetailsDaoImpl implements InvoiceDetalisDao {
 	@Override
 	public void delete(int invoice_id) {
 		// TODO Auto-generated method stub
-		session.getCurrentSession().delete(getInvoiceDetails(invoice_id));
+		session.getCurrentSession().createQuery("delete from InvoiceDetails where invoice_id = "+ invoice_id);
 	}
 	
 	@Override
-	public InvoiceDetails getInvoiceDetails(int invoice_id) {
+	public List<InvoiceDetails> getInvoiceDetails(int invoice_id) {
 		// TODO Auto-generated method stub
-		return (InvoiceDetails)session.getCurrentSession().get(InvoiceDetails.class, invoice_id);
+		return session.getCurrentSession().createQuery("from InvoiceDetails where invoice_id = "+ invoice_id).list();
 	}
 
 	@Override

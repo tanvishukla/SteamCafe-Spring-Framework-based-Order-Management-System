@@ -29,32 +29,6 @@
 	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery.easing.min.js"></script>
 </head>
 
-<script type="text/javascript">
-	function removeThis() {
-		var id = removeThis.caller.arguments[0].target.id + "";
-		$.ajax({
-			type : 'POST',
-			url : "/TOMSystem/removeItem",
-			data : id
-		});
-		setTimeout(2000);
-		location.reload();
-	}
-	
-	function viewThis(ele) {
-		var id = ele.id;
-		/* alert(id);
-		$.ajax({
-			type : 'POST',
-			url : "/TOMSystem/invoiceDetail",
-			data : id
-		});
-		//setTimeout(2000); */
-		window.location.replace("http://localhost:8080/TOMSystem/invoiceDetail/"+id);
-		//location.reload();
-	}
-</script>
-
 <body>
 	<!-- header-bot -->
 	<div class="header-bot">
@@ -89,14 +63,9 @@
 						<div class="collapse navbar-collapse menu--shylock"
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
+								
 								<li class="active menu__item "><a class="menu__link"
-									href="items">View Items<span class="sr-only">(current)</span></a></li>
-							
-								<li class="active menu__item "><a class="menu__link"
-									href="invoices">View Orders <span class="sr-only">(current)</span></a></li>
-
-								<li class="active menu__item "><a class="menu__link"
-									href="logout">Logout <span class="sr-only">(current)</span></a></li>
+									href="http://localhost:8080/TOMSystem/logout">Logout <span class="sr-only">(current)</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -116,99 +85,27 @@
 	<!-- check out -->
 	<div class="checkout">
 		<div class="container">
-			<h2>Your orders in queue...</h2>
+			<h2>Items in this order...</h2>
 			<br />
 				<div class="table-responsive checkout-right animated wow slideInUp"
 					data-wow-delay=".5s">
 					<table class="timetable_sub">
 						<thead>
 							<tr>
-								<th>Remove</th>
-								<th>View Order</th>
-								<th>Order Id</th>
-								<th>Status</th>
-								<th>Order Date</th>
-								<th>Pick-up time</th>
+								<th>Item Id</th>
+								<th>Item Name</th>
+								<th>Quantity</th>
+								<th>Price</th>
 							</tr>
 						</thead>
 
-						<c:forEach items="${invoiceList}" var="invoice">
+						<c:forEach items="${invoiceDetailList}" var="invoice">
 							<!-- For every item-->
-							<tr class=${invoice.invoice_id} id=${invoice.invoice_id} style="height: 10px; ">
-								<td name="id" value=${invoice.invoice_id} class="invert-closeb">
-									<div class="rem">
-										<div class="entry value-minus label-danger" id = ${invoice.invoice_id} onclick="removeThis()"></div>
-						   			</div>
-								</td>
-								<td class="invert" id=${invoice.invoice_id} onclick="viewThis(this)"><a >View</a></td>
-								<td class="invert">${invoice.invoice_id}</td>
-								<td class="invert">${invoice.status}</td>
-								<td class="invert">${invoice.orderDate.toString()}</td>
-								<td class="invert">${invoice.pickupTime.toString()}</td>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</div>
-	</div>
-	
-	<div class="checkout">
-		<div class="container">
-			<h2>Your orders in progress...</h2>
-			<br />
-				<div class="table-responsive checkout-right animated wow slideInUp"
-					data-wow-delay=".5s">
-					<table class="timetable_sub">
-						<thead>
-							<tr>
-								<th>View Order</th>
-								<th>Order Id</th>
-								<th>Status</th>
-								<th>Order Date</th>
-								<th>Pick-up time</th>
-							</tr>
-						</thead>
-
-						<c:forEach items="${inProgressInvoiceList}" var="invoice">
-							<!-- For every item-->
-							<tr class=${invoice.invoice_id} id=${invoice.invoice_id} style="height: 10px; ">
-								<td class="invert" id=${invoice.invoice_id} onclick="viewThis(this)"><a >View</a></td>
-								<td class="invert">${invoice.invoice_id}</td>
-								<td class="invert">${invoice.status}</td>
-								<td class="invert">${invoice.orderDate.toString()}</td>
-								<td class="invert">${invoice.pickupTime.toString()}</td> 
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
-			</div>
-	</div>
-	
-	<div class="checkout">
-		<div class="container">
-			<h2>Your orders completed in past</h2>
-			<br />
-				<div class="table-responsive checkout-right animated wow slideInUp"
-					data-wow-delay=".5s">
-					<table class="timetable_sub">
-						<thead>
-							<tr>
-								<th>View Order</th>
-								<th>Order Id</th>
-								<th>Status</th>
-								<th>Order Date</th>
-								<th>Pick-up time</th>
-							</tr>
-						</thead>
-
-						<c:forEach items="${CompletedInvoiceList}" var="invoice">
-							<!-- For every item-->
-							<tr class=${invoice.invoice_id} id=${invoice.invoice_id} style="height: 10px; ">
-								<td class="invert" id=${invoice.invoice_id} onclick="viewThis(this)"><a >View</a></td>
-								<td class="invert">${invoice.invoice_id}</td>
-								<td class="invert">${invoice.status}</td>
-								<td class="invert">${invoice.orderDate.toString()}</td>
-								<td class="invert">${invoice.pickupTime.toString()}</td>
+							<tr class=${invoice.invoice_id} style="height: 10px; ">
+								<td class="invert">${invoice.item_id}</td>
+								<td class="invert">${invoice.item_name}</td>
+								<td class="invert">${invoice.quantity}</td>
+								<td class="invert">${invoice.price}</td>
 							</tr>
 						</c:forEach>
 					</table>

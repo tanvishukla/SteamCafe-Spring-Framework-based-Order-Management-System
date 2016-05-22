@@ -1,5 +1,7 @@
 package com.TOMSystem.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +34,7 @@ public class InvoiceDetailsServiceImpl implements InvoiceDetailsService {
 	}
 
 	@Transactional
-	public InvoiceDetails getInvoiceDetails(int invoice_id) {
+	public List<InvoiceDetails> getInvoiceDetails(int invoice_id) {
 		// TODO Auto-generated method stub
 		return invoiceDetailsDao.getInvoiceDetails(invoice_id);
 	}
