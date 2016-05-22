@@ -59,10 +59,14 @@
 		});
 	
 	function addToCart() {
+<<<<<<< HEAD
 		
 		
 		alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
 		alert(addToCart.caller.arguments[0].target.id);
+=======
+		alert(addToCart.caller.arguments[0].target.id.innerHTML);
+>>>>>>> 52df053f6133a04d2ce7ef97b8ed38254973eaf8
 		//alert("Clicked "+c);
 		var quantity=document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value;
 		var id = addToCart.caller.arguments[0].target.id + "";
@@ -84,8 +88,8 @@
 			url : "/TOMSystem/removeFromCart",
 			data : id
 		});
-		//setTimeout(5000);
-		//location.reload();
+		setTimeout(5000);
+		location.reload();
 	}
 
 	$(function() {
@@ -196,8 +200,7 @@
 														<td name="id" value=${item.id } class="invert-closeb">
 															<div class="rem">
 																<div class="entry value-plus label-success"
-																	id=${item.id
-																	} onclick="addToCart()"></div>
+																	id=${item.id} onclick="addToCart()"></div>
 															</div>
 														</td>
 														<td class="invert-image"><img
@@ -304,7 +307,28 @@
 														<td class="invert">${item.unit_price}</td>
 													</tr>
 												</c:forEach>
+<<<<<<< HEAD
 											
+=======
+												<!--quantity-->
+												<script>
+													$('.value-plus')
+															.on('click',function() {
+																var divUpd = $(this).parent().find('.value'), 
+																newVal = parseInt( divUpd.text(),	10) + 1;
+																divUpd.text(newVal);
+															});
+
+													$('.value-minus')
+															.on('click',function() {
+																var divUpd = $(this).parent().find('.value'), 
+																newVal = parseInt(divUpd.text(),10) - 1;
+																if (newVal >= 1)
+																	divUpd.text(newVal);
+															});
+												</script>
+												<!--quantity-->
+>>>>>>> 52df053f6133a04d2ce7ef97b8ed38254973eaf8
 											</table>
 										</div>
 									</div>
@@ -408,6 +432,7 @@
 							</tr>
 						</c:forEach>
 					</table>
+<<<<<<< HEAD
 				</div>
 
 				<!-- My date selector comes here -->
@@ -440,13 +465,18 @@
 								class="form-control  label-success" onclick="callMyFunction()">
 						</div>
 					</div>
+=======
+				</div>								
+				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+					<a href="checkout"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Continue to checkout</a>
+>>>>>>> 52df053f6133a04d2ce7ef97b8ed38254973eaf8
 				</div>
 			</form>
 			<br>
 		</div>
 	</div>
 
-	<!-- //check out -->
+	
 	<!-- //product-nav -->
 	<div class="coupons">
 		<div class="container">
