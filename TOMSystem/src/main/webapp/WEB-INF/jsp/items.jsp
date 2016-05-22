@@ -59,14 +59,14 @@
 		});
 	
 	function addToCart() {
-<<<<<<< HEAD
+
 		
 		
 		alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
 		alert(addToCart.caller.arguments[0].target.id);
-=======
-		alert(addToCart.caller.arguments[0].target.id.innerHTML);
->>>>>>> 52df053f6133a04d2ce7ef97b8ed38254973eaf8
+
+		//alert(addToCart.caller.arguments[0].target.id.innerHTML);
+
 		//alert("Clicked "+c);
 		var quantity=document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value;
 		var id = addToCart.caller.arguments[0].target.id + "";
@@ -307,28 +307,9 @@
 														<td class="invert">${item.unit_price}</td>
 													</tr>
 												</c:forEach>
-<<<<<<< HEAD
-											
-=======
-												<!--quantity-->
-												<script>
-													$('.value-plus')
-															.on('click',function() {
-																var divUpd = $(this).parent().find('.value'), 
-																newVal = parseInt( divUpd.text(),	10) + 1;
-																divUpd.text(newVal);
-															});
 
-													$('.value-minus')
-															.on('click',function() {
-																var divUpd = $(this).parent().find('.value'), 
-																newVal = parseInt(divUpd.text(),10) - 1;
-																if (newVal >= 1)
-																	divUpd.text(newVal);
-															});
-												</script>
-												<!--quantity-->
->>>>>>> 52df053f6133a04d2ce7ef97b8ed38254973eaf8
+												
+
 											</table>
 										</div>
 									</div>
