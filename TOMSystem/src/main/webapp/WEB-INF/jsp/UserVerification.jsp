@@ -103,7 +103,7 @@ body {
 <div class="login-block">
     <h1>Verify Yourself by entering your Access Token</h1>
     <form action="verifyAccess" method="POST" commandName ="access">
-    <input type="text" value="" name="accessToken" placeholder="Username" id="accessToken" />
+    <input type="text" value="" name="accessToken" placeholder="Access Token" id="accessToken" />
     <button type="submit" name="action" commandName = "user">Verify</button>
    </form>
 </div>

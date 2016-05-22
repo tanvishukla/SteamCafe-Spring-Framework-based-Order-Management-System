@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		Query query= session.getCurrentSession().createQuery("from User where email=:parameter");
 		query.setParameter("parameter", emailId);
-		User user = (User) query.uniqueResult();		
+		User user = (User) query.uniqueResult();	
 		return user;
 	}
 
