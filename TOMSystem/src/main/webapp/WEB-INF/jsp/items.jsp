@@ -2,13 +2,12 @@
 <%@ page session="true"%>
 <html>
 <head>
-<title>Smart Shop a E- commerce Online Shopping Portal</title>
+<title>Smart Shop a E-commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript">
-		
+<script type="application/x-javascript">		
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
@@ -46,9 +45,6 @@
 </head>
 
 <script type="text/javascript">
-	function callMyFunction() {
-		alert("Your order has been placed");
-	}
 	 $(function(){
 		    var $select = $(".1-100");
 		    for (var i=1;i<=100;i++){
@@ -56,9 +52,7 @@
 		    }
 		});
 	
-	function addToCart() {
-		
-		
+	function addToCart() {		
 		alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
 		alert(addToCart.caller.arguments[0].target.id);
 		//alert(addToCart.caller.arguments[0].target.id.innerHTML);
@@ -73,6 +67,7 @@
 		setTimeout(5000);
 		location.reload();
 	}
+	
 	function removeThisFromCart() {
 		alert(removeThisFromCart.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
@@ -85,15 +80,7 @@
 		setTimeout(5000);
 		location.reload();
 	}
-	$(function() {
-		$("#datepicker").datepicker({
-			defaultDate : "+1w",
-			changeMonth : true,
-			numberOfMonths : 1,
-			minDate : 0,
-			maxDate : "+1m"
-		});
-	});
+	
 </script>
 
 <body>
@@ -102,8 +89,7 @@
 		<div class="container">
 			<div class="col-md-3 header-left">
 				<h1>
-					<a href="index.html"><img
-						src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
+					<a href="index.html"><img src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
 				</h1>
 			</div>
 			<div class="clearfix"></div>
@@ -131,10 +117,13 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href="myCart">View Previous Orders <span class="sr-only">(current)</span></a></li>
+									href="items">View Items<span class="sr-only">(current)</span></a></li>
+							
+								<li class="active menu__item "><a class="menu__link"
+									href="invoices">View Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="/logout">Logout <span class="sr-only">(current)</span></a></li>
+									href="logout">Logout <span class="sr-only">(current)</span></a></li>
 							</ul>
 						</div>
 					</div>
@@ -192,18 +181,17 @@
 													<tr class=${item.id} >
 														<td name="id" value=${item.id } class="invert-closeb">
 															<div class="rem">
-																<div class="entry value-plus label-success"
-																	id=${item.id} onclick="addToCart()"></div>
+																<div class="entry value-plus label-success" id=${item.id
+																	} onclick="addToCart()"></div>
 															</div>
 														</td>
 														<td class="invert-image"><img
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/tree/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
-															
-														
-														<td class="invert">
-														 <select  class="1-100" name="${item.id}"></select>
-														</td> 
+
+
+														<td class="invert"><select class="1-100"
+															name="${item.id}"></select></td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
 														<td class="invert">${item.unit_price}</td>
@@ -246,9 +234,8 @@
 														<td class="invert-image"><img
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
-														<td class="invert">
-															 <select  class="1-100" name="${item.id}"></select>
-														</td>
+														<td class="invert"><select class="1-100"
+															name="${item.id}"></select></td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
 														<td class="invert">${item.unit_price}</td>
@@ -292,16 +279,15 @@
 														<td class="invert-image"><img
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
-														<td class="invert">
-															 <select  class="1-100" name="${item.id}"></select>
-														</td>
+														<td class="invert"><select class="1-100"
+															name="${item.id}"></select></td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
 														<td class="invert">${item.unit_price}</td>
 													</tr>
 												</c:forEach>
 
-												
+
 
 											</table>
 										</div>
@@ -341,9 +327,8 @@
 														<td class="invert-image"><img
 															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
 															alt=" " class="img-responsive" /></td>
-														<td class="invert">
-															 <select  class="1-100" name="${item.id}"></select>
-														</td>
+														<td class="invert"><select class="1-100"
+															name="${item.id}"></select></td>
 														<td class="invert">${item.name}</td>
 														<td class="invert">${item.calories}</td>
 														<td class="invert">${item.unit_price}</td>
@@ -374,68 +359,36 @@
 								<th>Remove</th>
 								<th>Item Name</th>
 								<th>Quantity</th>
-								
+
 								<th>Price</th>
 							</tr>
 						</thead>
-						
-						
-						 <c:forEach items='<%=session.getAttribute("cart")%>' var="item">
+
+
+						<c:forEach items='<%=session.getAttribute("cart")%>' var="item">
 							<!-- For every item-->
 							<tr class=${item.itemId} >
-								<td name="id" value=${item.itemId} class="invert-closeb">
+								<td name="id" value=${item.itemId } class="invert-closeb">
 									<div class="rem">
 										<div class="enrty value-plus label-danger" id=${item.itemId
 											} onclick="removeThisFromCart()"></div>
 									</div>
 								</td>
-								
-								
+
+
 								<td class="invert">${item.itemName}</td>
-								<td class="invert">
-								${item.quantity}
-								</td>
-								<td class="invert"> ${item.price} </td>
+								<td class="invert">${item.quantity}</td>
+								<td class="invert">${item.price}</td>
 							</tr>
-						</c:forEach> 
+						</c:forEach>
 					</table>
 
 				</div>
 
-				<!-- My date selector comes here -->
-				<div class="col-md-3 col-sm-3 col-lg-3 horizontal-tab">
-					<div class="grid_3 grid_5 wow fadeInRight animated"
-						data-wow-delay=".5s">
-						<div class="input-group">
-							<span> Pick-up Date: <input name="date" type="text"
-								id="datepicker" readonly="readonly">
-							</span>
-						</div>
-					</div>
-
-					<div class="input-group">
-						<span class="input-group-addon" id="hours">HH</span> <input
-							type="number" min="6" max="21" class="form-control"
-							placeholder="6" name="hours">
-					</div>
-
-					<div class="input-group">
-						<span class="input-group-addon" id="minutes">MM</span> <input
-							type="number" min="0" max="60" class="form-control"
-							placeholder="00" name="minutes">
-					</div>
-
-					<div class="grid_3 grid_5 wow fadeInRight animated"
-						data-wow-delay=".5s">
-						<div class="input-group">
-							<input type="submit" value="Proceed"
-								class="form-control  label-success" onclick="callMyFunction()">
-						</div>
-					</div>
-
-				</div>								
-				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-					<a href="checkout"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Continue to checkout</a>
+				<div class="checkout-right-basket animated wow slideInRight"
+					data-wow-delay=".5s">
+					<a href="checkout"><span class="glyphicon glyphicon-menu-right"
+						aria-hidden="true"></span>Continue to checkout</a>
 
 				</div>
 			</form>
@@ -443,7 +396,7 @@
 		</div>
 	</div>
 
-	
+
 	<!-- //product-nav -->
 	<div class="coupons">
 		<div class="container">

@@ -38,7 +38,7 @@ public class CartController {
 	@Autowired
 	private InvoiceDetailsService invoiceDetailsService;
 
-	
+	@Autowired
 	private InvoiceService invoiceService;
 	
 
@@ -125,36 +125,7 @@ public class CartController {
 		{
 			return "login";
 		}
-	}
-
-	/*
-	 * 
-	 * Add items to invoice with dates
-	 * 
-	 */
-
-	/*@RequestMapping(value = "/checkout", method = RequestMethod.POST)
-	public String proceedToCheckout(@RequestBody String item_id, Model model, HttpServletRequest request){
-		HttpSession session = request.getSession();
-		if(session.getAttribute("userId")!=null)
-		{
-			Item tempItem = itemService.getItem(Integer.valueOf(item_id));
-			cart.add(tempItem);
-			session.setAttribute("cart", cart);
-
-			model.addAttribute("item", tempItem);
-			model.addAttribute("itemList", itemService.getAllItems());
-			model.addAttribute("unavailableItemList", itemService.getUnavailableItems());
-			model.addAttribute("cart", session.getAttribute("cart"));
-			//System.out.println("Cart:"+ cart.size());
-			return "items";
-		}
-		else
-		{
-			return "login";
-		}
-	}
-*/
+	}	
 	
 	/*
 	 * Add functionality HERE 
@@ -322,23 +293,37 @@ public class CartController {
 	 * return "checkout";
 	 */
 
-	public boolean checkAvailability(Date startTime, Date endTime) {
-        int chefCount = 0;
-        List<Invoice> tempInvoiceList = new ArrayList<Invoice>();
-        tempInvoiceList.addAll(invoiceService.getAllInvoice());
-		for(int i=0; i<tempInvoiceList.size(); i++){
-			
-			if( ( startTime.before(tempInvoiceList.get(i).getStartTime()) && endTime.after(tempInvoiceList.get(i).getStartTime()) )
-					|| ( startTime.before(tempInvoiceList.get(i).getEndTime()) && endTime.after(tempInvoiceList.get(i).getStartTime()) )
-					|| ( startTime.before(tempInvoiceList.get(i).getEndTime()) && endTime.after(tempInvoiceList.get(i).getEndTime()) ) ){
-				chefCount++;
-				if(chefCount == 3)
-					return false;
+		public boolean checkAvailability(Date startTime, Date endTime) {
+	        int chefCount = 0;
+	        List<Invoice> tempInvoiceList = new ArrayList<Invoice>();
+	        tempInvoiceList.addAll(invoiceService.getAllInvoice());
+			for(int i=0; i<tempInvoiceList.size(); i++){
+				
+				if( ( startTime.before(tempInvoiceList.get(i).getStartTime()) && endTime.after(tempInvoiceList.get(i).getStartTime()) )
+						|| ( startTime.before(tempInvoiceList.get(i).getEndTime()) && endTime.after(tempInvoiceList.get(i).getStartTime()) )
+						|| ( startTime.before(tempInvoiceList.get(i).getEndTime()) && endTime.after(tempInvoiceList.get(i).getEndTime()) ) ){
+					chefCount++;
+					if(chefCount == 3)
+						return false;
+				}
+			}		
+			return true;
+	    }
+	
+		@RequestMapping(value = "/invoices", method = RequestMethod.GET)
+		public String SetupInvoicesPage(Model model, HttpServletRequest request){
+			HttpSession session = request.getSession();
+			if(session.getAttribute("userId")!=null)
+			{
+				String userName = session.getAttribute("userId").toString();
+				System.out.println("email for invoices: "+userName);
+				model.addAttribute("invoiceList", invoiceService.getAllQueuedInvoices(userName));
+				model.addAttribute("inProgressInvoiceList", invoiceService.getAllInProgressInvoices(userName));
+				model.addAttribute("CompletedInvoiceList", invoiceService.getAllCompletedInvoices(userName));
+				return "invoices";
 			}
-		}		
-		return true;
-    }
-	
-	
+			else
+			return "login";
+		}
 
 }

@@ -64,4 +64,22 @@ public class InvoiceServiceImpl implements InvoiceService {
 		invoiceDao.deleteAll();
 	}
 
+	@Transactional
+	public List<Invoice> getAllQueuedInvoices(String email) {
+		// TODO Auto-generated method stub
+		return invoiceDao.getAllQueuedInvoices(email);
+	}
+
+	@Transactional
+	public List<Invoice> getAllInProgressInvoices(String email) {
+		// TODO Auto-generated method stub
+		return invoiceDao.getAllInProgressInvoices(email);
+	}
+
+	@Transactional
+	public List<Invoice> getAllCompletedInvoices(String email) {
+		// TODO Auto-generated method stub
+		return invoiceDao.getAllCompletedInvoices(email);
+	}
+
 }

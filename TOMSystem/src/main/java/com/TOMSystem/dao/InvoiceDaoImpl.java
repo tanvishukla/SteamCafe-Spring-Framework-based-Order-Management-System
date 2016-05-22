@@ -79,4 +79,22 @@ public class InvoiceDaoImpl implements InvoiceDao {
 		// TODO Auto-generated method stub
 		session.getCurrentSession().createQuery("delete from Invoice").executeUpdate();		
 	}
+
+	@Override
+	public List<Invoice> getAllQueuedInvoices(String email) {
+		// TODO Auto-generated method stub
+		return session.getCurrentSession().createQuery("from Invoice where email='"+email+"' AND status='Queued'").list();
+	}
+
+	@Override
+	public List<Invoice> getAllInProgressInvoices(String email) {
+		// TODO Auto-generated method stub
+		return  session.getCurrentSession().createQuery("from Invoice where email='"+email+"' AND status='In progress'").list();
+	}
+
+	@Override
+	public List<Invoice> getAllCompletedInvoices(String email) {
+		// TODO Auto-generated method stub
+		return session.getCurrentSession().createQuery("from Invoice where email='"+email+"' AND status='Completed'").list();
+	}
 }

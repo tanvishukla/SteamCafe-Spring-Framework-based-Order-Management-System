@@ -1,62 +1,56 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="true"%>
+<%@ page session="false"%>
 <html>
 <head>
-<title>Smart Shop a E- commerce Online Shopping Portal</title>
+<title>Smart Shop a E-commerce Online Shopping Portal</title>
 <!-- for-mobile-apps -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
-<script type="application/x-javascript">	
+<script type="application/x-javascript">
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-			function hideURLbar(){ window.scrollTo(0,1); } 
+		function hideURLbar(){ window.scrollTo(0,1); } 
 </script>
 <!-- //for-mobile-apps -->
-<link
-	href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/bootstrap.css"
-	rel="stylesheet" type="text/css" media="all" />
-<link
-	href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/style.css"
-	rel="stylesheet" type="text/css" media="all" />
+<link href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="https://cdn.rawgit.com/aniketkhaire/static-resources/master/css/style.css" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
-<script type="text/javascript"
-	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery-2.1.4.min.js"></script>
 <!-- //js -->
 <!-- cart -->
-<script
-	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/simpleCart.min.js"></script>
+<script src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/simpleCart.min.js"></script>
 <!-- cart -->
 <!-- for bootstrap working -->
-<script type="text/javascript"
-	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/bootstrap-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/bootstrap-3.1.1.min.js"></script>
 <!-- //for bootstrap working -->
-<link href='//fonts.googleapis.com/css?family=Montserrat:400,700'
-	rel='stylesheet' type='text/css'>
-<link
-	href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
-	rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
 <script
 	src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/js/jquery.easing.min.js"></script>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/demos/style.css">
 </head>
-<script type="text/javascript">
-function callMyFunction() {
-	alert("Your order has been placed");
-}
-$(function() {
-	$("#datepicker").datepicker({
-		defaultDate : "+1w",
-		changeMonth : true,
-		numberOfMonths : 1,
-		minDate : 0,
-		maxDate : "+1m"
-	});
-});
 
+<script type="text/javascript">
+	function removeThis() {
+		var id = removeThis.caller.arguments[0].target.id + "";
+		$.ajax({
+			type : 'POST',
+			url : "/TOMSystem/removeItem",
+			data : id
+		});
+		setTimeout(2000);
+		location.reload();
+	}
+	
+	function addThis() {
+		var id = addThis.caller.arguments[0].target.id + "";
+		$.ajax({
+			type : 'POST',
+			url : "/TOMSystem/addThisItem",
+			data : id
+		});
+		setTimeout(2000);
+		location.reload();
+	}
 </script>
 
 <body>
@@ -73,7 +67,6 @@ $(function() {
 		</div>
 	</div>
 	<!-- //header-bot -->
-	<!-- banner -->
 	<div class="ban-top">
 		<div class="container">
 			<div class="top_nav_left">
@@ -110,7 +103,7 @@ $(function() {
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	<!-- //banner-top -->
+	
 	<!-- banner -->
 	<div class="page-head">
 		<div class="container">
@@ -121,51 +114,42 @@ $(function() {
 	<!-- check out -->
 	<div class="checkout">
 		<div class="container">
-			
-			<!-- When user selects earliest pickup time-->
-			<form action="POST" action="earliestPickUp">
-				<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
-					<h2>Your order will be available by: ${pickup_time}</h2>
-					<div class="input-group">
-						<input type="submit" value="Confirm" class="form-control  label-success">
-					</div>
-				</div>
-			</form>
+			<h2>Your orders in queue...</h2>
+			<br />
+			<form method="POST" action="removeItem" command="item">
+				<div class="table-responsive checkout-right animated wow slideInUp"
+					data-wow-delay=".5s">
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>Remove</th>
+								<th>Order Id</th>
+								<th>Status</th>
+								<th>Order Date</th>
+								<th>Pick-up time</th>
+							</tr>
+						</thead>
 
-			<!-- When user selects his own time -->
-			<form method="POST" action="confirmOrder" command="item">
-				<h2>Want it later? Your your custom pick-up time.</h2>
-				
-				<!-- Time select comes here -->				
-				<div class="col-md-3 col-sm-3 col-lg-3 horizontal-tab">					
-					<div class="input-group">
-						<span class="input-group-addon" id="hours">HH</span> 
-						<input type="number" min="6" max="21" class="form-control" value="6" name="hours">
-					</div>
-					
-					<div class="input-group">
-						<span class="input-group-addon" id="minutes">MM</span> 
-						<input type="number" min="0" max="60" class="form-control" value="00" name="minutes">
-					</div>			
+						<c:forEach items="${invoiceList}" var="invoice">
+							<!-- For every item-->
+							<tr class=${invoice.invoice_id} style="height: 10px; ">
+								<td name="id" value=${invoice.invoice_id} class="invert-closeb">
+									<div class="rem">
+										<div class="entry value-minus label-danger" id = ${invoice.invoice_id} onclick="removeThis()"></div>
+						   			</div>
+								</td>
+								<td class="invert">${invoice.invoice_id}</td>
+								<td class="invert">${invoice.status}</td>
+								<td class="invert">${invoice.orderDate}</td>
+								<td class="invert">${invoice.pickupTime}</td>
+							</tr>
+						</c:forEach>
+					</table>
 				</div>
-				
-				<!-- Date select comes here -->
-				<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
-					<div class="input-group">
-						<span> Pick-up Date: <input name="date" type="text" id="datepicker" readonly="readonly"> </span>
-					</div>
-				</div>
-				
-				<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
-					<div class="input-group">
-						<input type="submit" value="Confirm" class="form-control  label-success" ">
-					</div>
-				</div>
-					
 			</form>
 		</div>
 	</div>
-	<!-- //check out -->
+	
 	<!-- //product-nav -->
 	<div class="coupons">
 		<div class="container">
@@ -192,4 +176,5 @@ $(function() {
 			</div>
 		</div>
 	</div>
-	<
+</body>
+</html>

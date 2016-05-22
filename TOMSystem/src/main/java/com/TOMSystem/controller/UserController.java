@@ -2,6 +2,7 @@ package com.TOMSystem.controller;
 
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
@@ -201,6 +202,58 @@ public class UserController {
 		map.put("email", "Sign-up successful! Please verify by using the code sent to your mail.");
 		map.put("user", userResult);
 		return "login";
+	}
+		
+	public static void sendThisMail(String email, String accessToken, String mailBody, Date pickupTime, String status) throws MessagingException, NoSuchAlgorithmException, NoSuchPaddingException,
+	InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
+		
+		String subject = "CMPE-275 - Takeout Order Management System";
+		final String from = "tomsystemcmpe275@gmail.com";
+		final String password = "TOMSystem";
+
+		Properties props = new Properties();
+		props.setProperty("mail.transport.protocol", "smtp");
+		props.setProperty("mail.host", "smtp.gmail.com");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.port", "465");
+		props.put("mail.debug", "true");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.socketFactory.fallback", "false");
+		props.put("mail.smtp.starttls.enable", "true");
+
+		Session session = Session.getInstance(props, new GMailAuthenticator(from, password));
+		// session.setDebug(true);
+		Transport transport = session.getTransport();
+		InternetAddress addressFrom = new InternetAddress(from);
+
+		// SmtpAuthenticator authentication = new SmtpAuthenticator();
+
+		MimeMessage message = new MimeMessage(session);
+
+		message.setSender(addressFrom);
+		
+		if(accessToken.length() != 0){
+			message.setSubject(subject + " - Verify your account.");
+			String messageBody = "<div style=\"color:red;\">Welcome to TOMSystem</div><br><div>Please find below link and token to verify yourself</div><br><div>Your Access Token is :"
+				+ accessToken + "</div>";
+			String url = "http://localhost:8080/TOMSystem/";
+			messageBody = messageBody.concat("<a href=" + '"' + url + '"' + ">Verify your account</a>");
+			message.setContent(messageBody, "text/html; charset=utf-8");
+		}else if(status.equals("In progress")){
+			message.setSubject(subject + " - Order in progress");
+			String messageBody = "You order with orderId: "+ mailBody + " is in progress and will be ready by :"+ pickupTime.toString();
+			message.setContent(messageBody, "text/html; charset=utf-8");
+		}else{
+			message.setSubject(subject + " - Order placed");
+			String messageBody = "You order with otderid : "+ mailBody + " is placed and will be ready by :"+ pickupTime.toString();
+			message.setContent(messageBody, "text/html; charset=utf-8");
+		}
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+		transport.connect();
+		Transport.send(message);
+		transport.close();
 	}
 
 	// Navigate to Verify User

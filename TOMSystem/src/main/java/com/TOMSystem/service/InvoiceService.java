@@ -14,6 +14,9 @@ public interface InvoiceService{
 	public void deleteAll();
 	public Invoice getInvoice(int invoice_id);
 	public List<Invoice> getAllInvoice();
+	public List<Invoice> getAllQueuedInvoices(String email);
+	public List<Invoice> getAllInProgressInvoices(String email);
+	public List<Invoice> getAllCompletedInvoices(String email);
 	public int totalPrepTime(ArrayList<Item> invoice);
 	public List<Item> getAllItems(Invoice invoice);
 
