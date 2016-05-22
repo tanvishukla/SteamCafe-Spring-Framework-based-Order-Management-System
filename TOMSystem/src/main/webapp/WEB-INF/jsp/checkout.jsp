@@ -123,7 +123,7 @@ $(function() {
 		<div class="container">
 			
 			<!-- When user selects earliest pickup time-->
-			<form action="POST" action="earliestPickUp">
+			<form method="POST" action="earliestPickUp">
 				<div class="grid_3 grid_5 wow fadeInRight animated" data-wow-delay=".5s">
 					<h2>Your order will be available by: ${pickup_time}</h2>
 					<div class="input-group">

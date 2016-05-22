@@ -8,6 +8,15 @@ public class CartItems {
 	public int itemId;
 	public String itemName;
 	public double price;
+	public int Item_PrepTime;
+	
+	
+	public int getItem_PrepTime() {
+		return Item_PrepTime;
+	}
+	public void setItem_PrepTime(int item_PrepTime) {
+		Item_PrepTime = item_PrepTime;
+	}
 	public int quantity;
 	
 	public int getItemId() {

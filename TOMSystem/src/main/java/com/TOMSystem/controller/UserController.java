@@ -1,13 +1,26 @@
 package com.TOMSystem.controller;
 
+
 import java.util.ArrayList;
 import java.util.Base64;
+
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -30,16 +43,6 @@ import com.TOMSystem.model.User;
 import com.TOMSystem.service.ItemService;
 import com.TOMSystem.service.UserService;
 
-import java.security.InvalidKeyException;
-import java.security.Key;
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-import javax.crypto.spec.SecretKeySpec;
-
 @Controller
 public class UserController {
 
@@ -49,7 +52,9 @@ public class UserController {
 	private ItemService itemService;
 
 	@RequestMapping("/")
-	public String HomePage(Map<String, Object> map) {
+	public String HomePage(Map<String, Object> map) throws ParseException {
+		
+		
 		return "login";
 	}
 
