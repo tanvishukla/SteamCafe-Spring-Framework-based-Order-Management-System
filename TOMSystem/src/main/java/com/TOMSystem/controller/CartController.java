@@ -3,38 +3,30 @@ package com.TOMSystem.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import java.util.HashMap;
-
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.TOMSystem.model.InvoiceDetails;
-import com.TOMSystem.model.Item;
-import com.TOMSystem.service.InvoiceDetailsService;
-
 
 import com.TOMSystem.model.Invoice;
 import com.TOMSystem.model.Item;
+import com.TOMSystem.service.InvoiceDetailsService;
 import com.TOMSystem.service.InvoiceService;
-
 import com.TOMSystem.service.ItemService;
+
+
 
 @Controller
 public class CartController {
@@ -43,39 +35,47 @@ public class CartController {
 	private	ItemService itemService;
 	
 	@Autowired
-
 	private InvoiceDetailsService invoiceDetailsService;
 
-
+	
 	private InvoiceService invoiceService;
 	
 
 	//Creating an list of all items in the cart
 	//public HashMap<Item,Integer> cart = new HashMap<Item,Integer>();
 	public ArrayList<Item> cart = new ArrayList<Item>();
-	//public ArrayList<InvoiceDetails> cart = new ArrayList<InvoiceDetails>();
+	
+	public ArrayList<CartItems> cartItemsList= new ArrayList<CartItems>();
+	
+	
 	/*
 	 * To add an element in the cart 
 	 * First check whether the element exists. If YES?
 	 * increment count, else add 
 	 */
 	@RequestMapping(value = "/addCart", method = RequestMethod.POST)
-	public String addItemToCart(@RequestParam("item_id") int item_id,@RequestParam("item_quantity") int item_quantity, Model model, HttpServletRequest request){
+	public String addItemToCart(@RequestParam("item_id") int item_id,@RequestParam("item_quantity") int item_quantity, Model model, HttpServletRequest request) throws NoSuchFieldException, SecurityException{
 
 
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId")!=null)
 		{
-			System.out.println("Item Id is....."+Integer.valueOf(item_id));
-			System.out.println("Item quantity is...."+Integer.valueOf(item_quantity));
+			System.out.println("Item Id is....."+item_id);
+			System.out.println("Item quantity is...."+item_quantity);
 			
-			//int item_id1=Integer.valueOf(item_id);
-			//int item_quantity1= Integer.valueOf(item_quantity);
-			//InvoiceDetails tempInvoiceItem= new InvoiceDetails(); 
+			
 			Item tempItem = itemService.getItem(Integer.valueOf(item_id));
 			
-			session.setAttribute("cart", cart);
-
+			CartItems tempCartItem=new CartItems();
+			tempCartItem.setItemId(tempItem.getId());
+			tempCartItem.setItemName(tempItem.getName());
+			tempCartItem.setPrice(tempItem.getUnit_price()*item_quantity);
+			tempCartItem.setQuantity(item_quantity);
+			
+			cartItemsList.add(tempCartItem);
+			session.setAttribute("cart", cartItemsList);
+		
+					
 			model.addAttribute("item", tempItem);
 			model.addAttribute("itemList", itemService.getAllItems());
 			model.addAttribute("unavailableItemList", itemService.getUnavailableItems());
@@ -132,7 +132,7 @@ public class CartController {
 	 * 
 	 */
 
-	@RequestMapping(value = "/checkout", method = RequestMethod.POST)
+	/*@RequestMapping(value = "/checkout", method = RequestMethod.POST)
 	public String proceedToCheckout(@RequestBody String item_id, Model model, HttpServletRequest request){
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId")!=null)
@@ -153,7 +153,7 @@ public class CartController {
 			return "login";
 		}
 	}
-
+*/
 	
 	/*
 	 * Add functionality HERE 

@@ -378,42 +378,35 @@
 					<table class="timetable_sub">
 						<thead>
 							<tr>
-								<th>Add</th>
-								<th>Item</th>
-								<th>Quantity</th>
+								<th>Remove</th>
 								<th>Item Name</th>
+								<th>Quantity</th>
+								
 								<th>Price</th>
 							</tr>
 						</thead>
-						<c:forEach items='<%=session.getAttribute("cart")%>' var="item">
+						
+						
+						 <c:forEach items='<%=session.getAttribute("cart")%>' var="item">
 							<!-- For every item-->
-							<tr class=${item.id} >
-								<td name="id" value=${item.id } class="invert-closeb">
+							<tr class=${item.itemId} >
+								<td name="id" value=${item.itemId} class="invert-closeb">
 									<div class="rem">
-										<div class="enrty value-plus label-danger" id=${item.id
+										<div class="enrty value-plus label-danger" id=${item.itemId
 											} onclick="removeThisFromCart()"></div>
 									</div>
 								</td>
-								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
-									alt=" " class="img-responsive" /></td>
+								
+								
+								<td class="invert">${item.itemName}</td>
 								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-												<span>1</span>
-											</div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
+								${item.quantity}
 								</td>
-								<td class="invert">${item.name}</td>
-								<td class="invert">${item.unit_price}</td>
+								<td class="invert"> ${item.price} </td>
 							</tr>
-						</c:forEach>
+						</c:forEach> 
 					</table>
-<<<<<<< HEAD
+
 				</div>
 
 				<!-- My date selector comes here -->
@@ -446,11 +439,11 @@
 								class="form-control  label-success" onclick="callMyFunction()">
 						</div>
 					</div>
-=======
+
 				</div>								
 				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
 					<a href="checkout"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Continue to checkout</a>
->>>>>>> 52df053f6133a04d2ce7ef97b8ed38254973eaf8
+
 				</div>
 			</form>
 			<br>
