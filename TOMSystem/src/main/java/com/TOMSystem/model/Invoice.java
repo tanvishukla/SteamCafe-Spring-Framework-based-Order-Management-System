@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="invoice")
+@Table(name="Invoice")
 public class Invoice {
 	
 	@Id
@@ -134,6 +134,16 @@ public String getEmail() {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public void setOrderDate(Date d) {
+		// TODO Auto-generated method stub
+		this.orderDate=d;
+	}
+	
+	public Date getOrderDate() {
+		// TODO Auto-generated method stub
+		return this.orderDate;
 	}
 }
 
