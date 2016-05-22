@@ -161,10 +161,23 @@ $(function() {
 						<input type="submit" value="Confirm" class="form-control  label-success" ">
 					</div>
 				</div>
-					
+		
+		<h2>${message}</h2>
+	<div class="checkout-right-basket animated wow slideInRight"
+					data-wow-delay=".5s">
+					<a href="items"><span class="glyphicon glyphicon-menu-left"
+						aria-hidden="true"></span>Back to orders</a>
+
+				</div>			
+		
 			</form>
 		</div>
+		
 	</div>
+	
+	
+	
+	
 	<!-- //check out -->
 	<!-- //product-nav -->
 	<div class="coupons">

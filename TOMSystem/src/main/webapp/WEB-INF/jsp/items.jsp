@@ -53,8 +53,8 @@
 		});
 	
 	function addToCart() {		
-		alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
-		alert(addToCart.caller.arguments[0].target.id);
+		//alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
+		//alert(addToCart.caller.arguments[0].target.id);
 		//alert(addToCart.caller.arguments[0].target.id.innerHTML);
 		//alert("Clicked "+c);
 		var quantity=document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value;

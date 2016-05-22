@@ -36,6 +36,7 @@ public class ItemController {
 			model.addAttribute("appetizerList", itemService.getAppetizers());
 			model.addAttribute("maincourseList", itemService.getMainCourse());
 			model.addAttribute("dessertList", itemService.getDesserts());
+			model.addAttribute("cart", session.getAttribute("cart"));
 			return "items";
 		}
 		else
