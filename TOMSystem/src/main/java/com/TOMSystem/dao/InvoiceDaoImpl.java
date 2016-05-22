@@ -42,7 +42,7 @@ public class InvoiceDaoImpl implements InvoiceDao {
 	}
 
 	@Override
-	public List getAllInvoice(){
+	public List<Invoice> getAllInvoice(){
 		// TODO Auto-generated method stub
 		return session.getCurrentSession().createQuery("from Invoice").list();
 	}

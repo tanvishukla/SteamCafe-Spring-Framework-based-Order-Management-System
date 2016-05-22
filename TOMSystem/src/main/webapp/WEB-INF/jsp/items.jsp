@@ -11,7 +11,6 @@
 		
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 			function hideURLbar(){ window.scrollTo(0,1); } 
-
 </script>
 <!-- //for-mobile-apps -->
 <link
@@ -50,7 +49,6 @@
 	function callMyFunction() {
 		alert("Your order has been placed");
 	}
-
 	 $(function(){
 		    var $select = $(".1-100");
 		    for (var i=1;i<=100;i++){
@@ -59,14 +57,11 @@
 		});
 	
 	function addToCart() {
-
 		
 		
 		alert(document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value);
 		alert(addToCart.caller.arguments[0].target.id);
-
 		//alert(addToCart.caller.arguments[0].target.id.innerHTML);
-
 		//alert("Clicked "+c);
 		var quantity=document.getElementsByName(addToCart.caller.arguments[0].target.id)[0].value;
 		var id = addToCart.caller.arguments[0].target.id + "";
@@ -78,7 +73,6 @@
 		setTimeout(5000);
 		location.reload();
 	}
-
 	function removeThisFromCart() {
 		alert(removeThisFromCart.caller.arguments[0].target.id);
 		//alert("Clicked "+c);
@@ -91,7 +85,6 @@
 		setTimeout(5000);
 		location.reload();
 	}
-
 	$(function() {
 		$("#datepicker").datepicker({
 			defaultDate : "+1w",
@@ -141,7 +134,7 @@
 									href="myCart">View Previous Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
-									href="/TOMSystem">Logout <span class="sr-only">(current)</span></a></li>
+									href="/logout">Logout <span class="sr-only">(current)</span></a></li>
 							</ul>
 						</div>
 					</div>

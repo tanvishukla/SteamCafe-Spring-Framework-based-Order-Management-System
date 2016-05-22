@@ -27,6 +27,7 @@ import com.TOMSystem.model.Item;
 import com.TOMSystem.service.InvoiceDetailsService;
 import com.TOMSystem.service.InvoiceService;
 import com.TOMSystem.service.ItemService;
+import com.thoughtworks.xstream.persistence.StreamStrategy;
 
 
 
@@ -194,6 +195,7 @@ public class CartController {
 				map.put("appetizerList", itemService.getAppetizers());
 				map.put("maincourseList", itemService.getMainCourse());
 				map.put("dessertList", itemService.getDesserts());
+				
 				return "OrderConfirmationPage";
 			}
 			else
@@ -227,6 +229,21 @@ public class CartController {
 				tempInvoice.setStatus("Queued");
 				invoiceService.add(tempInvoice);	
 				
+				//***************Adding to invoice Deatils table***********///
+				
+				InvoiceDetails invoiceDetails=new InvoiceDetails(); 
+				invoiceDetails.setInvoice_id(tempInvoice.getInvoice_id());
+				
+				for(int i=0;i<cartItemsList.size();i++)
+				{
+					invoiceDetails.setInvoice_id(tempInvoice.getInvoice_id());
+					invoiceDetails.setItem_id(cartItemsList.get(i).getItemId());
+					invoiceDetails.setPrice(cartItemsList.get(i).getPrice());
+					invoiceDetails.setQuantity((cartItemsList.get(i).getQuantity()));
+					invoiceDetailsService.add(invoiceDetails);
+				}
+				 
+				
 				return "OrderConfirmationPage";
 			}
 			else
@@ -238,56 +255,66 @@ public class CartController {
 	/*
 	 * To display checkout page 
 	 */
+
 		@RequestMapping(value = "/checkout", method = RequestMethod.GET)
-		public String confirmOrder(Model model,Map<String, Object> map, HttpServletRequest request){
+		public String confirmOrder(Model model, HttpServletRequest request){
 			HttpSession session = request.getSession();
 			if(session.getAttribute("userId")!=null)
 			{
 				session.setAttribute("cart", cart);
 				
-				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:s");
-		        Calendar startTime = Calendar.getInstance();
-		        
-		        Calendar TodaysDate=Calendar.getInstance();
-		        Date orderDate = TodaysDate.getTime();
-		        session.setAttribute("orderDate",orderDate);
-		        System.out.println("Current Time: "+dateFormat.format(startTime.getTime()));
-		        session.setAttribute("start", startTime.getTime());
+				Calendar startTime = Calendar.getInstance();
+		        System.out.println("Current Time: "+startTime.getTime());
+				
+				Calendar endTime = Calendar.getInstance();
+				
+				Calendar pickUpTime = Calendar.getInstance();
 				
 				int totalPrepTime = 0;
-				/*for(int i=0; i<cart.size(); i++){
+				for(int i=0; i<cart.size(); i++){
 					totalPrepTime += cart.get(i).getPrep_time();
-					System.out.println("cart item prep time -------------->"+cart.get(i).getPrep_time());
-				}*/
-				System.out.println("Total Prep Time ----------->"+totalPrepTime);
-				session.setAttribute("totalPrepTime",totalPrepTime);
-				Calendar endTime = Calendar.getInstance();
+				}			
+				
 				endTime.add(Calendar.MINUTE, totalPrepTime);
 				System.out.println("End Time: "+endTime.getTime());
-				/*while(checkAvailability(startTime.getTime(), endTime.getTime()) == false)
+				
+				//Checking for timing constraints
+				if((endTime.getTime().getHours() >= 21)){
+					//Start the order from 5 AM
+					startTime.add(Calendar.DAY_OF_MONTH, 1);
+					startTime.set(Calendar.HOUR, 5);
+				    startTime.set(Calendar.MINUTE, 00);
+				    //Push the end time ahead
+				    endTime.setTime(startTime.getTime());
+					endTime.add(Calendar.MINUTE, totalPrepTime);
+				}
+				while(checkAvailability(startTime.getTime(), endTime.getTime()) == false)
 				{
 					endTime.add(Calendar.MINUTE, 1);
 					startTime.add(Calendar.MINUTE, 1);
-					if((endTime.getTime().getHours() == 21) && (endTime.getTime().getMinutes() == 1)){
-						startTime.add(Calendar.MINUTE, 479 + + totalPrepTime);
-						endTime.add(Calendar.MINUTE, 479 + totalPrepTime);
+					if((endTime.getTime().getHours() == 21)){
+						startTime.add(Calendar.MINUTE, 480 + totalPrepTime);
+						endTime.add(Calendar.MINUTE, 480 + totalPrepTime);
 					}
 				}
-				*/System.out.println(startTime.getTime());
+				System.out.println("Start Time: "+startTime.getTime());
+				System.out.println("End Time: "+endTime.getTime());
+				
+				if(endTime.get(Calendar.HOUR) < 6){
+					pickUpTime.setTime(endTime.getTime());
+					pickUpTime.set(Calendar.HOUR, 6);
+					pickUpTime.set(Calendar.MINUTE, 0);
+				}
+				else
+					pickUpTime.setTime(endTime.getTime());
+				
 				
 				//System.out.println(formatDateToString(tempTime));
-				session.setAttribute("pickup",endTime.getTime());
-				
-				model.addAttribute("pickup_time", formatDateToString(endTime.getTime()));
+				model.addAttribute("pickup_time", pickUpTime.getTime());
 				model.addAttribute("itemList", itemService.getAllItems());
 				model.addAttribute("unavailableItemList", itemService.getUnavailableItems());
 				model.addAttribute("cart", session.getAttribute("cart"));
 				//System.out.println("Cart:"+ cart.size());
-				
-				map.put("drinksList", itemService.getDrinks());
-				map.put("appetizerList", itemService.getAppetizers());
-				map.put("maincourseList", itemService.getMainCourse());
-				map.put("dessertList", itemService.getDesserts());
 				return "checkout";
 			}
 			else
@@ -316,12 +343,35 @@ public class CartController {
 
 	
 	/*
-	 * Check availability of chef
+	 * Check availability of chef (run this a maximun of 60 times)
+	 * 
+	 * boolean success = false;
+	 * for(int i=0; i<60; i++){
+	 * 		if(checkAvaialability(startTime, endTime) == true){
+	 * 			insert into table
+	 * 			success = true;
+	 * 			break;
+	 * 		}else if(startTime.before(new Calendar.getInstance())){
+	 * 			break;
+	 * 		}else{
+	 * 			startTime.add(Calendar.MINUTE, -1);
+	 * 			endTime.add(Calendar.MINUTE, -1);
+	 * 		}	
+	 * } 
+	 * 
+	 * if(success == true){
+	 * 		model.addAttribute("message", "Your order has been placed!");
+	 * }
+	 * else
+	 * 		model.addAttribute("message, "Sorry! All chefs are busy. Please change your order / pickup time");
+	 * 
+	 * return "checkout";
 	 */
-	
+
 	public boolean checkAvailability(Date startTime, Date endTime) {
         int chefCount = 0;
-        List<Invoice> tempInvoiceList = invoiceService.getAllInvoice();
+        List<Invoice> tempInvoiceList = new ArrayList<Invoice>();
+        tempInvoiceList.addAll(invoiceService.getAllInvoice());
 		for(int i=0; i<tempInvoiceList.size(); i++){
 			
 			if( ( startTime.before(tempInvoiceList.get(i).getStartTime()) && endTime.after(tempInvoiceList.get(i).getStartTime()) )
