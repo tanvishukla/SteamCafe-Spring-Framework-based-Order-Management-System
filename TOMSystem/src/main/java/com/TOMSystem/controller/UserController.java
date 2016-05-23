@@ -2,7 +2,7 @@ package com.TOMSystem.controller;
 
 
 import java.util.ArrayList;
-import java.util.Base64;
+
 
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -113,7 +113,10 @@ public class UserController {
 
 				//setting session attribute to user email
 				session.setAttribute("userId", user.getEmail().toString());
+
+				map.put("cart", session.getAttribute("cart"));
 				return "redirect:/items";			
+
 				}
 			}
 
@@ -252,11 +255,11 @@ public class UserController {
 			message.setContent(messageBody, "text/html; charset=utf-8");
 		}else if(status.equals("In progress")){
 			message.setSubject(subject + " - Order in progress");
-			String messageBody = "You order with orderId: "+ mailBody + " is in progress and will be ready by :"+ pickupTime.toString();
+			String messageBody = "You following order with Order Id :"+mailBody+" is in progress and will be ready by : "+ pickupTime.toString()+"<br>" ;
 			message.setContent(messageBody, "text/html; charset=utf-8");
 		}else{
 			message.setSubject(subject + " - Order placed");
-			String messageBody = "You order with otderid : "+ mailBody + " is placed and will be ready by :"+ pickupTime.toString();
+			String messageBody = "You following order is placed and will be ready by :"+ pickupTime.toString()+"<br>"+ mailBody;
 			message.setContent(messageBody, "text/html; charset=utf-8");
 		}
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));

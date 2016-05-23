@@ -109,6 +109,8 @@
 									href="reset">Reset System Orders <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
+									href="getReports">Get Order Reports<span class="sr-only">(current)</span></a></li>
+								<li class="active menu__item "><a class="menu__link"
 									href="logout">Logout<span class="sr-only">(current)</span></a></li>
 
 							</ul>
@@ -155,7 +157,7 @@
 						   			</div>
 								</td>
 								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" align="middle" width="100px" alt=" "
+									src="${item.picture}" align="middle" width="100px" alt=" "
 									class="img-responsive" /></td>
 								<td class="invert">${item.name}</td>
 								<td class="invert">${item.unit_price}</td>
@@ -195,7 +197,7 @@
 									</div>
 								</td>
 								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+									src="${item.picture}"
 									width="100px" alt=" " class="img-responsive" /></td>
 								<td class="invert">${item.name}</td>
 								<td class="invert">${item.unit_price}</td>

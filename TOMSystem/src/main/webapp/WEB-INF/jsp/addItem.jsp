@@ -79,7 +79,8 @@
 
 								<li class="active menu__item "><a class="menu__link"
 									href="reset">Reset System Orders <span class="sr-only">(current)</span></a></li>
-
+								<li class="active menu__item "><a class="menu__link"
+									href="getReports">Get Order Reports<span class="sr-only">(current)</span></a></li>
 								<li class="active menu__item "><a class="menu__link"
 									href="logout">Logout<span class="sr-only">(current)</span></a></li>
 
@@ -151,9 +152,9 @@
 				</div>
 
 				<div class="input-group">
-					<span class="input-group-addon" id="basic-addon1">Image</span> <input
-						type="file" name="image" class="form-control"
-						accept=".png, .jpg, .jpeg" required>
+					<span class="input-group-addon" id="basic-addon1">Image URL</span> <input
+						type="text" min="0" class="form-control" placeholder="Enter image URL here"
+						name="image" required>
 				</div>
 				<div>
 					<h4>${message}</h4>
