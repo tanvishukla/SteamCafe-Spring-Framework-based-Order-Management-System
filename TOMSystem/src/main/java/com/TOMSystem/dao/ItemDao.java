@@ -8,6 +8,7 @@ public interface ItemDao {
 	public void addItem(Item item);
 	public void editItem(Item item);
 	public void removeItem(int itemId);
+	public void removeAll();
 	public Item getItem(int itemId);
 	public List getAllItems();
 	public List getDrinks();

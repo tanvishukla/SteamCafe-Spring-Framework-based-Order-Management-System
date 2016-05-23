@@ -41,7 +41,7 @@ public class Item implements Serializable{
 	public Item(String category, String name, String picture, double calories, double unit_price,
 			int prep_time,boolean availability) {
 		super();
-		this.id = id;
+		//this.id = id;
 		this.category = category;
 		this.name = name;
 		this.picture = picture;

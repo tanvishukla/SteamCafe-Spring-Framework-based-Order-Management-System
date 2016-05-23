@@ -89,7 +89,8 @@
 		<div class="container">
 			<div class="col-md-3 header-left">
 				<h1>
-					<a href="index.html"><img src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
+					<a href="index.html"><img
+						src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/images/logo3.jpg"></a>
 				</h1>
 			</div>
 			<div class="clearfix"></div>
@@ -118,7 +119,7 @@
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
 									href="items">View Items<span class="sr-only">(current)</span></a></li>
-							
+
 								<li class="active menu__item "><a class="menu__link"
 									href="invoices">View Orders <span class="sr-only">(current)</span></a></li>
 
@@ -181,12 +182,13 @@
 													<tr class=${item.id} >
 														<td name="id" value=${item.id } class="invert-closeb">
 															<div class="rem">
-																<div class="entry value-plus label-success" id=${item.id
+																<div class="entry value-plus label-success"
+																	id=${item.id
 																	} onclick="addToCart()"></div>
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/tree/master/Drinks/${item.picture}.png"
+															src="${item.picture}" width="100px"
 															alt=" " class="img-responsive" /></td>
 
 
@@ -232,7 +234,7 @@
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+															src="${item.picture}" width="100px"
 															alt=" " class="img-responsive" /></td>
 														<td class="invert"><select class="1-100"
 															name="${item.id}"></select></td>
@@ -277,8 +279,8 @@
 															</div>
 														</td>
 														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
-															alt=" " class="img-responsive" /></td>
+															src="${item.picture}"
+															alt=" " width="100px" class="img-responsive" /></td>
 														<td class="invert"><select class="1-100"
 															name="${item.id}"></select></td>
 														<td class="invert">${item.name}</td>
@@ -324,9 +326,8 @@
 																	} onclick="addToCart()"></div>
 															</div>
 														</td>
-														<td class="invert-image"><img
-															src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
-															alt=" " class="img-responsive" /></td>
+														<td class="invert-image"><img src="${item.picture}"
+															alt=" " width="100px" class="img-responsive" /></td>
 														<td class="invert"><select class="1-100"
 															name="${item.id}"></select></td>
 														<td class="invert">${item.name}</td>
@@ -357,6 +358,7 @@
 						<thead>
 							<tr>
 								<th>Remove</th>
+								<th>Item</th>
 								<th>Item Name</th>
 								<th>Quantity</th>
 
@@ -370,12 +372,14 @@
 							<tr class=${item.itemId} >
 								<td name="id" value=${item.itemId } class="invert-closeb">
 									<div class="rem">
-										<div class="enrty value-plus label-danger" id=${item.itemId
+										<div class="enrty value-plus label-danger"
+											id=${item.itemId
 											} onclick="removeThisFromCart()"></div>
 									</div>
 								</td>
 
-
+								<td class="invert-image"><img src="${item.picture}" width="100px" alt=" "
+									class="img-responsive" /></td>
 								<td class="invert">${item.itemName}</td>
 								<td class="invert">${item.quantity}</td>
 								<td class="invert">${item.price}</td>

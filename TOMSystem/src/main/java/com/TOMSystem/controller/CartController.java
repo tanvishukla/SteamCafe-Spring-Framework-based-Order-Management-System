@@ -76,6 +76,7 @@ public class CartController {
 			tempCartItem.setItemName(tempItem.getName());
 			tempCartItem.setPrice(tempItem.getUnit_price() * item_quantity);
 			tempCartItem.setItem_PrepTime(tempItem.getPrep_time());
+			tempCartItem.setPicture(tempItem.getPicture());
 			tempCartItem.setQuantity(item_quantity);
 
 			cartItemsList.add(tempCartItem);
@@ -249,7 +250,9 @@ public class CartController {
 				
 			}
 		}
-
+		else
+		return "login";
+		
 		return "login";
 	}
 
@@ -529,4 +532,23 @@ public class CartController {
 		}
 	}
 
+	@RequestMapping(value = "/removeInvoice", method = RequestMethod.POST)
+	public String removeSelectedItem(@RequestBody String id, Model model,HttpServletRequest request){
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")!=null)
+		{
+			invoiceService.delete(Integer.valueOf(id));				
+			invoiceDetailsService.delete(Integer.valueOf(id));
+			System.out.println("HERE");
+			String userName = session.getAttribute("userId").toString();
+			model.addAttribute("invoiceList", invoiceService.getAllQueuedInvoices(userName));
+			model.addAttribute("inProgressInvoiceList", invoiceService.getAllInProgressInvoices(userName));
+			model.addAttribute("CompletedInvoiceList", invoiceService.getAllCompletedInvoices(userName));
+			return "invoices";
+		}
+		else
+		{
+			return "login";
+		}
+	}
 }

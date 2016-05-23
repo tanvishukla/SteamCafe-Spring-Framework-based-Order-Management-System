@@ -2,7 +2,7 @@ package com.TOMSystem.controller;
 
 
 import java.util.ArrayList;
-import java.util.Base64;
+
 
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -74,7 +74,7 @@ public class UserController {
 		if (user.getEmail().equals("admin") && user.getPassword().equals("admin")) {
 			session.setAttribute("userId", "admin");
 			// Return the Admin Homepage
-			return "addItem";
+			return "redirect:/addItem";
 		}
 		// User Login Authentication
 		else {
@@ -113,8 +113,10 @@ public class UserController {
 
 				//setting session attribute to user email
 				session.setAttribute("userId", user.getEmail().toString());
+
 				map.put("cart", session.getAttribute("cart"));
-				return "items";			
+				return "redirect:/items";			
+
 				}
 			}
 
@@ -131,83 +133,88 @@ public class UserController {
 	public String Signup(@ModelAttribute User user, BindingResult result, @RequestParam String action,
 			Map<String, Object> map) throws MessagingException, NoSuchAlgorithmException, NoSuchPaddingException,
 			InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-		System.out.println(user.getName());
-		System.out.println(user.getEmail());
-		System.out.println(user.getPassword());
-		User userResult = new User();
-		if ((userService.getUser(user.getEmail()) != null)) {
-			System.out.println("inside already exist" + user.getEmail());
-			map.put("userAlreadyExistError", "User already exist! Either login or signup with new emailId.");
+
+		try {
+			System.out.println(user.getName());
+			System.out.println(user.getEmail());
+			System.out.println(user.getPassword());
+			User userResult = new User();
+			if ((userService.getUser(user.getEmail()) != null)) {
+				System.out.println("inside already exist" + user.getEmail());
+				map.put("userAlreadyExistError", "User already exist! Either login or signup with new emailId.");
+				return "SignUp";
+			} else {
+				userService.add(user);
+
+				System.out.println("Added to database successfully");
+				userResult = userService.getUser(user.getEmail());
+
+				String text = userResult.getEmail();
+				String key = "Bar12345Bar12345"; // 128 bit key
+
+				// Create key and cipher
+				Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+				Cipher cipher = Cipher.getInstance("AES");
+
+				// encrypt the text
+				cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+				byte[] encrypted = cipher.doFinal(text.getBytes());
+				System.out.println("Access Token is");
+				String accessToken = new String(encrypted.toString());
+				System.err.println(accessToken);
+
+				userResult.setActivation_token(accessToken);
+				userService.edit(userResult);
+
+				String to = userResult.getEmail();
+				String subject = "subject";
+				final String from = "tomsystemcmpe275@gmail.com";
+				final String password = "TOMSystem";
+
+				Properties props = new Properties();
+				props.setProperty("mail.transport.protocol", "smtp");
+				props.setProperty("mail.host", "smtp.gmail.com");
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.port", "465");
+				props.put("mail.debug", "true");
+				props.put("mail.smtp.socketFactory.port", "465");
+				props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+				props.put("mail.smtp.socketFactory.fallback", "false");
+				props.put("mail.smtp.starttls.enable", "true");
+
+				Session session = Session.getInstance(props, new GMailAuthenticator(from, password));
+				// session.setDebug(true);
+				Transport transport = session.getTransport();
+				InternetAddress addressFrom = new InternetAddress(from);
+
+				// SmtpAuthenticator authentication = new SmtpAuthenticator();
+
+				MimeMessage message = new MimeMessage(session);
+
+				message.setSender(addressFrom);
+				message.setSubject(subject);
+				String messageBody = "<div style=\"color:red;\">Welcome to TOMSystem</div><br><div>Please find below link and token to verify yourself</div><br><div>Your Access Token is :"
+						+ accessToken + "</div>";
+				String url = "http://localhost:8080/TOMSystem/Verify";
+				messageBody = messageBody.concat("<a href=" + '"' + url + '"' + ">Verify your account</a>");
+				System.out.println("Message body is...." + messageBody);
+				message.setContent(messageBody, "text/html; charset=utf-8");
+				// message.setContent(messageBody, "text/plain");
+				message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+
+				transport.connect();
+				Transport.send(message);
+				transport.close();
+
+				System.out.println("Email Sent successfully....");
+			}
+
+			map.put("email", "Sign-up successful! Please verify by using the code sent to your mail.");
+			map.put("user", userResult);
+			return "UserVerification";
+		} catch (Exception e) {
 			return "SignUp";
-		} else {
-			userService.add(user);
-
-			System.out.println("Added to database successfully");
-			userResult = userService.getUser(user.getEmail());
-
-			String text = userResult.getEmail();
-			String key = "Bar12345Bar12345"; // 128 bit key
-
-			// Create key and cipher
-			Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
-			Cipher cipher = Cipher.getInstance("AES");
-
-			// encrypt the text
-			cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-			byte[] encrypted = cipher.doFinal(text.getBytes());
-			System.out.println("Access Token is");
-			String accessToken = new String(encrypted.toString());
-			System.err.println(accessToken);
-
-			userResult.setActivation_token(accessToken);
-			userService.edit(userResult);
-
-			String to = userResult.getEmail();
-			String subject = "subject";
-			final String from = "tomsystemcmpe275@gmail.com";
-			final String password = "TOMSystem";
-
-			Properties props = new Properties();
-			props.setProperty("mail.transport.protocol", "smtp");
-			props.setProperty("mail.host", "smtp.gmail.com");
-			props.put("mail.smtp.auth", "true");
-			props.put("mail.smtp.port", "465");
-			props.put("mail.debug", "true");
-			props.put("mail.smtp.socketFactory.port", "465");
-			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-			props.put("mail.smtp.socketFactory.fallback", "false");
-			props.put("mail.smtp.starttls.enable", "true");
-
-			Session session = Session.getInstance(props, new GMailAuthenticator(from, password));
-			// session.setDebug(true);
-			Transport transport = session.getTransport();
-			InternetAddress addressFrom = new InternetAddress(from);
-
-			// SmtpAuthenticator authentication = new SmtpAuthenticator();
-
-			MimeMessage message = new MimeMessage(session);
-
-			message.setSender(addressFrom);
-			message.setSubject(subject);
-			String messageBody = "<div style=\"color:red;\">Welcome to TOMSystem</div><br><div>Please find below link and token to verify yourself</div><br><div>Your Access Token is :"
-					+ accessToken + "</div>";
-			String url = "http://localhost:8080/TOMSystem/Verify";
-			messageBody = messageBody.concat("<a href=" + '"' + url + '"' + ">Verify your account</a>");
-			System.out.println("Message body is...." + messageBody);
-			message.setContent(messageBody, "text/html; charset=utf-8");
-			// message.setContent(messageBody, "text/plain");
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-
-			transport.connect();
-			Transport.send(message);
-			transport.close();
-
-			System.out.println("Email Sent successfully....");
 		}
-
-		map.put("email", "Sign-up successful! Please verify by using the code sent to your mail.");
-		map.put("user", userResult);
-		return "login";
 	}
 		
 	public static void sendThisMail(String email, String accessToken, String mailBody, Date pickupTime, String status) throws MessagingException, NoSuchAlgorithmException, NoSuchPaddingException,
@@ -283,7 +290,7 @@ public class UserController {
 			map.put("VerifiedUser", userResult.getEmail() + " Verified! Now you can access your account");
 			return "login";
 		} else {
-			map.put("VerifiedUser", "Please enter valid Token");
+			map.put("VerifiedUser", "Please enter valid token");
 			return "UserVerification";
 		}
 	}

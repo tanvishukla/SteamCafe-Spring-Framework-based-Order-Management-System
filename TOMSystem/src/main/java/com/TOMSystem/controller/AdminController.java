@@ -101,46 +101,25 @@ public class AdminController {
 	 * 
 	 */
 	@RequestMapping(value = "/addItem", method = RequestMethod.POST)
-	public String uploadFileHandler(@RequestParam("item_name") String item_name, @RequestParam("image") MultipartFile file, @RequestParam("category") String category, @RequestParam("item_price") double item_price, @RequestParam("item_calories") double item_calories, @RequestParam("item_prep_time") int item_prep_time, Model model,HttpServletRequest request) 
+	public String uploadFileHandler(@RequestParam("item_name") String item_name, @RequestParam("image") String image, @RequestParam("category") String category, @RequestParam("item_price") double item_price, @RequestParam("item_calories") double item_calories, @RequestParam("item_prep_time") int item_prep_time, Model model,HttpServletRequest request) 
 	{
 		HttpSession session = request.getSession();
 		if(session.getAttribute("userId").toString().equalsIgnoreCase("admin"))
 		{
 			Item tempItem = new Item();
-			if (!file.isEmpty()) 
-			{
+			
 				try 
 				{
 					tempItem.setName(item_name);
 					tempItem.setCalories(item_calories);
 					tempItem.setCategory(category);
-					tempItem.setPicture(item_name);
+					tempItem.setPicture(image);
 					tempItem.setPrep_time(item_prep_time);
 					tempItem.setUnit_price(item_price);
 					tempItem.setavailability(true);
 					
 					//add item to table
 					itemService.addItem(tempItem);
-
-					//uploading image
-					byte[] bytes = file.getBytes();
-
-					// Creating the directory to store file
-					//String rootPath = System.getProperty("catalina.home");
-					String rootPath = "F:/MSSE/Spring2016/275Zang/Project/CMPE-275-Project/TOMSystem/src/main/webapp/WEB-INF";
-
-					File dir = new File(rootPath + File.separator + "images");
-					if (!dir.exists())
-						dir.mkdirs();
-
-					// Create the file on server
-					File serverFile = new File(dir.getAbsolutePath() + File.separator + item_name +".png");
-					BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-					stream.write(bytes);
-					stream.close();
-
-					logger.info("Server File Location=" + serverFile.getAbsolutePath());
-					System.out.println("Server File Location=" + serverFile.getAbsolutePath());
 
 					model.addAttribute("message", "The item was added successfully...!");
 				} 
@@ -150,11 +129,8 @@ public class AdminController {
 					model.addAttribute("message", "Sorry! Something went wrong..!");
 					return "addItem";
 				}
-			}
-			else 
-			{
-				model.addAttribute("message", "Please upload image!");
-			}
+			
+			
 			model.addAttribute("item", tempItem);
 			model.addAttribute("itemList", itemService.getAllItems());
 			return "addItem";

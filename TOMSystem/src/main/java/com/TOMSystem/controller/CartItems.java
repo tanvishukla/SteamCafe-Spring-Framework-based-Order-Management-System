@@ -9,8 +9,15 @@ public class CartItems {
 	public String itemName;
 	public double price;
 	public int Item_PrepTime;
+	public String picture;
 	
 	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 	public int getItem_PrepTime() {
 		return Item_PrepTime;
 	}
