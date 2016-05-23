@@ -2,7 +2,6 @@ package com.TOMSystem.controller;
 
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,7 +52,6 @@ public class CartController {
 	
 
 	//Creating an list of all items in the cart
-	//public HashMap<Item,Integer> cart = new HashMap<Item,Integer>();
 	public ArrayList<Item> cart = new ArrayList<Item>();
 	
 	public ArrayList<CartItems> cartItemsList= new ArrayList<CartItems>();
@@ -146,12 +144,7 @@ public class CartController {
 		{
 			return "login";
 		}
-
 	}	
-
-	
-
-	
 
 	
 	//Takes time and date from customer and sets the invoice
@@ -160,8 +153,6 @@ public class CartController {
 			HttpSession session = request.getSession();
 			if(session.getAttribute("userId")!=null)
 			{
-				
-				System.out.println("Before----------------->"+date);
 				String[] strArr = date.split("/");			
 				int year = Integer.parseInt(strArr[2]);
 				int month = Integer.parseInt(strArr[0])-1;
@@ -170,13 +161,9 @@ public class CartController {
 			    Calendar cal = Calendar.getInstance();
 			    cal.set(year, month, day, hours, minutes,0);
 				Date d= cal.getTime();
-				System.out.println("After----------------->"+d);
-				
-				/////
 				
 				Calendar endTime= Calendar.getInstance();
 				endTime.setTime(d);
-				System.out.println("endTime is**- "+endTime);
 				
 				Calendar startTime= Calendar.getInstance();
 				startTime.setTime(endTime.getTime());
@@ -201,10 +188,8 @@ public class CartController {
 							tempInvoice.setPrep_Time((Integer)session.getAttribute("totalPrepTime"));
 							tempInvoice.setStatus("Queued");
 							invoiceService.add(tempInvoice);
-							
 												
 							//***************Adding to invoice Deatils table***********///
-													
 							System.out.println("Invoice id is----"+tempInvoice.getInvoice_id());
 							
 							InvoiceDetails invoiceDetails=new InvoiceDetails(); 
@@ -241,9 +226,6 @@ public class CartController {
 				 		model.addAttribute("message", "Sorry! All chefs are busy. Please change your order / pickup time");
 				 		return "checkout";
 				 }
-							
-				/////
-							
 			}
 			else
 			{
@@ -252,23 +234,14 @@ public class CartController {
 		}
 		
 	/*
-	 * Add functionality HERE 
-	 */
-		//Provides earliest pickup time and sets the invoice
+	 * Provides earliest pickup time and sets the invoice
+	 */		
 		@RequestMapping(value = "/earliestPickUp", method = RequestMethod.POST)
 		public String earliestPickUp(@RequestBody String item_id, Model model,Map<String, Object> map, HttpServletRequest request) throws InvalidKeyException, NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException, MessagingException{
 			HttpSession session = request.getSession();
 			
-			System.out.println("in earliest pickup");
-			
-			
 			if(session.getAttribute("userId")!=null)
 			{
-				System.out.println(session.getAttribute("pickup").toString());
-				System.out.println(session.getAttribute("userId").toString());
-				
-				
-				//////
 				Calendar startTime = Calendar.getInstance();
 				Calendar endTime = Calendar.getInstance();				
 				Calendar pickUpTime = Calendar.getInstance();	
@@ -306,7 +279,7 @@ public class CartController {
 				System.out.println("End Time: "+endTime.getTime());
 				
 				//if order is ready before shop opens
-				if(endTime.get(Calendar.HOUR) < 6){
+				if((endTime.get(Calendar.HOUR) < 6) && (endTime.get(Calendar.AM_PM) == 0) ){
 					pickUpTime.setTime(endTime.getTime());
 					pickUpTime.set(Calendar.HOUR, 6);
 					pickUpTime.set(Calendar.MINUTE, 0);
@@ -531,5 +504,24 @@ public class CartController {
 			}
 		}
 	
+		@RequestMapping(value = "/removeInvoice", method = RequestMethod.POST)
+		public String removeSelectedItem(@RequestBody String id, Model model,HttpServletRequest request){
+			HttpSession session = request.getSession();
+			if(session.getAttribute("userId")!=null)
+			{
+				invoiceService.delete(Integer.valueOf(id));				
+				invoiceDetailsService.delete(Integer.valueOf(id));
+				System.out.println("HERE");
+				String userName = session.getAttribute("userId").toString();
+				model.addAttribute("invoiceList", invoiceService.getAllQueuedInvoices(userName));
+				model.addAttribute("inProgressInvoiceList", invoiceService.getAllInProgressInvoices(userName));
+				model.addAttribute("CompletedInvoiceList", invoiceService.getAllCompletedInvoices(userName));
+				return "invoices";
+			}
+			else
+			{
+				return "login";
+			}
+		}
 
 }

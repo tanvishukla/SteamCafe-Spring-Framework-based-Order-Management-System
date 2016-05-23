@@ -74,4 +74,10 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.getUnavailableItems();
 	}
 
+	@Override
+	public void removeAll() {
+		// TODO Auto-generated method stub
+		itemDao.removeAll();
+	}
+
 }

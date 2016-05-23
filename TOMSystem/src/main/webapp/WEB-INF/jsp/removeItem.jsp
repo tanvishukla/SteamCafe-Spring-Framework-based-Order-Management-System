@@ -8,8 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="" />
 <script type="application/x-javascript">
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 </script>
 <!-- //for-mobile-apps -->
 <link
@@ -50,7 +52,7 @@
 		setTimeout(2000);
 		location.reload();
 	}
-	
+
 	function addThis() {
 		var id = addThis.caller.arguments[0].target.id + "";
 		$.ajax({
@@ -62,9 +64,6 @@
 		location.reload();
 	}
 </script>
-
-
-
 <body>
 	<!-- header-bot -->
 	<div class="header-bot">
@@ -101,7 +100,7 @@
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item "><a class="menu__link"
-									href=addItem >Add Item <span class="sr-only">(current)</span></a></li>
+									href=addItem>Add Item <span class="sr-only">(current)</span></a></li>
 
 								<li class="active menu__item "><a class="menu__link"
 									href=removeItem>Remove Item <span class="sr-only">(current)</span></a></li>
@@ -142,7 +141,6 @@
 							<tr>
 								<th>Remove</th>
 								<th>Item</th>
-								<th>Quantity</th>
 								<th>Item Name</th>
 								<th>Price</th>
 							</tr>
@@ -150,7 +148,7 @@
 
 						<c:forEach items="${itemList}" var="item">
 							<!-- For every item-->
-							<tr class=${item.id} style="height: 10px; ">
+							<tr class=${item.id } style="height: 10px;">
 								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
 										<div class="entry value-minus label-danger" id = ${item.id} onclick="removeThis()"></div>
@@ -159,75 +157,16 @@
 								<td class="invert-image"><img
 									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" align="middle" width="100px" alt=" "
 									class="img-responsive" /></td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-												<span>1</span>
-											</div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
-									</div>
-								</td>
 								<td class="invert">${item.name}</td>
 								<td class="invert">${item.unit_price}</td>
 							</tr>
 						</c:forEach>
-						<!-- If quantity changes-->
-
-						<!--quantity-->
-						<script>
-							$('.value-plus').on(
-									'click',
-									function() {
-										var divUpd = $(this).parent().find(
-												'.value'), newVal = parseInt(
-												divUpd.text(), 10) + 1;
-										divUpd.text(newVal);
-									});
-
-							$('.value-minus').on(
-									'click',
-									function() {
-										var divUpd = $(this).parent().find(
-												'.value'), newVal = parseInt(
-												divUpd.text(), 10) - 1;
-										if (newVal >= 1)
-											divUpd.text(newVal);
-									});
-						</script>
-						<!--quantity-->
 					</table>
 				</div>
 			</form>
-
-			<br>
-<%-- 			<table border="1">
-				<th>Name</th>
-				<th>Calories</th>
-				<th>Unit Price</th>
-				<th>Preparation Time</th>
-				<th>Cateory</th>
-				<th>Image Name</th>
-				<th>Available</th>
-
-				<c:forEach items="${itemList}" var="item">
-					<tr>
-						<td>${item.name}</td>
-						<td>${item.calories}</td>
-						<td>${item.unit_price}</td>
-						<td>${item.prep_time}</td>
-						<td>${item.category}</td>
-						<td>${item.picture}</td>
-						<td>${item.availability}</td>
-					</tr>
-				</c:forEach>
-			</table>
- --%>
 		</div>
 	</div>
-	
+
 	<div class="checkout">
 		<div class="container">
 			<h2>Unavailable items...</h2>
@@ -241,7 +180,6 @@
 							<tr>
 								<th>Add</th>
 								<th>Item</th>
-								<th>Quantity</th>
 								<th>Item Name</th>
 								<th>Price</th>
 							</tr>
@@ -252,107 +190,45 @@
 							<tr class=${item.id} >
 								<td name="id" value=${item.id } class="invert-closeb">
 									<div class="rem">
-										<div class="enrty value-plus label-success" id = ${item.id} onclick="addThis()"></div>
-						   			</div>
-								</td>
-								<td class="invert-image"><img
-									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png" width="100px" alt=" "
-									class="img-responsive" /></td>
-								<td class="invert">
-									<div class="quantity">
-										<div class="quantity-select">
-											<div class="entry value-minus">&nbsp;</div>
-											<div class="entry value">
-												<span>1</span>
-											</div>
-											<div class="entry value-plus active">&nbsp;</div>
-										</div>
+										<div class="enrty value-plus label-success" id=${item.id
+											} onclick="addThis()"></div>
 									</div>
 								</td>
+								<td class="invert-image"><img
+									src="https://cdn.rawgit.com/aniketkhaire/static-resources/master/Drinks/${item.picture}.png"
+									width="100px" alt=" " class="img-responsive" /></td>
 								<td class="invert">${item.name}</td>
 								<td class="invert">${item.unit_price}</td>
 							</tr>
 						</c:forEach>
-						<!-- If quantity changes-->
-
-						<!--quantity-->
-						<script>
-							$('.value-plus').on(
-									'click',
-									function() {
-										var divUpd = $(this).parent().find(
-												'.value'), newVal = parseInt(
-												divUpd.text(), 10) + 1;
-										divUpd.text(newVal);
-									});
-
-							$('.value-minus').on(
-									'click',
-									function() {
-										var divUpd = $(this).parent().find(
-												'.value'), newVal = parseInt(
-												divUpd.text(), 10) - 1;
-										if (newVal >= 1)
-											divUpd.text(newVal);
-									});
-						</script>
-						<!--quantity-->
 					</table>
 				</div>
 			</form>
-
-			<br>
-<%-- 			<table border="1">
-				<th>Name</th>
-				<th>Calories</th>
-				<th>Unit Price</th>
-				<th>Preparation Time</th>
-				<th>Cateory</th>
-				<th>Image Name</th>
-				<th>Available</th>
-
-				<c:forEach items="${unavailableItemList}" var="item">
-					<tr>
-						<td>${item.name}</td>
-						<td>${item.calories}</td>
-						<td>${item.unit_price}</td>
-						<td>${item.prep_time}</td>
-						<td>${item.category}</td>
-						<td>${item.picture}</td>
-						<td>${item.availability}</td>
-					</tr>
-				</c:forEach>
-			</table>
- --%>		</div>
-	</div>
-	
-	
-	<!-- //check out -->
-	<!-- //product-nav -->
-	<div class="coupons">
-		<div class="container">
-			<div class="coupons-grids text-center">
-				<div class="col-md-3 coupons-gd">
-					<h3>Buy your product in a simple way</h3>
+			<!-- //product-nav -->
+			<div class="coupons">
+				<div class="container">
+					<div class="coupons-grids text-center">
+						<div class="col-md-3 coupons-gd">
+							<h3>Buy your product in a simple way</h3>
+						</div>
+						<div class="col-md-3 coupons-gd">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+							<h4>LOGIN TO YOUR ACCOUNT</h4>
+							<p>Easy and hassle free login</p>
+						</div>
+						<div class="col-md-3 coupons-gd">
+							<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+							<h4>SELECT YOUR ITEM</h4>
+							<p>Select from wide range of items. I am lov'in it.</p>
+						</div>
+						<div class="col-md-3 coupons-gd">
+							<span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
+							<h4>MAKE PAYMENT</h4>
+							<p>Place order and get to know the earliest pick-up time.</p>
+						</div>
+						<div class="clearfix"></div>
+					</div>
 				</div>
-				<div class="col-md-3 coupons-gd">
-					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-					<h4>LOGIN TO YOUR ACCOUNT</h4>
-					<p>Easy and hassle free login</p>
-				</div>
-				<div class="col-md-3 coupons-gd">
-					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-					<h4>SELECT YOUR ITEM</h4>
-					<p>Select from wide range of items. I am lov'in it.</p>
-				</div>
-				<div class="col-md-3 coupons-gd">
-					<span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>
-					<h4>MAKE PAYMENT</h4>
-					<p>Place order and get to know the earliest pick-up time.</p>
-				</div>
-				<div class="clearfix"></div>
 			</div>
-		</div>
-	</div>
 </body>
 </html>

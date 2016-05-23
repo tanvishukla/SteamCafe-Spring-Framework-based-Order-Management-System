@@ -75,4 +75,10 @@ public class ItemDaoImpl implements ItemDao {
 		return session.getCurrentSession().createQuery("from Item where availability='0'").list();
 	}
 
+	@Override
+	public void removeAll() {
+		// TODO Auto-generated method stub
+		session.getCurrentSession().createQuery("delete from Item where id > 0");
+	}
+
 }

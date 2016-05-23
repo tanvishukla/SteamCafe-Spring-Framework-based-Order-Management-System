@@ -109,8 +109,7 @@
 
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Item Name</span>
-					<input type="text" class="form-control" placeholder="Name"
-						name="item_name">
+					<input type="text" class="form-control" placeholder="Name" name="item_name" required>
 				</div>
 
 				<div class="input-group">
@@ -126,13 +125,13 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Price</span> <input
 						type="text" min="0" class="form-control" placeholder="$0.00"
-						name="item_price">
+						name="item_price" required>
 				</div>
 
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Calories</span> <input
 						type="number" min="0" class="form-control" placeholder="0.00"
-						name="item_calories">
+						name="item_calories" required>
 				</div>
 
 				<div class="input-group">
@@ -154,7 +153,7 @@
 				<div class="input-group">
 					<span class="input-group-addon" id="basic-addon1">Image</span> <input
 						type="file" name="image" class="form-control"
-						accept=".png, .jpg, .jpeg">
+						accept=".png, .jpg, .jpeg" required>
 				</div>
 				<div>
 					<h4>${message}</h4>
@@ -162,8 +161,7 @@
 				<div class="grid_3 grid_5 wow fadeInRight animated"
 					data-wow-delay=".5s">
 					<div class="input-group">
-						<input type="submit" value="Add Item"
-							class="form-control  label-success">
+						<input type="submit" value="Add Item" class="form-control  label-success">
 					</div>
 				</div>
 			</form>

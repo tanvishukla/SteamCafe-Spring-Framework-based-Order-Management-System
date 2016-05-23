@@ -32,9 +32,10 @@
 <script type="text/javascript">
 	function removeThis() {
 		var id = removeThis.caller.arguments[0].target.id + "";
+		alert(id);
 		$.ajax({
 			type : 'POST',
-			url : "/TOMSystem/removeItem",
+			url : "/TOMSystem/removeInvoice",
 			data : id
 		});
 		setTimeout(2000);
@@ -43,13 +44,6 @@
 	
 	function viewThis(ele) {
 		var id = ele.id;
-		/* alert(id);
-		$.ajax({
-			type : 'POST',
-			url : "/TOMSystem/invoiceDetail",
-			data : id
-		});
-		//setTimeout(2000); */
 		window.location.replace("http://localhost:8080/TOMSystem/invoiceDetail/"+id);
 		//location.reload();
 	}

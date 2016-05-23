@@ -107,7 +107,7 @@ body {
 <input  type="text" path="name" id="name" name="name" required placeholder="Name" autocomplete="off" />
 
 <span class="fontawesome-envelope-alt"></span>
-<input type="text" path="email" id="email" name="email" required placeholder="Email" autocomplete="off" />
+<input type="email" path="email" id="email" name="email" required placeholder="Email" autocomplete="off" />
 
 <span class="fontawesome-lock"></span>
 <input type="password" path="password" name="password" id="password" required placeholder="Password" autocomplete="off"> 
