@@ -365,7 +365,7 @@
 						</thead>
 
 
-						<c:forEach items='<%=session.getAttribute("cart")%>' var="item">
+						<c:forEach items="${cart}" var="item">
 							<!-- For every item-->
 							<tr class=${item.itemId} >
 								<td name="id" value=${item.itemId } class="invert-closeb">
